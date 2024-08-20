@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'self'">
     <link rel="icon" type="image/png" href="https://i.imgur.com/iQZmNok.png">
     <title>KOÇAK</title>
     <link rel="stylesheet" href="styles.css">
@@ -44,7 +43,7 @@
                 <ul>
                     <li><a href="#yazi1" onclick="showContent('yazi1')">Yazı Başlığı 1</a></li>
                     <li><a href="#yazi2" onclick="showContent('yazi2')">Yazı Başlığı 2</a></li>
-                    <li><a href="#yazi3" onclick="showContent('yazi3')">Beef framework nedir nasıl kullanılır?</a></li>
+                    <li><a href="#yazi3" onclick="showContent('yazi3')">Beef framwork nedir nasıl kullanılır?</a></li>
                 </ul>
             </div>
             <div id="yazi-content">
@@ -67,7 +66,7 @@
                 contentElement.classList.remove('hidden');
             } else {
                 // İçeriği yükle
-                fetch('Content/' + contentId + '.html')
+                fetch('content/' + contentId + '.html')
                     .then(response => response.text())
                     .then(data => {
                         var contentDiv = document.createElement('div');
