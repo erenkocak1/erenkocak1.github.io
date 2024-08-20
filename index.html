@@ -53,30 +53,35 @@
     </div>
     
     <script>
-        function showContent(contentId) {
-            // Tüm içerik div'lerini gizle
-            var sections = document.querySelectorAll('.content > div');
-            sections.forEach(function(section) {
-                section.classList.add('hidden');
-            });
+       function showContent(contentId) {
+    // Tüm içerik div'lerini gizle
+    var sections = document.querySelectorAll('.content > div');
+    sections.forEach(function(section) {
+        section.classList.add('hidden');
+    });
 
-            // İçerik bölümü yüklü mü kontrol et
-            var contentElement = document.getElementById(contentId);
-            if (contentElement) {
-                contentElement.classList.remove('hidden');
-            } else {
-                // İçeriği yükle
-                fetch('content/' + contentId + '.html')
-                    .then(response => response.text())
-                    .then(data => {
-                        var contentDiv = document.createElement('div');
-                        contentDiv.innerHTML = data;
-                        contentDiv.id = contentId;
-                        document.querySelector('.content').appendChild(contentDiv);
-                        contentDiv.classList.remove('hidden');
-                    })
-                    .catch(error => console.error('İçerik yüklenemedi:', error));
-            }
+    // İçerik bölümü yüklü mü kontrol et
+    var contentElement = document.getElementById(contentId);
+    if (contentElement) {
+        contentElement.classList.remove('hidden');
+    } else {
+        // İçeriği yükle
+        fetch('Content/' + contentId + '.html') // Dizin adı burada 'Content'
+            .then(response => response.text())
+            .then(data => {
+                var contentDiv = document.createElement('div');
+                contentDiv.innerHTML = data;
+                contentDiv.id = contentId;
+                document.querySelector('.content').appendChild(contentDiv);
+                contentDiv.classList.remove('hidden');
+            })
+            .catch(error => console.error('İçerik yüklenemedi:', error));
+    }
+
+    if (contentId === 'yazilar-list') {
+        document.getElementById('yazilar-list').classList.remove('hidden');
+    }
+}
 
             if (contentId === 'yazilar-list') {
                 document.getElementById('yazilar-list').classList.remove('hidden');
