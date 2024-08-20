@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://i.imgur.com/iQZmNok.png">
+    <title>KOÇAK</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="loadContent()">
+    <div class="container">
+        <div class="sidebar">
+            <h2>Menü</h2>
+            <ul>
+                <li><a href="#anasayfa" onclick="showContent('anasayfa')">Ana Sayfa</a></li>
+                <li><a href="#hakkimda" onclick="showContent('hakkimda')">Hakkımda</a></li>
+                <li><a href="#yazilar-list" onclick="showContent('yazilar-list')">Yazılar</a></li>
+            </ul>
+            <div class="social-media">
+                <a href="https://www.linkedin.com/in/yusuf-eren-ko%C3%A7ak-2522b828a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BUqISFXQARqWHBTnyYUlKbg%3D%3D" target="_blank">
+                    <img src="https://fineproxy.org/wp-content/uploads/2023/08/LinkedIn-logo.png" alt="LinkedIn" class="social-icon linkedin-icon">
+                </a>
+                <a href="https://github.com/erenkocak1" target="_blank">
+                    <img src="https://logos-world.net/wp-content/uploads/2020/11/GitHub-Logo.png" alt="GitHub" class="social-icon github-icon">
+                </a>
+                <a href="https://www.instagram.com/erennkocak1/" target="_blank">
+                    <img src="https://w7.pngwing.com/pngs/877/705/png-transparent-instagram-photo-picture-social-brands-and-logos-icon.png" alt="Instagram" class="social-icon linkedin-icon">
+                </a>
+                <!-- Diğer hesaplar -->
+            </div>            
+        </div>
+        <div class="content">
+            <div id="anasayfa">
+                <h1>Hoşgeldiniz</h1>
+                <p>Burası ana sayfa içeriğiniz.</p>
+            </div>
+            <div id="hakkimda" class="hidden">
+                <h1>Hakkımda</h1>
+                <p>Burada kendiniz hakkında bilgiler verebilirsiniz. örnek eren</p>
+            </div>
+            <div id="yazilar-list" class="hidden">
+                <h3>Yazılar</h3>
+                <ul>
+                    <li><a href="#yazi1" onclick="showContent('yazi1')">Yazı Başlığı 1</a></li>
+                    <li><a href="#yazi2" onclick="showContent('yazi2')">Yazı Başlığı 2</a></li>
+                    <li><a href="#yazi3" onclick="showContent('yazi3')">Beef framwork nedir nasıl kullanılır?</a></li>
+                </ul>
+            </div>
+            <div id="yazi-content">
+                <!-- Dinamik içerik buraya yüklenecek -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showContent(contentId) {
+            // Tüm içerik div'lerini gizle
+            var sections = document.querySelectorAll('.content > div');
+            sections.forEach(function(section) {
+                section.classList.add('hidden');
+            });
+
+            // İçerik bölümü yüklü mü kontrol et
+            var contentElement = document.getElementById(contentId);
+            if (contentElement) {
+                contentElement.classList.remove('hidden');
+            } else {
+                // İçeriği yükle
+                fetch('content/' + contentId + '.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        var contentDiv = document.createElement('div');
+                        contentDiv.innerHTML = data;
+                        contentDiv.id = contentId;
+                        document.querySelector('.content').appendChild(contentDiv);
+                        contentDiv.classList.remove('hidden');
+                    })
+                    .catch(error => console.error('İçerik yüklenemedi:', error));
+            }
+
+            if (contentId === 'yazilar-list') {
+                document.getElementById('yazilar-list').classList.remove('hidden');
+            }
+        }
+
+        function loadContent() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showContent(hash);
+            } else {
+                showContent('anasayfa');
+            }
+        }
+
+        window.onload = loadContent;
+    </script>
+</body>
+</html>
