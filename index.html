@@ -51,29 +51,8 @@
             </div>
         </div>
     </div>
-    <button onclick="topFunction()" id="scrollTopBtn" title="Yukarı Çık">Yukarı Çık</button>
-
+    
     <script>
-         // Butonu tanımlayın
-let scrollTopBtn = document.getElementById("scrollTopBtn");
-
-// Sayfa aşağı kaydırıldığında butonu görünür hale getiren fonksiyon
-window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        scrollTopBtn.style.display = "block";
-    } else {
-        scrollTopBtn.style.display = "none";
-    }
-}
-
-// Butona tıklayınca sayfayı üste kaydıran fonksiyon
-function topFunction() {
-    document.body.scrollTop = 0; // Safari için
-    document.documentElement.scrollTop = 0; // Chrome, Firefox, IE ve Opera için
-}
-
         function showContent(contentId) {
             // Tüm içerik div'lerini gizle
             var sections = document.querySelectorAll('.content > div');
