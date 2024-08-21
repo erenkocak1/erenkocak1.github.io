@@ -154,6 +154,25 @@ body {
     color: #ffcc00; /* Üzerine gelindiğinde rengin nasıl değişeceğini belirleyin */
     text-decoration: underline; /* Üzerine gelindiğinde alt çizgi eklemek isterseniz */
 }
+#scrollTopBtn {
+    display: none; /* Başlangıçta buton görünmez */
+    position: fixed; /* Sayfanın bir köşesine sabitler */
+    bottom: 20px; /* Sayfanın altından 20px yukarıda */
+    right: 20px; /* Sayfanın sağından 20px içeride */
+    z-index: 99; /* Diğer öğelerin üstünde kalması için yüksek bir z-index değeri verin */
+    border: none; /* Kenarlıkları kaldırır */
+    outline: none; /* Varsayılan outline'ı kaldırır */
+    background-color: #000; /* Buton rengi */
+    color: white; /* Yazı rengi */
+    cursor: pointer; /* Fare işaretçisi el simgesine dönüşür */
+    padding: 15px; /* Butonun iç boşluğu */
+    border-radius: 10px; /* Butonu yuvarlatır */
+}
+
+#scrollTopBtn:hover {
+    background-color: #555; /* Fareyle üzerine gelince butonun rengi değişir */
+}
+
 
 @media (max-width: 600px) {
     .container {
