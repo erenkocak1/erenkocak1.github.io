@@ -4,16 +4,7 @@
     background-color: rgba(255, 255, 255, 0.059); /* İçerik alanına yarı saydam bir arka plan */ 
     min-height: 100vh; 
 
-
-footer {
-  background-color: #f1f1f1; /* Arka plan rengini ayarlayın */
-  text-align: center;        /* Metni ortalayın */              
-  margin-top: auto;         /* Footer'ı en alta itmek için */
-  font-size: 14px;          /* Yazı boyutunu ayarlayın */
-}
-
- 
-.sidebar { 
+ .sidebar { 
     width: 200px; 
     padding: 15px; 
     box-shadow: 2px 0 5px rgb(0,0,0,0.1); 
@@ -347,16 +338,7 @@ body {
 .content ul li a:hover {
     color: #ffcc00; /* Üzerine gelindiğinde rengin nasıl değişeceğini belirleyin */
     text-decoration: underline; /* Üzerine gelindiğinde alt çizgi eklemek isterseniz */
-}
-footer {
-  background-color: #f1f1f1; /* Arka plan rengini ayarlayın */
-  text-align: center;        /* Metni ortalayın */
-  padding: 10px;            /* İç boşluk ekleyin */
-  position: fixed;          /* Footer'ı sayfanın altında sabitleyin */
-  bottom: 0;
-  width: 100%;
-  font-size: 14px;          /* Yazı boyutunu ayarlayın */
-}
+
 
 
     
