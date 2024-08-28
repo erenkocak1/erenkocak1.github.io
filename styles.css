@@ -340,6 +340,15 @@ body {
     color: #ffcc00; /* Üzerine gelindiğinde rengin nasıl değişeceğini belirleyin */
     text-decoration: underline; /* Üzerine gelindiğinde alt çizgi eklemek isterseniz */
 }
+footer {
+  background-color: #f1f1f1; /* Arka plan rengini ayarlayın */
+  text-align: center;        /* Metni ortalayın */
+  padding: 10px;            /* İç boşluk ekleyin */
+  position: fixed;          /* Footer'ı sayfanın altında sabitleyin */
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;          /* Yazı boyutunu ayarlayın */
+}
 
 
     
