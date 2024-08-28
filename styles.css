@@ -4,6 +4,16 @@
     background-color: rgba(255, 255, 255, 0.059); /* İçerik alanına yarı saydam bir arka plan */ 
     min-height: 100vh; 
 } 
+footer {
+  background-color: #f1f1f1; /* Arka plan rengini ayarlayın */
+  text-align: center;        /* Metni ortalayın */
+  padding: 10px;            /* İç boşluk ekleyin */
+  position: fixed;          /* Footer'ı sayfanın altında sabitleyin */
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;          /* Yazı boyutunu ayarlayın */
+}
+
  
 .sidebar { 
     width: 200px; 
