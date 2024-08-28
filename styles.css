@@ -3,14 +3,19 @@
     height: 100vh; 
     background-color: rgba(255, 255, 255, 0.059); /* İçerik alanına yarı saydam bir arka plan */ 
     min-height: 100vh; 
-} 
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Footer'ın en alta gelmesi için body yüksekliğini ayarla */
+  display: flex;
+  flex-direction: column;
+}
+
 footer {
   background-color: #f1f1f1; /* Arka plan rengini ayarlayın */
   text-align: center;        /* Metni ortalayın */
   padding: 10px;            /* İç boşluk ekleyin */
-  position: fixed;          /* Footer'ı sayfanın altında sabitleyin */
-  bottom: 0;
-  width: 100%;
+  margin-top: auto;         /* Footer'ı en alta itmek için */
   font-size: 14px;          /* Yazı boyutunu ayarlayın */
 }
 
