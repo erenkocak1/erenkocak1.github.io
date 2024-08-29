@@ -18,63 +18,50 @@
     </style>
 </head>
 <body>
-    <h1>Yazı Başlığı 1</h1>
-    <p><h2><b>Nmap NEDİR?</b><span class="ez-toc-section-end"></span></h2>
-        <p><span>Network Mapper&rsquo;ın kısaltılmış hali olarak karşımıza &ccedil;ıkan &lsquo;Nmap&rsquo; genel anlamda ağ taramak ve zafiyet tespiti yapmak i&ccedil;in kullanılan a&ccedil;ık kaynaklı bir ara&ccedil; olarak bilinir. Nmap, sistemlerde ne t&uuml;r cihazların &ccedil;alıştığını ortaya koymak, ana makinelerin sunduğu hizmetleri &ouml;ğrenmek, a&ccedil;ık bağlantı noktaları bulmak, g&uuml;venlik riskleri tespit etmek i&ccedil;in oluşturulmuştur.</span></p>
-        <p><span>Bunların yanında Nmap aracı ile&nbsp;</span><span>port taramaları, servis keşifleri, işletim sistemleri ve versiyonlarının tespiti gibi işlevler kullanılabilir.</span><span></span></p>
-        <p><span><img src="https://siberbulten.com/wp-content/uploads/2021/10/nmap_SAYF1-450x254.jpg" alt="" width="409" height="231" /></span><span></span></p>
-        <h2><span class="ez-toc-section" id="Nmap_NE_ISE_YARAR" ez-toc-data-id="#Nmap_NE_ISE_YARAR"></span><b>Nmap NE İŞE YARAR?</b><span class="ez-toc-section-end"></span></h2>
-        <p><span>Genel anlamda Nmap&rsquo;in &ccedil;alışma prensibi, sistem bağlantı noktalarına ham paketler g&ouml;ndermesiyle başlar. Bu paketlerle bilgi toplayan ara&ccedil;, yanıtları dinler ve bağlantı noktalarının a&ccedil;ık, kapalı veya filtrelenmiş/filtrelenmemiş durumlarını belirler. Son olarak da bu sonu&ccedil;ları kullanıcılara g&ouml;sterir. Gerek binlerce cihazı veya ağı gerekse de tek bir ana bilgisayarı izlemek i&ccedil;in de kullanılan Nmap aracı, i&ccedil;erdiği mod&uuml;ller sayesinde farklı işlevler i&ccedil;in de kullanılabilir.</span></p>
-        <p><span>Port taramalarından servis keşiflerine, a&ccedil;ık bağlantı noktalarını keşfetmekten g&uuml;venlik risklerini belirlemeye kadar bir&ccedil;ok işlevi yerine getiren Nmap&rsquo;i kullanmak i&ccedil;in belirli parametreleri kullanmak, aracın daha efektif sonu&ccedil;lar &uuml;retmesine yardımcı olur.</span></p>
-        <h2><span class="ez-toc-section" id="Nmap_NASIL_KULLANILIR" ez-toc-data-id="#Nmap_NASIL_KULLANILIR"></span><b>Nmap NASIL KULLANILIR?</b><span class="ez-toc-section-end"></span></h2>
-        <p><span>Genel anlamda ağ tarama aracı olarak kullanılan Nmap, ağ keşfi, ağ y&ouml;netimi ve ağ g&uuml;venlik denetimi i&ccedil;in de kullanılır. Nmap&rsquo;in efektif bir bi&ccedil;imde kullanabilmek i&ccedil;in komut satırı arabirimlerini bilmek gerekir. Default komutlar yalnızca belirli işlevleri kullanabilmeye yardımcı olur. Bu bilgiyle birlikte komut satırına &ldquo;nmap&rdquo; yazarak Nmap başlatılabilir.</span></p>
-        <p><span>Nmap &ouml;zelinde t&uuml;m komutları ve s&ouml;z konusu komutların işlevlerini &ouml;ğrenmek isterseniz, komut satırına &ldquo;nmap -help&rdquo; veya &ldquo;nmap -h&rdquo; komutunu yazabilirsiniz. B&ouml;ylelikle Nmap kullanımı i&ccedil;in ihtiyacınız olan &ccedil;eşitli komutları ve işlevlerini &ouml;ğrenebilirsiniz.</span></p>
-        <p><span>Nmap&rsquo;in kullanım alanlarına kısaca g&ouml;z atmak gerekirse:</span></p>
-        <ul>
-            <li aria-level="1"><span>Nmap ile sızma testleri ger&ccedil;ekleştirilebilir</span></li>
-            <li aria-level="1"><span>Taranan ağda bulunan sistemler hakkında bilgi sahibi olunabilir (port vb. bilgileri &ouml;ğrenmek gibi)</span></li>
-            <li aria-level="1"><span>Ağ topolojisi &ccedil;ıkarılabilir</span></li>
-            <li aria-level="1"><span>Bir ağın hazırlanması esnasında gerekli ayarlar test edilebilir</span></li>
-            <li aria-level="1"><span>Ağ envanteri tutulması, haritalaması, bakımı ve y&ouml;netimi g&ouml;revlerini yerine getirebilir</span></li>
-            <li aria-level="1"><span>Ağ kurulumu sonrasında gerekli ayarları test edebilir</span></li>
-            <li aria-level="1"><span>Bilinmeyen sunucuları tanımlayarak g&uuml;venlik denetimi yapılmasında kullanılabilir.</span></li>
-        </ul>
-        <h2><span class="ez-toc-section" id="Nmap_ILE_NASIL_TARAMA_YAPILIR" ez-toc-data-id="#Nmap_ILE_NASIL_TARAMA_YAPILIR"></span><b>Nmap İLE NASIL TARAMA YAPILIR?</b><span class="ez-toc-section-end"></span></h2>
-        <p><span>Tarama yapmak, kısaca &ouml;zetlemek gerekirse hedef makinanın &uuml;zerinde bulunan portların durumunu g&ouml;zetmek i&ccedil;in yapılan bir test etme işlemidir. Nmap ile &ccedil;eşitli tarama işlemleri ger&ccedil;ekleştirebilirsiniz. Bunlar arasında;</span></p>
-        <ul>
-            <li aria-level="1"><b>TCP Syn Scan:</b><span>&nbsp;Kaynak makinanın hedef makinaya&nbsp;TCP&nbsp;SYN paketi g&ouml;ndermesiyle tarama t&uuml;r&uuml;d&uuml;r. SYN paketinin karşılığında SYN+ACK paketi geldiğinde, ACK paketi g&ouml;nderir, porta bağlanır, portun a&ccedil;ık olduğunu rapor eder ve RST paketi g&ouml;ndererek oturumu kapatır. Port kapalı ise hedef ACK+RST cevabı g&ouml;nderir. Cevap gelmemesi durumu ise portun filtreli olduğu anlamındadır.</span></li>
-            <li aria-level="1"><b>TCP Connect Scan:</b><span>&nbsp;Hedef porta bağlanmak i&ccedil;in SYN paket g&ouml;nderir, karşılığında SYN+ACK paketi gelirse ACK paketi g&ouml;ndererek porta bağlanır ve portun a&ccedil;ık olduğunu, RST+ACK cevabı gelirse portun kapalı olduğunu rapor eder.</span></li>
-            <li aria-level="1"><b>UDP Scan:</b><span>&nbsp;Hedef bilgisayardaki UDP portlarının a&ccedil;ık veya kapalı olduğunu analiz eder. Hedef makine gelen UDP paketine, &ldquo;ICMP Port Unreachable&rdquo; cevabı d&ouml;nd&uuml;r&uuml;l&uuml;yorsa hedef makine kapalı, UDP paketi cevap d&ouml;nd&uuml;ren hedef makinaya ait port ise a&ccedil;ık kabul edilecektir.</span></li>
-            <li aria-level="1"><b>IdleScan:</b><span>&nbsp;En gizli olan bu tarama t&uuml;r&uuml;nde, kaynak makine hedefteki makineyi tarama esnasında aktif olarak rol almaz. Hedef makinaya g&ouml;nderilen paketlerin hi&ccedil;birisi taramayı yapan makinanın IP adresiyle g&ouml;nderilmez. Kaynak makina &ccedil;eşitli &lsquo;gizli&rsquo; makinalar sayesinde hedefteki makineyi tarayarak bilgi toplar.</span></li>
-        </ul>
-        <p><span>Nmap kullanımında karşımıza &ccedil;ıkan bazı durumlar arasında;</span></p>
-        <ul>
-            <li aria-level="1"><b>Open (A&ccedil;ık):</b><span>&nbsp;Portun erişilebilir durumda olduğunu belirtir.</span></li>
-            <li aria-level="1"><b>Closed (Kapalı):</b><span>&nbsp;Portun erişilebilir olduğunu fakat &uuml;zerinde herhangi bir servis olmadığını belirtir.</span></li>
-            <li aria-level="1"><b>Filtered (Filtreli):</b><span>&nbsp;D&ouml;nen tepkilerin bir paket filtreleme mekanizması tarafından engellendiğini, portun a&ccedil;ık veya kapalı olduğuna karar veremediğini ve bir g&uuml;venlik cihazı olabileceğini belirtir.</span></li>
-            <li aria-level="1"><b>Unfiltered (Filtresiz):</b><span>&nbsp;Portların erişilebilir olduğunu ancak Nmap&rsquo;in portların a&ccedil;ık veya kapalı olduğuna karar veremediğini belirtir.&nbsp;</span></li>
-            <li aria-level="1"><b>Open|Filtered (A&ccedil;ık|Filtreli):</b><span>&nbsp;Nmap&rsquo;in portların a&ccedil;ık mı filtrelenmiş mi olduğuna karar veremediğini belirtir.</span></li>
-            <li aria-level="1"><b>Closed|Filtered (Kapalı|Filtreli):</b><span>&nbsp;Nmap&rsquo;in portların kapalı ya da &ouml;n&uuml;nde bir g&uuml;venlik cihazı olup olmadığına karar veremediğini belirtir.&nbsp;</span></li>
-        </ul>
-        <p><span>Bunların yanı sıra Nmap parametreleri arasında aşağıdakiler bulunur:</span></p>
-        <ul>
-            <li aria-level="1"><b>-sn:</b><span>&nbsp;Port taraması yapma anlamına gelir.</span></li>
-            <li aria-level="1"><b>-n:</b><span>&nbsp;DNS &Ccedil;&ouml;z&uuml;mlemesi yapma anlamına gelir.</span></li>
-            <li aria-level="1"><b>-v, -vv, -vvv:</b><span>&nbsp;Ekrana g&ouml;sterilecek detayları arttırır.</span></li>
-            <li aria-level="1"><b>-F:</b><span>&nbsp;Daha hızlı tarama yapar. Daha az sonu&ccedil; bulur.</span></li>
-            <li aria-level="1"><b>-sS:</b><span>&nbsp;Syn Taraması Yapar.</span></li>
-            <li aria-level="1"><b>&ndash;reason:</b><span>&nbsp;Bulduğu bir sonucun sebebini g&ouml;sterir.</span></li>
-            <li aria-level="1"><b>&ndash;open:</b><span>&nbsp;Sadece a&ccedil;ık Portları g&ouml;sterir.</span></li>
-            <li aria-level="1"><b>-p-:</b><span>&nbsp;Bir IP &uuml;zerinde bulunması muhtemel 65535 portun hepsini tarar.</span></li>
-            <li aria-level="1"><b>-sV:</b><span>&nbsp;A&ccedil;ık portta &ccedil;alışan servisin ne olduğunu bulmaya &ccedil;alışır. -sC ile birlikte kullanılırsa işe yarar.</span></li>
-            <li aria-level="1"><b>-sC:</b><span>&nbsp;-sV ile versiyon tespiti yapılırken nmap scriptlerini kullanır.</span></li>
-            <li aria-level="1"><b>-p:</b><span>&nbsp;Sadece bu parametreden sonra belirtilen portları tarar.</span></li>
-            <li aria-level="1"><b>&ndash;top-ports:</b><span>&nbsp;en &ccedil;ok kullanılan portları tarar.</span></li>
-        </ul>
-        <h2><span class="ez-toc-section" id="Nmap_HANGI_SISTEMLERDE_BULUNUR" ez-toc-data-id="#Nmap_HANGI_SISTEMLERDE_BULUNUR"></span><b>Nmap HANGİ SİSTEMLERDE BULUNUR?</b><span class="ez-toc-section-end"></span></h2>
-        <p><span>Kali Linux işletim sistemiyle birlikte kurulu olarak gelen Nmap, farklı işletim sistemleri &uuml;zerinde de kurulabilir.</span></p>
-        <p><span>Nmap&rsquo;in kullanılabildiği işletim sistemleri&nbsp;arasında Linux,&nbsp;Windows,&nbsp;MacOS,&nbsp;Solaris, BSD&nbsp;ve&nbsp;AmigaOS&nbsp;bulunur. Ancak daha &ccedil;ok Linux &uuml;zerinde pop&uuml;ler olan Nmap ardından Windows &uuml;zerinde de sıklıkla kullanılır.</span></p></p>
-    <!-- Diğer içerik buraya eklenecek -->
+    <h1>Nmap nedir, Nasıl Kullanılır? ve Kullanımı Sırasında &Ouml;nemli Parametreler</h1>
+<p><img src="https://nmap.org/images/sitelogo.png" alt="Home page logo" width="308" height="165" /></p>
+<p>Nmap (Network Mapper), ağ g&uuml;venliği denetimlerinde yaygın olarak kullanılan g&uuml;&ccedil;l&uuml; bir a&ccedil;ık kaynaklı ara&ccedil;tır. Bu ara&ccedil;, ağlarda var olan cihazları ve servisleri keşfetmek, g&uuml;venlik a&ccedil;ıklarını tespit etmek ve ağ yapılarını haritalamak i&ccedil;in kullanılır.&nbsp;</p>
+<p>Nmap (Network Mapper), bir <strong>hedef ağı veya belirli IP adreslerini tarayarak</strong> ağ &uuml;zerindeki cihazları, <strong>a&ccedil;ık portları ve &ccedil;alışan hizmetleri belirlemeye y&ouml;nelik bir tarama ger&ccedil;ekleştirir.</strong></p>
+<p>Nmap'in &ccedil;alışma prensipleri, ağ keşfi ve g&uuml;venlik analizi konularında derin bir anlayış sağlamaktadır.</p>
+<p>Bu yazımda, Nmap&rsquo;in kullanımı,temel işlevleri ve &ccedil;eşitli parametreleri detaylı olarak ele alacağım.</p>
+<p>İlk olarak kali linux makinemizde zaten nmap aracımız kurulu geliyor eğer sizde kurulu değil ise "<span><strong><code>sudo apt-get install nmap</code></strong>" komutu ile kurabiliriz.</span></p>
+<p><span>Nmap aracı en kapsamlı</span></p>
+<p style="text-align: center;"><span><span style="color: #ff0000;"><em><code>nmap 192.168.x.x -Pn -n -T4 -p -sV -sC -O</code></em></span></span></p>
+<p>şeklindedir. Bunların dışında -sU , -sN , -sU parametreleride vardır. Peki burdaki parametreler ne anlama gelir şimdi onlara bakalım.</p>
+<h4>-Pn:</h4>
+<p>Bu se&ccedil;enek, hedef sistemin canlı olup olmadığını kontrol etmeden doğrudan port taraması yapar. Eğer hedefin a&ccedil;ık olduğunu biliyorsanız veya ping (ICMP) yanıtları engelleniyorsa, -Pn kullanmak iyi bir se&ccedil;enektir. Bu se&ccedil;enekle, Nmap sistemin canlı olup olmadığını doğrulamaz ve doğrudan portları tarar. Bu sayede, hedef ICMP yanıtlarını engelliyor olsa bile port taraması ger&ccedil;ekleştirilir.</p>
+<p>Daha kısa şekilde anlatmak gerekirse biz&nbsp;bu parametreyi yazarak nmap'e diyoruz ki ping atma direkt port taramasına ge&ccedil;. :)</p>
+<h4>-n:</h4>
+<p>Asla dns &ccedil;&ouml;z&uuml;mlemesi yapmaması i&ccedil;in bu parametreyi ekleriz.Yani, tarama sırasında IP adreslerini isimlere &ccedil;evirmeyi atlar ve sadece IP adresleri ile işlem yapar. Bu, taramanın hızını artırabilir ve bazı gizlilik avantajları sağlayabilir.</p>
+<h4>-T4:&nbsp;</h4>
+<p>Burada aslında "-Tn" şkelinde bahsedebiliriz. -T bize taramanın agresifliğini ve hızını belirlememize olanak sağlar. 0,1,2,3,4,5 se&ccedil;enekleri vardır.</p>
+<p>T0 en yavaş, T5 en hızlı ,&ouml;nerilen T4 ,en g&uuml;venilen ise T2 dir.</p>
+<h4>-p:&nbsp;</h4>
+<p>Belirli portları taramak i&ccedil;in kullanılır.</p>
+<p>Bu se&ccedil;enek, tarama yapılacak portları belirtmenizi sağlar ve varsayılan olarak Nmap'in tarayacağı port aralığını daraltarak taramanızı daha hedefli hale getirir. "-p-" ise t&uuml;m portları tarar. Peki bunu belirtmezsek yani -p veya -p- yazmazsak nmap varsayılan olarak en yaygın 1000 TCP portunu tarar.</p>
+<p>Kodda o şekilde sade bırakılmaz yanına port bilgisi girmek lazım.</p>
+<p>Kullanma zorunluluğu yoktur. Ben g&ouml;stermek i&ccedil;in ekledim oraya.</p>
+<h4>-sV:&nbsp;</h4>
+<p>Bu parametre bize ağdaki hizmetlerin ve portların versiyon bilgilerini g&ouml;sterir. Bu şekilde, hizmetlerin versiyon bilgilerini kullanarak potansiyel g&uuml;venlik a&ccedil;ıklarını tespit edebilir</p>
+<h4>-sC:&nbsp;</h4>
+<p>Script taraması yapar.</p>
+<p>-sC parametresi, Nmap'in varsayılan betik koleksiyonunu &ccedil;alıştırır ve ek g&uuml;venlik testleri ile bilgi toplama işlemleri sağlar.Genellikle -sV gibi diğer se&ccedil;eneklerle bir arada kullanılır, b&ouml;ylece hizmet tespiti ve detaylı analiz birlikte yapılabilir.</p>
+<h4>-O:</h4>
+<p>İşletim sistemini de g&ouml;sterir.</p>
+<p></p>
+<ul>
+<li>Bu son &uuml;&ccedil;&uuml; yerine(-sV , -sC , O) genellikle -A parametresi kullanılır. Taramanızda kapsamlı bir bilgi toplama ve detaylı analiz sağlamak i&ccedil;in kullanılan bir se&ccedil;enektir.</li>
+</ul>
+<p>Bunların dışında kullanılan birka&ccedil; &ouml;nemli parametre daha vardır. Şimdi onlara bakalım.</p>
+<h4>-sU:</h4>
+<p>Nmap'te -sU se&ccedil;eneği, "UDP taraması" anlamına gelir. Bu se&ccedil;enek, hedef sistemdeki a&ccedil;ık UDP portlarını taramak i&ccedil;in kullanılır. UDP (User Datagram Protocol), TCP'den farklı olarak bağlantı kurma aşamasını i&ccedil;ermez ve genellikle bağlantısız bir protokold&uuml;r.</p>
+<h4>-sN:</h4>
+<p>Port taramasının yapılmaması analamına gelir. Nmap'te -sN parametresi, "Sadece ağ taraması" anlamına gelir. Bu se&ccedil;enek, hedef sistemlerin canlı olup olmadığını kontrol eder, ancak port taraması yapmaz. -sN ile sadece hedeflerin varlığı belirlenir ve portlar hakkında bilgi toplama yapılmaz.</p>
+<h4>-sS:</h4>
+<p>Hedefteki b&uuml;t&uuml;n portlara SYN paketleri atıyor eğer hedef SYN ACK paketi g&ouml;nderirse port a&ccedil;ık demek. Yani "syn scan" yapıyor. Bunu b&uuml;t&uuml;n portlara tekrarlıyor. B&ouml;ylelikle a&ccedil;ık portları buluyor.</p>
+<p></p>
+<h4>-sT:</h4>
+<p>"-sS" ye g&ouml;re daha yavaş ama daha g&uuml;venlidir.<br />&Ccedil;&uuml;nk&uuml; bağlantı kurma s&uuml;recinin tamamını ger&ccedil;ekleştirir. Bu s&uuml;re&ccedil;, TCP &uuml;&ccedil; aşamalı el sıkışma (SYN, SYN-ACK, ACK) i&ccedil;erir.<br />"-sS" de doğrudan bağlantı kurma girişimi olduğu i&ccedil;in, firewall ve diğer g&uuml;venlik cihazları tarafından daha iyi tespit edilebilir.</p>
      
 </body>
 </html>
