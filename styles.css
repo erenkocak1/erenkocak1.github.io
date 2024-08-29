@@ -3,8 +3,9 @@
     height: 100vh; 
     background-color: rgba(255, 255, 255, 0.059); /* İçerik alanına yarı saydam bir arka plan */ 
     min-height: 100vh; 
-
- .sidebar { 
+} 
+ 
+.sidebar { 
     width: 200px; 
     padding: 15px; 
     box-shadow: 2px 0 5px rgb(0,0,0,0.1); 
@@ -61,7 +62,7 @@
 h1 { 
     background-color: #303030; /* Başlık arka plan rengi */ 
     color: #b0b0b0; /* Başlık yazı rengi */ 
-    padding: 10px;
+    padding: 15px;
     margin-top: 0; 
     border-radius: 10px; 
     width: fit-content; /* İçeriğin genişliği kadar kısaltır */ 
@@ -338,8 +339,34 @@ body {
 .content ul li a:hover {
     color: #ffcc00; /* Üzerine gelindiğinde rengin nasıl değişeceğini belirleyin */
     text-decoration: underline; /* Üzerine gelindiğinde alt çizgi eklemek isterseniz */
+}
 
+.about-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* Görsel ile metin arasında boşluk bırakır */
+}
 
+.about-image {
+    width: 150px; /* Görselin genişliğini ayarlayın */
+    height: auto; /* Yükseklik genişliğe göre otomatik ayarlanır */
+    border-radius: 8px; /* Görselin kenarlarını yuvarlar */
+}
+.header-sections {
+    display: flex;
+    justify-content: space-between; /* This will push the two sections apart */
+    align-items: center; /* Aligns them vertically in the center */
+    margin-bottom: 20px; /* Adds space below the headers */
+}
+
+#hakkimda, #whoami {
+    background-color: #303030;
+    color: #b0b0b0;
+    padding: 15px;
+    border-radius: 10px;
+    width: fit-content;
+    display: inline-block;
+}
 
     
 }
