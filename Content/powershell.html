@@ -131,129 +131,120 @@
 <hr data-start="3753" data-end="3756" />
 <h2>5. Yerel Kullanıcı ve Grup Y&ouml;netimi</h2>
 <p>PowerShell ile sadece domain kullanıcıları değil, yerel bilgisayardaki kullanıcı ve gruplar da y&ouml;netilebilir.</p>
-<p>Yerel Kullanıcı Cmdlet&rsquo;leri:</p>
-<p data-start="3944" data-end="3993"><span style="color: #ffff00; background-color: #000000;">Get-LocalUser</span></p>
-<p data-start="3944" data-end="3993">&nbsp;T&uuml;m yerel kullanıcıları listeler</p>
-<p data-start="3996" data-end="4037"><span style="color: #ffff00; background-color: #000000;">New-LocalUser</span></p>
-<p data-start="3996" data-end="4037">&nbsp;Yeni kullanıcı oluşturur</p>
-<p data-start="4040" data-end="4096"><span style="color: #ffff00; background-color: #000000;">Set-LocalUser</span></p>
-<p data-start="4040" data-end="4096"><code data-start="4040" data-end="4055"></code>&nbsp;Mevcut kullanıcı bilgilerini değiştirir</p>
-<p data-start="4099" data-end="4150"><span style="color: #ffff00; background-color: #000000;">Disable-LocalUser</span></p>
-<p data-start="4099" data-end="4150"><code data-start="4099" data-end="4118"></code>&nbsp;Kullanıcıyı devre dışı bırakır</p>
-<p data-start="4153" data-end="4198"><span style="color: #ffff00; background-color: #000000;">Enable-LocalUser</span></p>
-<p data-start="4153" data-end="4198"><code data-start="4153" data-end="4171"></code>&nbsp;Kullanıcıyı etkinleştirir</p>
-<p data-start="4201" data-end="4240"><span style="color: #ffff00; background-color: #000000;">Remove-LocalUser</span></p>
-<p data-start="4201" data-end="4240">&nbsp;Kullanıcıyı siler</p>
+<p><em><strong>Yerel Kullanıcı Cmdlet&rsquo;leri:</strong></em></p>
+<p data-start="3944" data-end="3993"><span style="color: #ffff00; background-color: #000000;">Get-LocalUser:</span>T&uuml;m yerel kullanıcıları listeler</p>
+<p data-start="3996" data-end="4037"><span style="color: #ffff00; background-color: #000000;">New-LocalUser:</span>Yeni kullanıcı oluşturur</p>
+<p data-start="4040" data-end="4096"><span style="color: #ffff00; background-color: #000000;">Set-LocalUser:</span><code data-start="4040" data-end="4055"></code>Mevcut kullanıcı bilgilerini değiştirir</p>
+<p data-start="4099" data-end="4150"><span style="color: #ffff00; background-color: #000000;">Disable-LocalUse:</span>Kullanıcıyı devre dışı bırakır</p>
+<p data-start="4153" data-end="4198"><span style="color: #ffff00; background-color: #000000;">Enable-LocalUser:</span><code data-start="4153" data-end="4171"></code>Kullanıcıyı etkinleştirir</p>
+<p data-start="4201" data-end="4240"><span style="color: #ffff00; background-color: #000000;">Remove-LocalUser:</span>Kullanıcıyı siler</p>
 <p data-start="4243" data-end="4312"><em data-start="4243" data-end="4312">Yerel kullanıcılar, sadece o bilgisayarda ge&ccedil;erli olan hesaplardır.</em></p>
-<p>Yerel Grup Cmdlet&rsquo;leri:</p>
-<p data-start="4344" data-end="4389"><span style="color: #ffff00; background-color: #000000;">Get-LocalGroup</span></p>
-<p data-start="4344" data-end="4389"><code data-start="4344" data-end="4360"></code><code data-start="4344" data-end="4360"></code>&nbsp;T&uuml;m yerel grupları listeler</p>
-<p data-start="4392" data-end="4429"><span style="color: #ffff00; background-color: #000000;">New-LocalGroup</span></p>
-<p data-start="4392" data-end="4429"><code data-start="4392" data-end="4408"></code>&nbsp;Yeni grup oluşturur</p>
-<p data-start="4432" data-end="4476"><span style="color: #ffff00; background-color: #000000;">Set-LocalGroup</span></p>
-<p data-start="4432" data-end="4476"><code data-start="4432" data-end="4448"></code>&nbsp;Grup bilgilerini g&uuml;nceller</p>
-<p data-start="4479" data-end="4518"><span style="color: #ffff00; background-color: #000000;">Add-LocalGroupMember</span></p>
-<p data-start="4479" data-end="4518"><code data-start="4479" data-end="4501"></code>&nbsp;Gruba &uuml;ye ekler</p>
-<p data-start="4521" data-end="4567"><span style="color: #ffff00; background-color: #000000;">Remove-LocalGroupMember</span></p>
-<p data-start="4521" data-end="4567"><code data-start="4521" data-end="4546"></code>&nbsp;Gruptan &uuml;ye &ccedil;ıkarır</p>
+<p><em><strong>Yerel Grup Cmdlet&rsquo;leri:</strong></em></p>
+<p data-start="4344" data-end="4389"><span style="color: #ffff00; background-color: #000000;">Get-LocalGroup:</span><code data-start="4344" data-end="4360"></code>T&uuml;m yerel grupları listeler</p>
+<p data-start="4392" data-end="4429"><span style="color: #ffff00; background-color: #000000;">New-LocalGroup:</span><code data-start="4392" data-end="4408"></code>Yeni grup oluşturur</p>
+<p data-start="4432" data-end="4476"><span style="color: #ffff00; background-color: #000000;">Set-LocalGroup:</span><code data-start="4432" data-end="4448"></code>Grup bilgilerini g&uuml;nceller</p>
+<p data-start="4479" data-end="4518"><span style="color: #ffff00; background-color: #000000;">Add-LocalGroupMember:</span><code data-start="4479" data-end="4501"></code>Gruba &uuml;ye ekler</p>
+<p data-start="4521" data-end="4567"><span style="color: #ffff00; background-color: #000000;">Remove-LocalGroupMember:</span><code data-start="4521" data-end="4546"></code>Gruptan &uuml;ye &ccedil;ıkarır</p>
 <hr data-start="4569" data-end="4572" />
-<ul>
-<li data-start="4574" data-end="4611">6. Ağ Bağlantıları ve Yapılandırma</li>
-<li data-start="4613" data-end="4686">PowerShell ile ağ bağlantılarını analiz etmek ve yapılandırmak m&uuml;mk&uuml;nd&uuml;r.</li>
-<li data-start="4688" data-end="4720">Sık Kullanılan Ağ Komutları:</li>
-<li data-start="4721" data-end="4768">
-<p data-start="4723" data-end="4768"><code data-start="4723" data-end="4741">Get-NetIPAddress</code>: IP adreslerini listeler</p>
-</li>
-<li data-start="4769" data-end="4806">
-<p data-start="4771" data-end="4806"><code data-start="4771" data-end="4781">nslookup</code>: DNS &ccedil;&ouml;z&uuml;mlemesi yapar</p>
-</li>
-<li data-start="4807" data-end="4848">
-<p data-start="4809" data-end="4848"><code data-start="4809" data-end="4819">ipconfig</code>: IP bilgilerini g&ouml;r&uuml;nt&uuml;ler</p>
-</li>
-<li data-start="4849" data-end="4902">
-<p data-start="4851" data-end="4902"><code data-start="4851" data-end="4860">netstat</code>: A&ccedil;ık bağlantıları ve portları g&ouml;sterir</p>
-</li>
-<li data-start="4903" data-end="4939">
-<p data-start="4905" data-end="4939"><code data-start="4905" data-end="4913">arp -a</code>: ARP tablosunu g&ouml;sterir</p>
-</li>
-<li data-start="4940" data-end="4991">
-<p data-start="4942" data-end="4991"><code data-start="4942" data-end="4962">Test-NetConnection</code>: Ağ bağlantısını test eder</p>
-</li>
-<li data-start="4992" data-end="5039">
-<p data-start="4994" data-end="5039"><code data-start="4994" data-end="5013">Invoke-WebRequest</code>: Web istekleri g&ouml;nderir</p>
-</li>
-</ul>
+<h2>6. Ağ Bağlantıları ve Yapılandırma</h2>
+<p>PowerShell ile ağ bağlantılarını analiz etmek ve yapılandırmak m&uuml;mk&uuml;nd&uuml;r.</p>
+<p>Sık Kullanılan Ağ Komutları:</p>
+<p data-start="4723" data-end="4768"><code data-start="4723" data-end="4741"><span style="color: #ffff00; background-color: #000000;">Get-NetIPAddress</span></code>: IP adreslerini listeler</p>
+<p data-start="4771" data-end="4806"><code data-start="4771" data-end="4781"><span style="background-color: #000000; color: #ffff00;">nslookup</span></code>: DNS &ccedil;&ouml;z&uuml;mlemesi yapar</p>
+<p data-start="4809" data-end="4848"><span style="color: #ffff00; background-color: #000000;"><code data-start="4809" data-end="4819">ipconfig</code></span>: IP bilgilerini g&ouml;r&uuml;nt&uuml;ler</p>
+<p data-start="4851" data-end="4902"><span style="color: #ffff00; background-color: #000000;"><code data-start="4851" data-end="4860">netstat</code></span>: A&ccedil;ık bağlantıları ve portları g&ouml;sterir</p>
+<p data-start="4905" data-end="4939"><span style="color: #ffff00; background-color: #000000;"><code data-start="4905" data-end="4913">arp -a</code></span>: ARP tablosunu g&ouml;sterir</p>
+<p data-start="4942" data-end="4991"><code data-start="4942" data-end="4962"><span style="color: #ffff00; background-color: #000000;">Test-NetConnection</span></code>: Ağ bağlantısını test eder</p>
+<p data-start="4994" data-end="5039"><span style="color: #ffff00; background-color: #000000;"><code data-start="4994" data-end="5013">Invoke-WebRequest</code></span>: Web istekleri g&ouml;nderir</p>
 <hr data-start="5041" data-end="5044" />
-<ul>
-<li data-start="5046" data-end="5081">7. Bilgi Edinme ve Sistem Durumu</li>
-<li data-start="5083" data-end="5136">Sistem hakkında bilgi almak i&ccedil;in kullanılan komutlar:</li>
-<li data-start="5138" data-end="5188">
-<p data-start="5140" data-end="5188"><code data-start="5140" data-end="5158">Get-ComputerInfo</code>: Donanım ve yazılım bilgileri</p>
-</li>
-<li data-start="5189" data-end="5255">
-<p data-start="5191" data-end="5255"><code data-start="5191" data-end="5228">Get-WmiObject Win32_OperatingSystem</code>: İşletim sistemi bilgileri</p>
-</li>
-<li data-start="5256" data-end="5302">
-<p data-start="5258" data-end="5302"><code data-start="5258" data-end="5270">Get-HotFix</code>: Kurulu g&uuml;ncellemeleri listeler</p>
-</li>
-<li data-start="5303" data-end="5401">
-<p data-start="5305" data-end="5401"><code data-start="5305" data-end="5371">Get-Service | Where-Object { $_.DisplayName -like "*Defender*" }</code>: Belirli hizmetleri filtreler</p>
-</li>
-</ul>
+<h2>7. Bilgi Edinme ve Sistem Durumu</h2>
+<p>Sistem hakkında bilgi almak i&ccedil;in kullanılan komutlar:</p>
+<p data-start="5140" data-end="5188"><span style="color: #ffff00; background-color: #000000;"><code data-start="5140" data-end="5158">Get-ComputerInfo</code></span>: Donanım ve yazılım bilgileri</p>
+<p data-start="5191" data-end="5255"><span style="background-color: #000000; color: #ffff00;"><code data-start="5191" data-end="5228">Get-WmiObject Win32_OperatingSystem</code>:</span> İşletim sistemi bilgileri</p>
+<p data-start="5258" data-end="5302"><span style="color: #ffff00; background-color: #000000;"><code data-start="5258" data-end="5270">Get-HotFix</code></span>: Kurulu g&uuml;ncellemeleri listeler</p>
+<p data-start="5258" data-end="5302">&Ouml;rneğin:</p>
+<p data-start="5305" data-end="5401"><span style="background-color: #000000; color: #ffff00;"><code data-start="5305" data-end="5371">Get-Service | Where-Object { $_.DisplayName -like "*Defender*" }</code></span>: Defender servisini olup olmadığını kontrol eder .</p>
 <hr data-start="5403" data-end="5406" />
-<ul>
-<li data-start="5408" data-end="5441">8. PowerShell ile Script Yazma</li>
-<li data-start="5443" data-end="5590">PowerShell scriptleri, <code data-start="5466" data-end="5472">.ps1</code> uzantılı metin dosyalarıdır. İ&ccedil;erisine birden fazla komut ve fonksiyon yazılarak bir&ccedil;ok işlem otomatikleştirilebilir.</li>
-<li data-start="5592" data-end="5623">Otomatikleştirme &Ouml;rnekleri:</li>
-<li data-start="5624" data-end="5660">
-<p data-start="5626" data-end="5660">Yeni kullanıcı hesapları oluşturma</p>
+<h2 data-start="223" data-end="256">8. PowerShell ile Script Yazma</h2>
+<p data-start="258" data-end="537">PowerShell scriptleri, <em><code data-start="281" data-end="287">.ps1</code></em> uzantılı metin dosyalarıdır ve i&ccedil;erisinde bir&ccedil;ok komut, kontrol yapısı, fonksiyon, değişken ve d&ouml;ng&uuml; barındırabilir. Bu scriptler sistem y&ouml;neticilerine zaman kazandırmak, tekrarlayan işleri otomatikleştirmek ve hata riskini azaltmak i&ccedil;in kullanılır.</p>
+<h3 data-start="539" data-end="567">Scriptlerin Temel Yapısı</h3>
+<p data-start="568" data-end="591">Bir PowerShell scripti:</p>
+<ul data-start="592" data-end="807">
+<li data-start="592" data-end="620">
+<p data-start="594" data-end="620">Değişkenler tanımlayabilir</p>
 </li>
-<li data-start="5661" data-end="5681">
-<p data-start="5663" data-end="5681">Disk bi&ccedil;imlendirme</p>
+<li data-start="621" data-end="671">
+<p data-start="623" data-end="671">Koşul ifadeleri (<code data-start="640" data-end="649">if-else</code>, <code data-start="651" data-end="659">switch</code>) i&ccedil;erebilir</p>
 </li>
-<li data-start="5682" data-end="5707">
-<p data-start="5684" data-end="5707">Dosya kopyalama / silme</p>
+<li data-start="672" data-end="725">
+<p data-start="674" data-end="725">D&ouml;ng&uuml;ler (<code data-start="684" data-end="689">for</code>, <code data-start="691" data-end="700">foreach</code>, <code data-start="702" data-end="709">while</code>) barındırabilir</p>
 </li>
-<li data-start="5708" data-end="5736">
-<p data-start="5710" data-end="5736">Ağ ayarlarını yapılandırma</p>
+<li data-start="726" data-end="765">
+<p data-start="728" data-end="765">Fonksiyonlar ve mod&uuml;ller kullanabilir</p>
 </li>
-<li data-start="5737" data-end="5764">
-<p data-start="5739" data-end="5764">IP adreslerini değiştirme</p>
+<li data-start="766" data-end="807">
+<p data-start="768" data-end="807">Hata ayıklama (<code data-start="783" data-end="794">try-catch</code>) yapılabilir</p>
 </li>
-<li data-start="5765" data-end="5791">
-<p data-start="5767" data-end="5791">Uzak sunuculara bağlanma</p>
-</li>
-<li data-start="5792" data-end="5823">
-<p data-start="5794" data-end="5823">Veri analizi ve rapor &uuml;retimi</p>
-</li>
-<li data-start="5824" data-end="5843">
-<p data-start="5826" data-end="5843">Uygulama dağıtımı</p>
-</li>
-<li data-start="5844" data-end="5861">
-<p data-start="5846" data-end="5861">Test otomasyonu</p>
-</li>
-<li data-start="5862" data-end="5877">
-<p data-start="5864" data-end="5877">Hata ayıklama</p>
-</li>
-<li data-start="5879" data-end="5915">Script Yazımında &Ouml;nemli Yapılar:</li>
-<li data-start="5916" data-end="5960">
-<p data-start="5918" data-end="5960"><strong data-start="5918" data-end="5934">Değişkenler:</strong> <code data-start="5935" data-end="5960">$kullaniciAdi = "admin"</code></p>
-</li>
-<li data-start="5961" data-end="5989">
-<p data-start="5963" data-end="5989"><strong data-start="5963" data-end="5976">Koşullar:</strong> <code data-start="5977" data-end="5981">if</code>, <code data-start="5983" data-end="5989">else</code></p>
-</li>
-<li data-start="5990" data-end="6028">
-<p data-start="5992" data-end="6028"><strong data-start="5992" data-end="6011">Karar yapıları:</strong> <code data-start="6012" data-end="6020">switch</code>, <code data-start="6022" data-end="6028">case</code></p>
-</li>
-<li data-start="6029" data-end="6070">
-<p data-start="6031" data-end="6070"><strong data-start="6031" data-end="6044">D&ouml;ng&uuml;ler:</strong> <code data-start="6045" data-end="6050">for</code>, <code data-start="6052" data-end="6061">foreach</code>, <code data-start="6063" data-end="6070">while</code></p>
-</li>
-<li data-start="6072" data-end="6094">PowerShell Gallery</li>
-<li data-start="6095" data-end="6248">PowerShell Gallery, script ve mod&uuml;llerin paylaşıldığı resmi &ccedil;evrim i&ccedil;i bir havuzdur. Kullanıcılar buradan mod&uuml;ller indirerek işlevselliği genişletebilir.</li>
 </ul>
-<hr data-start="6250" data-end="6253" />
-<ul>
-<li data-start="6265" data-end="6695">&nbsp;</li>
-</ul>
+<hr data-start="809" data-end="812" />
+<h3 data-start="814" data-end="869">&Ouml;rnek 1: Kullanıcı Bilgisi Al</h3>
+<div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary">
+<div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-powershell">Kullanıcının adını sorar ve selamlar</code></div>
+<div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-powershell"></code></div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffff00; background-color: #000000;"><code class="whitespace-pre! language-powershell">$name = Read-Host "L&uuml;tfen adınızı girin"
+</code></span></div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffff00; background-color: #000000;"><code class="whitespace-pre! language-powershell">Write-Output "Merhaba, $name! PowerShell'e hoş geldin."
+</code></span></div>
+</div>
+<hr data-start="1026" data-end="1029" />
+<h3 data-start="1031" data-end="1080">&nbsp;&Ouml;rnek 2: Yerel Kullanıcı Oluşturma Scripti</h3>
+<div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary">
+<div class="sticky top-9">
+<div class="absolute end-0 bottom-0 flex h-9 items-center pe-2">
+<div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs">&nbsp;</div>
+</div>
+</div>
+<div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-powershell">Yeni bir yerel kullanıcı oluşturur</code></div>
+<div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-powershell"></code></div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffff00; background-color: #000000;"><code class="whitespace-pre! language-powershell">$username = "yeni_kullanici"
+</code></span></div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffff00; background-color: #000000;"><code class="whitespace-pre! language-powershell">$password = ConvertTo-SecureString "GucluSifre123!" -AsPlainText -Force
 
+New-LocalUser -Name $username -Password $password -FullName "Yeni Kullanıcı" -Description "Otomatik olarak oluşturulmuştur"
+</code></span></div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffff00; background-color: #000000;"><code class="whitespace-pre! language-powershell">Add-LocalGroupMember -Group "Users" -Member $username
+</code></span></div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffff00; background-color: #000000;"><code class="whitespace-pre! language-powershell">Write-Output "$username adlı kullanıcı başarıyla oluşturuldu."
+</code></span></div>
+</div>
+<blockquote data-start="1482" data-end="1562">
+<p data-start="1484" data-end="1562">&nbsp;</p>
+</blockquote>
+<hr data-start="1564" data-end="1567" />
+<h3 data-start="1569" data-end="1616">&Ouml;rnek 3: IP Adresi ve Ağ Durumu Kontrol&uuml;</h3>
+<div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary">
+<div class="sticky top-9">
+<div class="absolute end-0 bottom-0 flex h-9 items-center pe-2">
+<div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs">&nbsp;</div>
+</div>
+</div>
+<div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-powershell">&nbsp;Bilgisayarın IP adresini ve internet bağlantısını kontrol eder</code></div>
+</div>
+<p><br /><code><span style="color: #ffff00; background-color: #000000;">$ip = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notlike "Loopback*" }).IPAddress</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">Write-Output "Bu bilgisayarın IP adresi: $ip"</span></code></p>
+<p><code><span style="color: #ffff00; background-color: #000000;">Test-Connection -ComputerName google.com -Count 2 -Quiet | ForEach-Object {</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">if ($_ -eq $true) {</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">Write-Output "İnternet bağlantısı var."</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">} else {</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">Write-Output "İnternet bağlantısı yok!"</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">}</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">}</span></code></p>
+<hr data-start="2079" data-end="2082" />
+<h3 data-start="2084" data-end="2156">&Ouml;rnek 4: Belirli Bir Dosya Var mı Kontrol Et ve Gerekirse Oluştur</h3>
+<div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary">
+<div class="sticky top-9">
+<div class="absolute end-0 bottom-0 flex h-9 items-center pe-2">
+<div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs">&nbsp;</div>
+</div>
+</div>
+<div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-powershell">&nbsp;C:\Scripts klas&ouml;r&uuml;nde logs.txt dosyası var mı kontrol eder, yoksa oluşturur</code></div>
+<div class="overflow-y-auto p-4" dir="ltr">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr">
+<p><code><span style="color: #ffff00; background-color: #000000;">$path = "C:\Scripts\logs.txt"</span></code></p>
+<p><code><span style="color: #ffff00; background-color: #000000;">if (!(Test-Path -Path $path)) {</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">New-Item -ItemType File -Path $path</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">Write-Output "Dosya oluşturuldu: $path"</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">} else {</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">Write-Output "Dosya zaten mevcut: $path"</span></code><br /><code><span style="color: #ffff00; background-color: #000000;">}</span></code></p>
+</div>
+</div>
 
