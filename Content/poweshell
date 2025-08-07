@@ -21,3 +21,239 @@
 <h1>PowerShell'de Kullanıcı/Grup Yönetimi, Ağ Araçları, RSAT ve Script Tabanlı Otomasyon</h1>
 
 
+<p data-start="361" data-end="639">Windows işletim sistemlerinde komut satırı denildiğinde akla gelen ilk ara&ccedil;lardan biri <strong data-start="448" data-end="462">PowerShell</strong>&rsquo;dir. Microsoft&rsquo;un sistem y&ouml;neticileri ve ileri d&uuml;zey kullanıcılar i&ccedil;in geliştirdiği bu kabuk, geleneksel Windows Komut İstemi&rsquo;nden (CMD) &ccedil;ok daha g&uuml;&ccedil;l&uuml; ve kapsamlı bir ara&ccedil;tır.</p>
+<p data-start="641" data-end="788">Bu yazıda PowerShell&rsquo;in temel kullanımından başlayarak, Active Directory y&ouml;netimi, ağ yapılandırmaları, RSAT kullanımı ve otomasyon scriptleri oluşturma s&uuml;re&ccedil;lerine kadar bir&ccedil;ok konuyu ele alıcaz.</p>
+<hr data-start="790" data-end="793" />
+<h2 data-start="795" data-end="837">1. PowerShell ve Komut Satırı Temelleri</h2>
+<p data-start="839" data-end="1085">Detaylı bilgilere ge&ccedil;meden &ouml;nce, ilk olarak PowerShell&rsquo;de bazı temel bilgilere sahip olalım. PowerShell, CMD&rsquo;den farklı olarak nesne tabanlı &ccedil;alışan g&uuml;&ccedil;l&uuml; bir komut satırı kabuğudur. Geleneksel Windows Komut İstemi (CMD), &ccedil;ıktıları genellikle d&uuml;z metin olarak sunarken, PowerShell &ccedil;ıktıları birer <strong data-start="550" data-end="566">.NET nesnesi</strong> olarak işler. Bu sayede, veriler &uuml;zerinde &ccedil;ok daha gelişmiş işlemler yapılabilir.</p>
+<h3 data-start="1087" data-end="1115"><span style="color: #ff0000;"><em>CMDLET:</em></span></h3>
+<p data-start="248" data-end="445">PowerShell&rsquo;de komutlar <strong data-start="271" data-end="281">cmdlet</strong> (command-let) olarak adlandırılır. Cmdlet&rsquo;ler, PowerShell&rsquo;in temel yapı taşlarıdır ve belirli bir işlemi ger&ccedil;ekleştiren, &ouml;zel olarak tasarlanmış k&uuml;&ccedil;&uuml;k komutlardır.</p>
+<p data-start="447" data-end="504">Her cmdlet genellikle <strong data-start="469" data-end="482">fiil-isim</strong> formatında yazılır.&Ouml;rneğin:</p>
+<ul data-start="505" data-end="682">
+<li data-start="505" data-end="570">
+<p data-start="507" data-end="570"><code data-start="507" data-end="520">Get-Process</code> &rarr; Sistem &uuml;zerindeki &ccedil;alışan işlemleri listeler.</p>
+</li>
+<li data-start="571" data-end="621">
+<p data-start="573" data-end="621"><code data-start="573" data-end="586">Get-Service</code> &rarr; &Ccedil;alışan hizmetleri g&ouml;r&uuml;nt&uuml;ler.</p>
+</li>
+<li data-start="622" data-end="682">
+<p data-start="624" data-end="682"><code data-start="624" data-end="638">Set-Location</code> &rarr; Klas&ouml;r konumunu değiştirir.</p>
+</li>
+</ul>
+<p data-start="684" data-end="909">Bu yapı sayesinde PowerShell komutları daha okunabilir, daha tutarlı ve sezgisel hale gelir. Cmdlet&rsquo;ler b&uuml;y&uuml;k oranda <strong data-start="801" data-end="810">&ldquo;Get&rdquo;</strong>, <strong data-start="812" data-end="821">&ldquo;Set&rdquo;</strong>, <strong data-start="823" data-end="832">&ldquo;New&rdquo;</strong>, <strong data-start="834" data-end="846">&ldquo;Remove&rdquo;</strong>, <strong data-start="848" data-end="859">&ldquo;Start&rdquo;</strong>, <strong data-start="861" data-end="871">&ldquo;Stop&rdquo;</strong> gibi eylem belirten fiillerle başlar.</p>
+<h3 data-start="1442" data-end="1458"><span style="color: #ff0000;"><em>Yardım Almak:</em></span></h3>
+<ul data-start="1459" data-end="1616">
+<li data-start="1459" data-end="1504">
+<p data-start="1461" data-end="1504"><code data-start="1461" data-end="1465">-?</code> &rarr; Komut hakkında yardım almayı sağlar.</p>
+</li>
+<li data-start="1505" data-end="1557">
+<p data-start="1507" data-end="1557"><code data-start="1507" data-end="1520">Get-Command</code> &rarr; Sistemdeki t&uuml;m komutları listeler.</p>
+</li>
+<li data-start="1558" data-end="1616">
+<p data-start="1560" data-end="1616"><code data-start="1560" data-end="1578">Get-Help &lt;komut&gt;</code> &rarr; Komut hakkında detaylı bilgi verir.</p>
+</li>
+</ul>
+<h3 data-start="1618" data-end="1641">Alias (Takma Adlar)</h3>
+<p data-start="1642" data-end="1694">PowerShell, bazı uzun komutlara kısa adlar tanımlar:</p>
+<ul data-start="1695" data-end="1766">
+<li data-start="1695" data-end="1718">
+<p data-start="1697" data-end="1718"><code data-start="1697" data-end="1701">cd</code> = <code data-start="1704" data-end="1718">Set-Location</code></p>
+</li>
+<li data-start="1719" data-end="1743">
+<p data-start="1721" data-end="1743"><code data-start="1721" data-end="1725">ls</code> = <code data-start="1728" data-end="1743">Get-ChildItem</code></p>
+</li>
+<li data-start="1744" data-end="1766">
+<p data-start="1746" data-end="1766"><code data-start="1746" data-end="1750">rm</code> = <code data-start="1753" data-end="1766">Remove-Item</code></p>
+</li>
+</ul>
+<h3 data-start="1768" data-end="1797">Dosya ve Klas&ouml;r İşlemleri</h3>
+<ul data-start="1798" data-end="1916">
+<li data-start="1798" data-end="1873">
+<p data-start="1800" data-end="1873"><code data-start="1800" data-end="1849"><span style="background-color: #000000; color: #ffff00;">New-Item -ItemType Directory -Path .\YeniKlasor</span></code>: Yeni klas&ouml;r oluşturur.</p>
+</li>
+<li data-start="1874" data-end="1916">
+<p data-start="1876" data-end="1916"><span style="background-color: #000000; color: #ffff00;"><code data-start="1876" data-end="1889">Remove-Item</code></span>: Dosya ya da klas&ouml;r siler.</p>
+</li>
+</ul>
+<blockquote data-start="1917" data-end="2057">
+<p data-start="1919" data-end="2057">Not: PowerShell, Linux'taki <code data-start="1947" data-end="1951">rm</code>, <code data-start="1953" data-end="1957">cp</code>, <code data-start="1959" data-end="1963">mv</code>, <code data-start="1965" data-end="1970">cat</code> gibi komutlara da benzeyen yapıdadır; ancak bu yazıda bu benzerliklere değinmeyeceğiz.</p>
+</blockquote>
+<hr data-start="2059" data-end="2062" />
+<h2 data-start="2064" data-end="2095">2. Operat&ouml;rler ve Filtreleme</h2>
+<p data-start="2097" data-end="2176">PowerShell&rsquo;de bazı temel operat&ouml;rler ve veri işleme yapıları olduk&ccedil;a &ouml;nemlidir:</p>
+<ul>
+<li data-start="2180" data-end="2232"><code data-start="2180" data-end="2183">|</code> (pipe): Komut &ccedil;ıktısını başka bir komuta iletir.</li>
+<li data-start="2235" data-end="2288"><code data-start="2235" data-end="2240">-eq</code>: Eşitlik operat&ouml;r&uuml;d&uuml;r. (&ouml;rn: <code data-start="2270" data-end="2286">if ($x -eq 10)</code>).</li>
+<li data-start="2291" data-end="2352"><code data-start="2291" data-end="2306">Select-String</code>: Belirli bir metni dosyada veya &ccedil;ıktıda arar.</li>
+<li data-start="615" data-end="709">
+<p data-start="617" data-end="709"><code data-start="617" data-end="624">-like</code>: Metin karşılaştırması yapar; joker karakterlerle (&ouml;rneğin <code data-start="684" data-end="687">*</code>) birlikte kullanılır.</p>
+</li>
+<li data-start="710" data-end="762">
+<p data-start="712" data-end="762"><code data-start="712" data-end="726">where-object</code>: Filtreleme işlemi i&ccedil;in kullanılır.</p>
+</li>
+</ul>
+<p>&Ouml;rnek:</p>
+<p>Aşağıdaki komut, &ccedil;alışan t&uuml;m servisler arasında sadece adında &ldquo;defender&rdquo; ge&ccedil;enleri listeler:</p>
+<div class="sticky top-9">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffff00; background-color: #000000;"><code class="whitespace-pre! language-powershell">Get-Service | Where-Object { $_.DisplayName -like "*defender*" }
+</code></span></div>
+<p><em><strong><code data-start="955" data-end="968">Get-Service</code>:</strong></em> T&uuml;m hizmetleri listeler.</p>
+<p><strong><em><code data-start="997" data-end="1000">|</code>:</em></strong> &Ccedil;ıktıyı bir sonraki komuta g&ouml;nderir.</p>
+<p><strong><em><code data-start="1041" data-end="1055">Where-Object</code>:</em></strong> Koşula uyan verileri s&uuml;zer.</p>
+<p><strong><em><code data-start="1087" data-end="1091">$_</code>:</em></strong> İ&ccedil;inde bulunduğu işlemdeki ge&ccedil;erli nesneyi temsil eder.</p>
+<p><strong><em><code data-start="1151" data-end="1171">-like "*defender*"</code>:</em> </strong>Hizmet adında "defender" ge&ccedil;enleri eşleştirir.</p>
+<hr data-start="2354" data-end="2357" />
+<h2>3. PowerShell ile Kullanıcı ve Grup Y&ouml;netimi</h2>
+<p>PowerShell, hem yerel hem de Active Directory tabanlı kullanıcı ve grupların y&ouml;netimi i&ccedil;in olduk&ccedil;a g&uuml;&ccedil;l&uuml; bir ara&ccedil;tır.</p>
+<h4>Active Directory Nedir?</h4>
+<p>Active Directory (AD), Microsoft&rsquo;un Windows Server sistemleri i&ccedil;in geliştirdiği bir dizin hizmetidir. Kullanıcıları, yazıcıları, uygulamaları ve domain'e bağlı t&uuml;m cihazları <em>merkezi olarak y&ouml;netmeye</em> olanak tanır.</p>
+<p>Sağladığı Bazı &Ouml;zellikler:</p>
+<ul>
+<li>Tek noktadan kullanıcı hesabı oluşturma, silme, d&uuml;zenleme</li>
+<li>Erişim izinlerini ayarlama</li>
+<li>Grup politikalarını uygulama</li>
+<li>G&uuml;venlik ve masa&uuml;st&uuml; davranışlarını kontrol etme</li>
+</ul>
+<hr data-start="2978" data-end="2981" />
+<h2>4. RSAT: Remote Server Administration Tools</h2>
+<p><strong data-start="3031" data-end="3076">RSAT (Remote Server Administration Tools)</strong>, Windows sistemine sahip bir bilgisayardan uzaktaki Windows Server&rsquo;ları y&ouml;netmeye olanak sağlar.</p>
+<p data-start="3231" data-end="3274">(T&uuml;rk&ccedil;esi "Uzaktan Sunucu Y&ouml;netim Ara&ccedil;ları")</p>
+<p>RSAT, hem GUI (grafik aray&uuml;z) hem de PowerShell mod&uuml;lleri ile gelir. Bu ara&ccedil;lar sayesinde uzak sistemlerde kullanıcılar ve gruplar y&ouml;netilebilir.</p>
+<p><strong data-start="3423" data-end="3441">RSAT Kurulumu:</strong></p>
+<p data-start="3444" data-end="3539">Ayarlar &rarr; Uygulamalar &rarr; İsteğe Bağlı &Ouml;zellikler &rarr; &Ouml;zellik Ekle &rarr; "Uzak Sunucu Y&ouml;netim Ara&ccedil;ları"</p>
+<p>Active Directory Cmdlet &Ouml;rnekleri:</p>
+<ul>
+<li data-start="3582" data-end="3618"><span style="color: #ffff00; background-color: #000000;">Get-ADUser</span> &rarr; Kullanıcıyı getirir</li>
+<li data-start="3621" data-end="3662"><span style="color: #ffff00; background-color: #000000;">New-ADUser</span> &rarr; Yeni kullanıcı oluşturur</li>
+<li data-start="3665" data-end="3713"><span style="color: #ffff00; background-color: #000000;">Set-ADUser </span>&rarr; Kullanıcı bilgilerini g&uuml;nceller</li>
+<li data-start="3716" data-end="3751"><span style="color: #ffff00; background-color: #000000;">Remove-ADUser</span> &rarr; Kullanıcıyı siler</li>
+</ul>
+<hr data-start="3753" data-end="3756" />
+<h2>5. Yerel Kullanıcı ve Grup Y&ouml;netimi</h2>
+<p>PowerShell ile sadece domain kullanıcıları değil, yerel bilgisayardaki kullanıcı ve gruplar da y&ouml;netilebilir.</p>
+<p>Yerel Kullanıcı Cmdlet&rsquo;leri:</p>
+<p data-start="3944" data-end="3993"><span style="color: #ffff00; background-color: #000000;">Get-LocalUser</span></p>
+<p data-start="3944" data-end="3993">&nbsp;T&uuml;m yerel kullanıcıları listeler</p>
+<p data-start="3996" data-end="4037"><span style="color: #ffff00; background-color: #000000;">New-LocalUser</span></p>
+<p data-start="3996" data-end="4037">&nbsp;Yeni kullanıcı oluşturur</p>
+<p data-start="4040" data-end="4096"><span style="color: #ffff00; background-color: #000000;">Set-LocalUser</span></p>
+<p data-start="4040" data-end="4096"><code data-start="4040" data-end="4055"></code>&nbsp;Mevcut kullanıcı bilgilerini değiştirir</p>
+<p data-start="4099" data-end="4150"><span style="color: #ffff00; background-color: #000000;">Disable-LocalUser</span></p>
+<p data-start="4099" data-end="4150"><code data-start="4099" data-end="4118"></code>&nbsp;Kullanıcıyı devre dışı bırakır</p>
+<p data-start="4153" data-end="4198"><span style="color: #ffff00; background-color: #000000;">Enable-LocalUser</span></p>
+<p data-start="4153" data-end="4198"><code data-start="4153" data-end="4171"></code>&nbsp;Kullanıcıyı etkinleştirir</p>
+<p data-start="4201" data-end="4240"><span style="color: #ffff00; background-color: #000000;">Remove-LocalUser</span></p>
+<p data-start="4201" data-end="4240">&nbsp;Kullanıcıyı siler</p>
+<p data-start="4243" data-end="4312"><em data-start="4243" data-end="4312">Yerel kullanıcılar, sadece o bilgisayarda ge&ccedil;erli olan hesaplardır.</em></p>
+<p>Yerel Grup Cmdlet&rsquo;leri:</p>
+<p data-start="4344" data-end="4389"><span style="color: #ffff00; background-color: #000000;">Get-LocalGroup</span></p>
+<p data-start="4344" data-end="4389"><code data-start="4344" data-end="4360"></code><code data-start="4344" data-end="4360"></code>&nbsp;T&uuml;m yerel grupları listeler</p>
+<p data-start="4392" data-end="4429"><span style="color: #ffff00; background-color: #000000;">New-LocalGroup</span></p>
+<p data-start="4392" data-end="4429"><code data-start="4392" data-end="4408"></code>&nbsp;Yeni grup oluşturur</p>
+<p data-start="4432" data-end="4476"><span style="color: #ffff00; background-color: #000000;">Set-LocalGroup</span></p>
+<p data-start="4432" data-end="4476"><code data-start="4432" data-end="4448"></code>&nbsp;Grup bilgilerini g&uuml;nceller</p>
+<p data-start="4479" data-end="4518"><span style="color: #ffff00; background-color: #000000;">Add-LocalGroupMember</span></p>
+<p data-start="4479" data-end="4518"><code data-start="4479" data-end="4501"></code>&nbsp;Gruba &uuml;ye ekler</p>
+<p data-start="4521" data-end="4567"><span style="color: #ffff00; background-color: #000000;">Remove-LocalGroupMember</span></p>
+<p data-start="4521" data-end="4567"><code data-start="4521" data-end="4546"></code>&nbsp;Gruptan &uuml;ye &ccedil;ıkarır</p>
+<hr data-start="4569" data-end="4572" />
+<ul>
+<li data-start="4574" data-end="4611">6. Ağ Bağlantıları ve Yapılandırma</li>
+<li data-start="4613" data-end="4686">PowerShell ile ağ bağlantılarını analiz etmek ve yapılandırmak m&uuml;mk&uuml;nd&uuml;r.</li>
+<li data-start="4688" data-end="4720">Sık Kullanılan Ağ Komutları:</li>
+<li data-start="4721" data-end="4768">
+<p data-start="4723" data-end="4768"><code data-start="4723" data-end="4741">Get-NetIPAddress</code>: IP adreslerini listeler</p>
+</li>
+<li data-start="4769" data-end="4806">
+<p data-start="4771" data-end="4806"><code data-start="4771" data-end="4781">nslookup</code>: DNS &ccedil;&ouml;z&uuml;mlemesi yapar</p>
+</li>
+<li data-start="4807" data-end="4848">
+<p data-start="4809" data-end="4848"><code data-start="4809" data-end="4819">ipconfig</code>: IP bilgilerini g&ouml;r&uuml;nt&uuml;ler</p>
+</li>
+<li data-start="4849" data-end="4902">
+<p data-start="4851" data-end="4902"><code data-start="4851" data-end="4860">netstat</code>: A&ccedil;ık bağlantıları ve portları g&ouml;sterir</p>
+</li>
+<li data-start="4903" data-end="4939">
+<p data-start="4905" data-end="4939"><code data-start="4905" data-end="4913">arp -a</code>: ARP tablosunu g&ouml;sterir</p>
+</li>
+<li data-start="4940" data-end="4991">
+<p data-start="4942" data-end="4991"><code data-start="4942" data-end="4962">Test-NetConnection</code>: Ağ bağlantısını test eder</p>
+</li>
+<li data-start="4992" data-end="5039">
+<p data-start="4994" data-end="5039"><code data-start="4994" data-end="5013">Invoke-WebRequest</code>: Web istekleri g&ouml;nderir</p>
+</li>
+</ul>
+<hr data-start="5041" data-end="5044" />
+<ul>
+<li data-start="5046" data-end="5081">7. Bilgi Edinme ve Sistem Durumu</li>
+<li data-start="5083" data-end="5136">Sistem hakkında bilgi almak i&ccedil;in kullanılan komutlar:</li>
+<li data-start="5138" data-end="5188">
+<p data-start="5140" data-end="5188"><code data-start="5140" data-end="5158">Get-ComputerInfo</code>: Donanım ve yazılım bilgileri</p>
+</li>
+<li data-start="5189" data-end="5255">
+<p data-start="5191" data-end="5255"><code data-start="5191" data-end="5228">Get-WmiObject Win32_OperatingSystem</code>: İşletim sistemi bilgileri</p>
+</li>
+<li data-start="5256" data-end="5302">
+<p data-start="5258" data-end="5302"><code data-start="5258" data-end="5270">Get-HotFix</code>: Kurulu g&uuml;ncellemeleri listeler</p>
+</li>
+<li data-start="5303" data-end="5401">
+<p data-start="5305" data-end="5401"><code data-start="5305" data-end="5371">Get-Service | Where-Object { $_.DisplayName -like "*Defender*" }</code>: Belirli hizmetleri filtreler</p>
+</li>
+</ul>
+<hr data-start="5403" data-end="5406" />
+<ul>
+<li data-start="5408" data-end="5441">8. PowerShell ile Script Yazma</li>
+<li data-start="5443" data-end="5590">PowerShell scriptleri, <code data-start="5466" data-end="5472">.ps1</code> uzantılı metin dosyalarıdır. İ&ccedil;erisine birden fazla komut ve fonksiyon yazılarak bir&ccedil;ok işlem otomatikleştirilebilir.</li>
+<li data-start="5592" data-end="5623">Otomatikleştirme &Ouml;rnekleri:</li>
+<li data-start="5624" data-end="5660">
+<p data-start="5626" data-end="5660">Yeni kullanıcı hesapları oluşturma</p>
+</li>
+<li data-start="5661" data-end="5681">
+<p data-start="5663" data-end="5681">Disk bi&ccedil;imlendirme</p>
+</li>
+<li data-start="5682" data-end="5707">
+<p data-start="5684" data-end="5707">Dosya kopyalama / silme</p>
+</li>
+<li data-start="5708" data-end="5736">
+<p data-start="5710" data-end="5736">Ağ ayarlarını yapılandırma</p>
+</li>
+<li data-start="5737" data-end="5764">
+<p data-start="5739" data-end="5764">IP adreslerini değiştirme</p>
+</li>
+<li data-start="5765" data-end="5791">
+<p data-start="5767" data-end="5791">Uzak sunuculara bağlanma</p>
+</li>
+<li data-start="5792" data-end="5823">
+<p data-start="5794" data-end="5823">Veri analizi ve rapor &uuml;retimi</p>
+</li>
+<li data-start="5824" data-end="5843">
+<p data-start="5826" data-end="5843">Uygulama dağıtımı</p>
+</li>
+<li data-start="5844" data-end="5861">
+<p data-start="5846" data-end="5861">Test otomasyonu</p>
+</li>
+<li data-start="5862" data-end="5877">
+<p data-start="5864" data-end="5877">Hata ayıklama</p>
+</li>
+<li data-start="5879" data-end="5915">Script Yazımında &Ouml;nemli Yapılar:</li>
+<li data-start="5916" data-end="5960">
+<p data-start="5918" data-end="5960"><strong data-start="5918" data-end="5934">Değişkenler:</strong> <code data-start="5935" data-end="5960">$kullaniciAdi = "admin"</code></p>
+</li>
+<li data-start="5961" data-end="5989">
+<p data-start="5963" data-end="5989"><strong data-start="5963" data-end="5976">Koşullar:</strong> <code data-start="5977" data-end="5981">if</code>, <code data-start="5983" data-end="5989">else</code></p>
+</li>
+<li data-start="5990" data-end="6028">
+<p data-start="5992" data-end="6028"><strong data-start="5992" data-end="6011">Karar yapıları:</strong> <code data-start="6012" data-end="6020">switch</code>, <code data-start="6022" data-end="6028">case</code></p>
+</li>
+<li data-start="6029" data-end="6070">
+<p data-start="6031" data-end="6070"><strong data-start="6031" data-end="6044">D&ouml;ng&uuml;ler:</strong> <code data-start="6045" data-end="6050">for</code>, <code data-start="6052" data-end="6061">foreach</code>, <code data-start="6063" data-end="6070">while</code></p>
+</li>
+<li data-start="6072" data-end="6094">PowerShell Gallery</li>
+<li data-start="6095" data-end="6248">PowerShell Gallery, script ve mod&uuml;llerin paylaşıldığı resmi &ccedil;evrim i&ccedil;i bir havuzdur. Kullanıcılar buradan mod&uuml;ller indirerek işlevselliği genişletebilir.</li>
+</ul>
+<hr data-start="6250" data-end="6253" />
+<ul>
+<li data-start="6265" data-end="6695">&nbsp;</li>
+</ul>
+
+
