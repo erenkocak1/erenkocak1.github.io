@@ -62,7 +62,7 @@
 <h4>Log Dosyalarına Erişim</h4>
 <p>Web sunucuları genellikle erişim ve hata g&uuml;nl&uuml;kleri tutar. Saldırganlar, bu log dosyalarına erişerek &ouml;nemli bilgiler elde edebilirler.</p>
 <blockquote>
-<p><span style="background-color: #000000;"><code><span style="color: #ffff00;">http://example.com/index.php?page=../../../../var/log/apache2/access.log</span></code></span></p>
+<p><span style="background-color: #000000;"><code><span style="color: #ffff00;">http://4oca4.com/index.php?page=../../../../var/log/apache2/access.log</span></code></span></p>
 </blockquote>
 <h4>PHP Kod Enjeksiyonu (Log Poisoning)</h4>
 <p>LFI zafiyeti, saldırganların zararlı PHP kodlarını &ccedil;alıştırmasına da olanak tanıyabilir. &Ouml;rneğin, web sunucusunun erişim loglarına bir PHP kodu eklenmişse, bu kod LFI zafiyeti kullanılarak &ccedil;alıştırılabilir.</p>
@@ -73,7 +73,7 @@
 </blockquote>
 <p>Bu isteği g&ouml;nderdikten sonra tarayıcıdan <strong>access.log</strong> dosyasını g&ouml;r&uuml;nt&uuml;leyelim.</p>
 <blockquote>
-<p><span style="background-color: #000000; color: #ffff00;"><code>http://example.com/index.php?page=../../../../var/log/apache2/access.log</code></span></p>
+<p><span style="background-color: #000000; color: #ffff00;"><code>http://4oca4.com/index.php?page=../../../../var/log/apache2/access.log</code></span></p>
 </blockquote>
 <p>Bu durumda, zararlı PHP kodu sunucu &uuml;zerinde &ccedil;alıştırılır ve saldırgan sunucu dosya sistemindeki dosyaları listeleyebilir.</p>
 <h4>PHP://filter ile Dosya Okuma</h4>
@@ -83,7 +83,7 @@
 </ol>
 <blockquote>
 <p><code><span style="color: #ffff00; background-color: #000000;">php://filter/convert.base64-encode/resource=home.php</span></code></p>
-<p><code><span style="color: #ffff00; background-color: #000000;">http://example.com/index.php?page=php://filter/convert.base64-encode/resource=home.php</span></code></p>
+<p><code><span style="color: #ffff00; background-color: #000000;">http://4oca4.com/index.php?page=php://filter/convert.base64-encode/resource=home.php</span></code></p>
 </blockquote>
 <ol start="2">
 <li><span style="text-decoration: underline;"><em><strong> &Ccedil;ıktı:</strong></em></span></li>
@@ -114,7 +114,7 @@
 <p>Bu kod, ../ alt dizelerini kaldırarak dizin ge&ccedil;işini engellemeyi hedefler. Ancak, bu filtreler genellikle yetersizdir &ccedil;&uuml;nk&uuml; girdiyi sadece bir kez işler ve &ccedil;ıktıya yeniden filtre uygulamaz. Bu nedenle, <strong>....// </strong>gibi girdiler kullanarak filtreyi aşmak m&uuml;mk&uuml;nd&uuml;r.</p>
 <p><strong>Bypass Y&ouml;ntemi</strong></p>
 <blockquote>
-<p><code><span style="background-color: #000000; color: #ffff00;">https://example.com/index.php?language=....//....//....//....//etc/passwd</span></code></p>
+<p><code><span style="background-color: #000000; color: #ffff00;">https://4oca4.com/index.php?language=....//....//....//....//etc/passwd</span></code></p>
 </blockquote>
 <ul>
 <li><strong>G&ouml;nderdiğimiz Payload:</strong></li>
@@ -136,7 +136,7 @@
 </ul>
 <p>olarak URL kodlayabiliriz.</p>
 <ul>
-<li><strong>https://example.com/index.php language=%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64 </strong></li>
+<li><strong>https://4oca4.com/index.php language=%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64 </strong></li>
 </ul>
 <p>Bu şekilde, URL encoding ile kodlanmış LFI payloadımız, sunucu tarafındaki filtreyi aşarak dizin ge&ccedil;işi ger&ccedil;ekleştirir ve /etc/passwd dosyasını okuyabiliriz.</p>
 <p><strong>Not:</strong> URL encoding ve decoding işlemleri i&ccedil;in kullanılabilecek bir&ccedil;ok &ccedil;evrimi&ccedil;i site vardır, buralardan yararlanılabilir.</p>
@@ -149,13 +149,13 @@
 <p>Yukarıdaki kod par&ccedil;acığında, kullanıcıdan gelen get parametresinin</p>
 <p><strong>language</strong></p>
 <p>kelimesi ile başlayıp başlamadığı kontrol ediliyor. Bu filtreyi aşmak i&ccedil;in, sunucu tarafından izin verilen yol ile başlamalı ve ardından <strong>../ </strong>kullanarak k&ouml;k dizine d&ouml;nmeliyiz:</p>
-<p><strong>https://example.com/index.php?language=./languages/../../../../etc/passwd</strong></p>
+<p><strong>https://4oca4.com/index.php?language=./languages/../../../../etc/passwd</strong></p>
 <p>Bu y&ouml;ntem, izin verilen yolu kullanarak filtreyi aşar ve dizin ge&ccedil;işi ger&ccedil;ekleştirir.</p>
 <h3>4. Null Byte Enjeksiyonu</h3>
 <p>Bazı web uygulamaları, girdi dizisine belirli bir uzantı ekleyerek (&ouml;rneğin .php) dosya dahil etme işlemini sınırlar. Ancak, eski PHP s&uuml;r&uuml;mlerinde bu t&uuml;r filtreler <strong>null byte (%00) </strong>enjeksiyonu kullanılarak aşılabilir.</p>
 <p>Null byte, dizeyi sonlandırır ve sonraki karakterleri yok sayar.</p>
 <p><span style="text-decoration: underline;"><em><strong>Null Byte Karakteri: %00</strong></em></span></p>
-<p><strong>https://example.com/index.php?language=/etc/passwd%00</strong></p>
+<p><strong>https://4oca4.com/index.php?language=/etc/passwd%00</strong></p>
 <p>Bu şekilde, <strong>.php</strong> uzantısı yok sayılır ve <strong>/etc/passwd</strong> dosyası dahil edilir.</p>
 <p><strong>&Ouml;nleme Y&ouml;ntemleri</strong></p>
 <p>File Inclusion zafiyetleri, &ouml;zellikle web uygulamalarında ciddi g&uuml;venlik a&ccedil;ıklarına neden olabilir. Bu zafiyetlerin &ouml;nlenmesi i&ccedil;in &ccedil;eşitli y&ouml;ntemler ve uygulamalar mevcuttur. Bu b&ouml;l&uuml;mde, File Inclusion zafiyetlerinden korunmak i&ccedil;in alınabilecek &ouml;nlemleri detaylı bir şekilde ele alacağız.</p>
