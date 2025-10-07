@@ -1,4 +1,25 @@
-<p>Bu yazıda <code data-start="528" data-end="534">ffuf</code> kullanarak hedef sitelerde dizin keşfi (directory fuzzing) ve subdomain fuzzing nasıl yapılır, elde edilen HTTP stat&uuml;lerinin (200, 301, 403 vb.) ne anlama geldiği ve hangi sonu&ccedil;ların &ouml;ncelikli incelemeye değer olduğu adım adım anlatıcam.&nbsp;</p>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temel Düzeyde Ffuf Tool'u Kullanımı</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+<h1>Temel Düzeyde Ffuf Tool'u Kullanımı</h1>
+  <p>Bu yazıda <code data-start="528" data-end="534">ffuf</code> kullanarak hedef sitelerde dizin keşfi (directory fuzzing) ve subdomain fuzzing nasıl yapılır, elde edilen HTTP stat&uuml;lerinin (200, 301, 403 vb.) ne anlama geldiği ve hangi sonu&ccedil;ların &ouml;ncelikli incelemeye değer olduğu adım adım anlatıcam.&nbsp;</p>
 <p>Başlangı&ccedil; seviyesinde bir yazı olacaktır.&nbsp;</p>
 <p>İlk olarak Ffuf toolumuzu <a href="https://github.com/ffuf/ffuf" target="_blank">buradaki</a> github linkinden kuralım.</p>
 <p>Sonra her toolda olduğu gibi help men&uuml;s&uuml; var fakat burada &ccedil;ok kafa karıştırmaya gerek yok.</p>
@@ -9,7 +30,7 @@
 <p>Şimdi bize olası directory ve sub-domain isimlerini i&ccedil;eren wordlist&rsquo;lerin lazım olacak. Bunun i&ccedil;in SecLists kullanabiliriz. Onu da <a href="https://github.com/danielmiessler/SecLists" target="_blank">buradan</a> indirebilirsiniz. Directory taraması i&ccedil;in <em><strong>common.txt</strong></em> işimizi g&ouml;recektir.</p>
 <p><img src="https://i.imgur.com/Yef7CGN.png" width="871" height="305" /></p>
 <p>Şimdi test aşamasına ge&ccedil;elim. Burada ben <strong data-start="383" data-end="395">Acunetix</strong> tarafından eğitim ama&ccedil;lı a&ccedil;ık bırakılan <a href="https://testphp.vulnweb.com/" target="_blank">testphp.vulnweb.com&nbsp;</a> sitesinden deneme yapıcam.</p>
-<p>https://i.imgur.com/v3jW5Yz.png<img src="https://i.imgur.com/MwHdZ9k.png" width="634" height="533" /></p>
+<p><img src="https://i.imgur.com/MwHdZ9k.png" width="634" height="533" /></p>
 <p>Şimdi kullanımında ilk olarak -u parametresini yazıp hedef siteyi ekliyoruz. Burada şu an directory testi yaptığımız i&ccedil;in url'nin sonuna <em><strong>FUZZ</strong> </em>ibaresini ekledik.&nbsp;</p>
 <p>&Ccedil;&uuml;nk&uuml; toolumuz listeden aldığı isimleri FUZZ kısmına ekleyip deneyecek. Sonrasında -w parametresi ile seclistimizde bulunan common.txt dosyamızı se&ccedil;iyoruz.</p>
 <p>Tam kodumuz</p>
@@ -34,3 +55,6 @@
 <p>Kod bu şekilde oluyor:<span style="background-color: #000000; color: #ffff00;"><code>ffuf -u http://FUZZ.google.com -w ../../<em><strong>subdomains-top1million-5000.txt&nbsp;</strong></em></code></span></p>
 <p><img src="https://i.imgur.com/Xz6j12D.png" width="644" height="442" /></p>
 <p>Okuduğunuz i&ccedil;in teşekk&uuml;r ederim.</p>
+  
+
+
