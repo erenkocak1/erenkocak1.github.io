@@ -1,3 +1,23 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buffer Overflow Zafiyeti Nedir ve Nasıl Tespit Edilir?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+     <h1>Buffer Overflow Zafiyeti Nedir ve Nasıl Tespit Edilir?
+</h1>
 <p>Herkese merhaba,</p>
 <p>Bu yazımızda, exploit geliştirmenin temel taşlarından biri olan Buffer Overflow zafiyetinin ne olduğunu, nasıl meydana geldiğini ve bir uygulamada bu zafiyetin nasıl tespit edilebileceğini ele alacağız.</p>
 <h2>Buffer Overflow Nedir?</h2>
@@ -54,3 +74,6 @@
 <p><span style="text-decoration: underline;"><em><strong>Debugger ile Analiz</strong></em></span>: Uygulama bir debugger (hata ayıklayıcı) &uuml;zerinden tekrar başlatılır ve payload yeniden g&ouml;nderilir.</p>
 <p><span style="text-decoration: underline;"><em><strong>Register'ları Kontrol Etme</strong></em></span>: Eğer payload başarılı bir şekilde bellek taşmasına neden olduysa, bu durum işlemci register'larına yansıyacaktır. &Ouml;zellikle <strong>EIP</strong> (Extended Instruction Pointer) register'ı kontrol edilir. EIP, &ccedil;alıştırılacak bir sonraki komutun bellek adresini tutar. Başarılı bir saldırıda, EIP register'ının i&ccedil;inde g&ouml;nderdiğimiz 'A' karakterlerinin hexadecimal karşılığı olan 41414141 değerini g&ouml;r&uuml;r&uuml;z. Bu, programın akışını kontrol edebildiğimizin kesin bir kanıtıdır.</p>
 <p>Okuduğunuz i&ccedil;in teşekk&uuml;r ederim.</p>
+     
+</body>
+</html>
