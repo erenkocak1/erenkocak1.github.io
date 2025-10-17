@@ -66,7 +66,7 @@
 <p>Bir uygulamada bu zafiyetin olup olmadığını anlamanın ilk adımı, uygulamanın kullanıcıdan veri aldığı giriş noktalarını doğru bir şekilde belirlemektir. Tespit işlemi genel olarak Fuzzing adı verilen bir y&ouml;ntemle yapılır.</p>
 <p>Fuzzing Nedir?</p>
 <p>Fuzzing, bir uygulamanın giriş noktalarına <strong>&ccedil;ok sayıda anlamsız veya rastgele veri g&ouml;nderilerek uygulamanın &ccedil;&ouml;kertilmeye (crash) &ccedil;alışılmasıdır</strong>. Eğer uygulama g&ouml;nderilen bu uzun veriler karşısında &ccedil;&ouml;kerse, bu durum bir Buffer Overflow zafiyetinin olabileceğine dair g&uuml;&ccedil;l&uuml; bir işarettir. Ancak her &ccedil;&ouml;kmenin exploit edilebileceği anlamına gelmediğini de unutmamak gerekir.</p>
-<p>Ek olarak kali linux'ta ki fuzzing ile ilgili olan ffuf adlı toolu da tanıttığım yazıma <a href="https://www.turkhackteam.org/konular/temel-duzeyde-ffuf-toolu-kullanimi.2076479/">buradan</a> ulaşabilirsiniz.</p>
+<p>Ek olarak kali linux'ta ki fuzzing ile ilgili olan ffuf adlı toolu da tanıttığım yazıma <a href="https://erenkocak1.github.io/#ffuf">buradan</a> ulaşabilirsiniz.</p>
 <h3 class="bbHeading">Tespit Adımları:​</h3>
 <p><strong><em>Payload Oluşturma</em></strong>: İlk olarak, uygulamaya g&ouml;ndermek i&ccedil;in &ccedil;ok sayıda tekrarlayan karakterden oluşan bir veri hazırlanır.&Ouml;rneğin, Python kullanarak 3000 adet 'A' karakteri oluşturulabilir.<br /><br /></p>
 <div class="bbCodeBlock bbCodeBlock--screenLimited bbCodeBlock--code">
