@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Directory Sızma Testi ve BloodHound Analiz Rehberi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+   <h1>Active Directory Sızma Testi ve BloodHound Analiz Rehberi</h1>
+<p><img src="https://www.haivision.com/wp-content/uploads/active_directory_3-1.jpg" alt="Haivision Video Technology Glossary: Active Directory" width="462" height="268" /></p>
+<p data-path-to-node="5">Analize ge&ccedil;meden &ouml;nce, kullandığımız teknolojileri tanıyalım:</p>
+<ul data-path-to-node="6">
+<li>
+<p data-path-to-node="6,0,0"><strong data-path-to-node="6,0,0" data-index-in-node="0">Active Directory (AD):</strong> Windows ağlarındaki kullanıcıları, bilgisayarları ve yetkileri y&ouml;neten merkezi sistemdir. Bir şirketin t&uuml;m dijital kimliklerinin tutulduğu ana k&uuml;t&uuml;phanedir.</p>
+</li>
+<li>
+<p data-path-to-node="6,1,0"><strong data-path-to-node="6,1,0" data-index-in-node="0">Domain Controller (DC):</strong> Active Directory'nin &uuml;zerinde &ccedil;alıştığı ana sunucudur. Ağdaki t&uuml;m kimlik doğrulama (şifre kontrol&uuml;) ve yetkilendirme işlemleri burada yapılır. Bizim senaryomuzda <code data-path-to-node="6,1,0" data-index-in-node="186">dc01</code> isimli sunucumuz bu g&ouml;revi g&ouml;r&uuml;yor.</p>
+</li>
+<li>
+<p data-path-to-node="6,2,0"><strong data-path-to-node="6,2,0" data-index-in-node="0">BloodHound:</strong> Active Directory i&ccedil;erisindeki karmaşık yetki ilişkilerini g&ouml;rselleştiren bir analiz aracıdır. Saldırganlara, d&uuml;ş&uuml;k yetkili bir kullanıcıdan Domain Admin'e giden en kısa yolu "grafik" olarak g&ouml;sterir.</p>
+</li>
+<li>
+<p data-path-to-node="6,3,0"><strong data-path-to-node="6,3,0" data-index-in-node="0">Neo4j:</strong> BloodHound'un arka planında &ccedil;alışan grafik tabanlı veritabanıdır. Verileri klasik tablolar yerine "d&uuml;ğ&uuml;mler" ve "ilişkiler" olarak tutar.</p>
+</li>
+<li><strong data-path-to-node="3,0,0" data-index-in-node="0">SharpHound:</strong> BloodHound'un veri toplayıcısı (ingestor) olan bir ara&ccedil;tır. Kurban makine &uuml;zerinde &ccedil;alıştırıldığında, Active Directory ağındaki t&uuml;m kullanıcıları, grup &uuml;yeliklerini, oturum a&ccedil;mış kullanıcıları ve yetki ilişkilerini (ACL) hızlıca tarar. Bu bilgileri BloodHound'un anlayabileceği bir JSON formatında (genellikle bir <code data-path-to-node="3,0,0" data-index-in-node="326">.zip</code> dosyası i&ccedil;inde) toplar. Kısacası, ağın "r&ouml;ntgenini &ccedil;eken" asıl yazılımdır.</li>
+</ul>
+<p>&nbsp;</p>
+<p><iframe title="ad attack paths - bloodhound" src="//www.youtube.com/embed/ewf7f6XGLGc" width="600" height="375" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<h3 data-path-to-node="10">1. Hazırlık: Kali Linux &Uuml;zerinde Kurulum</h3>
+<p data-path-to-node="11">Videonun başında analiz merkezimizi hazırlıyoruz. Kali Linux terminaline <code><span style="background-color: #000000; color: #ffff00;">apt install bloodhound neo4j</span></code> komutunu girerek gerekli ara&ccedil;ları y&uuml;kl&uuml;yoruz. Ardından <span style="background-color: #000000; color: #ffff00;"><code data-path-to-node="11" data-index-in-node="157">bloodhound</code> </span>komutuyla Neo4j veri tabanı servisini aktif hale getiriyoruz.</p>
+<h3 data-path-to-node="13">2. Hedef Sistemin Yapılandırılması (Windows Server 2022)</h3>
+<p data-path-to-node="14">Hedefimiz olan sunucuyu (DC) ayağa kaldırıyoruz. Ağ ayarlarından sunucuya statik bir IP verip, DNS olarak kendisini (<code data-path-to-node="14" data-index-in-node="117">127.0.0.1</code>) g&ouml;rmesini sağlıyoruz.</p>
+<blockquote data-path-to-node="15">
+<p data-path-to-node="15,0">&Ccedil;&uuml;nk&uuml; bir Domain Controller, ağdaki t&uuml;m cihazlara rehberlik edebilmek i&ccedil;in sabit bir adreste bulunmalı ve kendi i&ccedil;indeki kayıtları &ccedil;&ouml;zebilmelidir.</p>
+</blockquote>
+<h3 data-path-to-node="16">3. Kullanıcı Hiyerarşisi Oluşturma</h3>
+<p data-path-to-node="17">"Sirket Personel" adında bir birim (OU) oluşturup altına kullanıcılarımızı ekliyoruz:</p>
+<ul data-path-to-node="18">
+<li>
+<p data-path-to-node="18,0,0"><strong data-path-to-node="18,0,0" data-index-in-node="0">Ahmet Bey:</strong> Standart kullanıcı.</p>
+</li>
+<li>
+<p data-path-to-node="18,1,0"><strong data-path-to-node="18,1,0" data-index-in-node="0">Destek:</strong> Y&uuml;ksek yetkili, <strong data-path-to-node="18,1,0" data-index-in-node="24">Domain Admins</strong> grubuna &uuml;ye yapılmış hedef kullanıcı.</p>
+</li>
+</ul>
+<blockquote data-path-to-node="19">
+<p data-path-to-node="19,0"><strong>!!</strong> Ger&ccedil;ek hayatta saldırganlar Ahmet Bey gibi sıradan hesaplardan girer, Destek gibi admin hesaplarını hedef alır.</p>
+</blockquote>
+<h3 data-path-to-node="20">4. Saldırı Anı: Responder ile Hash Yakalama</h3>
+<p data-path-to-node="21">Kurban makine (Windows 10) domaine dahil edildikten sonra Kali tarafında <code data-path-to-node="21" data-index-in-node="73">Responder</code> aracını pusuya yatırıyoruz. Kurban kullanıcı ağda yanlış bir adrese (&Ouml;rn: <code data-path-to-node="21" data-index-in-node="157">\\olmayan-dizin</code>) gitmeye &ccedil;alıştığında, sistem bu bilgiyi ağa sorar. Responder bu isteği yakalar ve <strong data-path-to-node="21" data-index-in-node="256">NTLMv2 hash</strong> (şifre &ouml;zeti) bilgisini ele ge&ccedil;irir.</p>
+<h3 data-path-to-node="22">5. Veri Toplama: SharpHound Kullanımı</h3>
+<p data-path-to-node="23">Oturum a&ccedil;ıldıktan sonra, t&uuml;m ağ haritasını &ccedil;ıkaracak olan <code data-path-to-node="23" data-index-in-node="58">SharpHound.exe</code> aracını Kali &uuml;zerindeki bir HTTP sunucusu aracılığıyla hedefe transfer ediyoruz. PowerShell &uuml;zerinden <span style="background-color: #000000; color: #ffff00;"><code data-path-to-node="23" data-index-in-node="175">.\SharpHound.exe -c All</code></span> komutuyla t&uuml;m ağın r&ouml;ntgenini &ccedil;ekiyoruz.</p>
+<blockquote data-path-to-node="24">
+<p data-path-to-node="24,0"><strong data-path-to-node="24,0" data-index-in-node="0">Neden?</strong> Bu ara&ccedil;, saniyeler i&ccedil;inde binlerce yetki ilişkisini tarayarak analiz i&ccedil;in gereken <code data-path-to-node="24,0" data-index-in-node="89">.zip</code> dosyasını oluşturur.</p>
+</blockquote>
+<h3 data-path-to-node="25">6. BloodHound Analizi</h3>
+<p data-path-to-node="26">Topladığımız zip dosyasını&nbsp; smb &uuml;zerinden dışarı a&ccedil;ıyor ve kali makinemize alıyoruz bu dosyamızı. Bundan sonra Bloodhound &uuml;zerinden analizimizi yapıyoruz.</p>
+<blockquote data-path-to-node="27">
+<p data-path-to-node="27,0"><strong data-path-to-node="27,0" data-index-in-node="0">Sonu&ccedil;:</strong> Ekranda Ahmet Bey'den Domain Admin grubuna giden bir hat beliriyor. Bu hat, saldırganın adım adım hangi yetkileri kullanarak zirveye ulaşabileceğini kanıtlar.</p>
+</blockquote>
+<h3>&Ouml;nemli Not:</h3>
+<p><strong><em>Bu tekniklerin hepsi, yalnızca yasal ve etik ama&ccedil;larla, yani izniniz olan sistemlerde kullanılmalıdır. İzniniz olmayan sistemlerde bu t&uuml;r teknikleri kullanmak yasalara aykırıdır ve ciddi hukuki sonu&ccedil;lara yol a&ccedil;abilir.</em></strong></p>
+<p><strong>Okuduğunuz i&ccedil;in teşekk&uuml;rler.</strong></p>
+     
+</body>
+</html>
