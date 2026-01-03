@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nmap nedir, Nasıl Kullanılır? ve Kullanımı Sırasında Önemli Parametreler</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+            
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+<h1>Nmap nedir, Nasıl Kullanılır? ve Kullanımı Sırasında &Ouml;nemli Parametreler</h1>
+<p><img src="https://nmap.org/images/sitelogo.png" alt="Home page logo" width="308" height="165" /></p>
+<p>Nmap (Network Mapper), ağ g&uuml;venliği denetimlerinde yaygın olarak kullanılan g&uuml;&ccedil;l&uuml; bir a&ccedil;ık kaynaklı ara&ccedil;tır. Bu ara&ccedil;, ağlarda var olan cihazları ve servisleri keşfetmek, g&uuml;venlik a&ccedil;ıklarını tespit etmek ve ağ yapılarını haritalamak i&ccedil;in kullanılır.&nbsp;</p>
+<p>Nmap (Network Mapper), bir <strong>hedef ağı veya belirli IP adreslerini tarayarak</strong> ağ &uuml;zerindeki cihazları, <strong>a&ccedil;ık portları ve &ccedil;alışan hizmetleri belirlemeye y&ouml;nelik bir tarama ger&ccedil;ekleştirir.</strong></p>
+<p>Nmap'in &ccedil;alışma prensipleri, ağ keşfi ve g&uuml;venlik analizi konularında derin bir anlayış sağlamaktadır.</p>
+<p>Bu yazımda, Nmap&rsquo;in kullanımı,temel işlevleri ve &ccedil;eşitli parametreleri detaylı olarak ele alacağım.</p>
+<p>İlk olarak kali linux makinemizde zaten nmap aracımız kurulu geliyor eğer sizde kurulu değil ise "<span><strong><code>sudo apt-get install nmap</code></strong>" komutu ile kurabiliriz.</span></p>
+<p><span>Nmap aracı en kapsamlı</span></p>
+<p style="text-align: center;"><span><span style="color: #ff0000;"><em><code>nmap 192.168.x.x -Pn -n -T4 -p -sV -sC -O</code></em></span></span></p>
+<p>şeklindedir. Bunların dışında -sU , -sN , -sU parametreleride vardır. Peki burdaki parametreler ne anlama gelir şimdi onlara bakalım.</p>
+<h4>-Pn:</h4>
+<p>Bu se&ccedil;enek, hedef sistemin canlı olup olmadığını kontrol etmeden doğrudan port taraması yapar. Eğer hedefin a&ccedil;ık olduğunu biliyorsanız veya ping (ICMP) yanıtları engelleniyorsa, -Pn kullanmak iyi bir se&ccedil;enektir. Bu se&ccedil;enekle, Nmap sistemin canlı olup olmadığını doğrulamaz ve doğrudan portları tarar. Bu sayede, hedef ICMP yanıtlarını engelliyor olsa bile port taraması ger&ccedil;ekleştirilir.</p>
+<p>Daha kısa şekilde anlatmak gerekirse biz&nbsp;bu parametreyi yazarak nmap'e diyoruz ki ping atma direkt port taramasına ge&ccedil;. :)</p>
+<h4>-n:</h4>
+<p>Asla dns &ccedil;&ouml;z&uuml;mlemesi yapmaması i&ccedil;in bu parametreyi ekleriz.Yani, tarama sırasında IP adreslerini isimlere &ccedil;evirmeyi atlar ve sadece IP adresleri ile işlem yapar. Bu, taramanın hızını artırabilir ve bazı gizlilik avantajları sağlayabilir.</p>
+<h4>-T4:&nbsp;</h4>
+<p>Burada aslında "-Tn" şkelinde bahsedebiliriz. -T bize taramanın agresifliğini ve hızını belirlememize olanak sağlar. 0,1,2,3,4,5 se&ccedil;enekleri vardır.</p>
+<p>T0 en yavaş, T5 en hızlı ,&ouml;nerilen T4 ,en g&uuml;venilen ise T2 dir.</p>
+<h4>-p:&nbsp;</h4>
+<p>Belirli portları taramak i&ccedil;in kullanılır.</p>
+<p>Bu se&ccedil;enek, tarama yapılacak portları belirtmenizi sağlar ve varsayılan olarak Nmap'in tarayacağı port aralığını daraltarak taramanızı daha hedefli hale getirir. "-p-" ise t&uuml;m portları tarar. Peki bunu belirtmezsek yani -p veya -p- yazmazsak nmap varsayılan olarak en yaygın 1000 TCP portunu tarar.</p>
+<p>Kodda o şekilde sade bırakılmaz yanına port bilgisi girmek lazım.</p>
+<p>Kullanma zorunluluğu yoktur. Ben g&ouml;stermek i&ccedil;in ekledim oraya.</p>
+<h4>-sV:&nbsp;</h4>
+<p>Bu parametre bize ağdaki hizmetlerin ve portların versiyon bilgilerini g&ouml;sterir. Bu şekilde, hizmetlerin versiyon bilgilerini kullanarak potansiyel g&uuml;venlik a&ccedil;ıklarını tespit edebilir</p>
+<h4>-sC:&nbsp;</h4>
+<p>Script taraması yapar.</p>
+<p>-sC parametresi, Nmap'in varsayılan betik koleksiyonunu &ccedil;alıştırır ve ek g&uuml;venlik testleri ile bilgi toplama işlemleri sağlar.Genellikle -sV gibi diğer se&ccedil;eneklerle bir arada kullanılır, b&ouml;ylece hizmet tespiti ve detaylı analiz birlikte yapılabilir.</p>
+<h4>-O:</h4>
+<p>İşletim sistemini de g&ouml;sterir.</p>
+<p></p>
+<ul>
+<li>Bu son &uuml;&ccedil;&uuml; yerine(-sV , -sC , O) genellikle -A parametresi kullanılır. Taramanızda kapsamlı bir bilgi toplama ve detaylı analiz sağlamak i&ccedil;in kullanılan bir se&ccedil;enektir.</li>
+</ul>
+<p>Bunların dışında kullanılan birka&ccedil; &ouml;nemli parametre daha vardır. Şimdi onlara bakalım.</p>
+<h4>-sU:</h4>
+<p>Nmap'te -sU se&ccedil;eneği, "UDP taraması" anlamına gelir. Bu se&ccedil;enek, hedef sistemdeki a&ccedil;ık UDP portlarını taramak i&ccedil;in kullanılır. UDP (User Datagram Protocol), TCP'den farklı olarak bağlantı kurma aşamasını i&ccedil;ermez ve genellikle bağlantısız bir protokold&uuml;r.</p>
+<h4>-sN:</h4>
+<p>Port taramasının yapılmaması analamına gelir. Nmap'te -sN parametresi, "Sadece ağ taraması" anlamına gelir. Bu se&ccedil;enek, hedef sistemlerin canlı olup olmadığını kontrol eder, ancak port taraması yapmaz. -sN ile sadece hedeflerin varlığı belirlenir ve portlar hakkında bilgi toplama yapılmaz.</p>
+<h4>-sS:</h4>
+<p>Hedefteki b&uuml;t&uuml;n portlara SYN paketleri atıyor eğer hedef SYN ACK paketi g&ouml;nderirse port a&ccedil;ık demek. Yani "syn scan" yapıyor. Bunu b&uuml;t&uuml;n portlara tekrarlıyor. B&ouml;ylelikle a&ccedil;ık portları buluyor.</p>
+<p></p>
+<h4>-sT:</h4>
+<p>"-sS" ye g&ouml;re daha yavaş ama daha g&uuml;venlidir.<br />&Ccedil;&uuml;nk&uuml; bağlantı kurma s&uuml;recinin tamamını ger&ccedil;ekleştirir. Bu s&uuml;re&ccedil;, TCP &uuml;&ccedil; aşamalı el sıkışma (SYN, SYN-ACK, ACK) i&ccedil;erir.<br />"-sS" de doğrudan bağlantı kurma girişimi olduğu i&ccedil;in, firewall ve diğer g&uuml;venlik cihazları tarafından daha iyi tespit edilebilir.</p>
+<h3></h3>
+<h3>&Ouml;nemli Not:</h3>
+<p><span style="text-align: center; color: #0000ff;"><strong><em>Bu tekniklerin hepsi, yalnızca yasal ve etik ama&ccedil;larla, yani izniniz olan sistemlerde kullanılmalıdır. İzniniz olmayan sistemlerde bu t&uuml;r teknikleri kullanmak yasalara aykırıdır ve ciddi hukuki sonu&ccedil;lara yol a&ccedil;abilir.</em></strong></span></p>
+<p style="text-align: center;"><strong>Okuduğunuz i&ccedil;in teşekk&uuml;rler.</strong></p>
+
+</body>
+</html>
+

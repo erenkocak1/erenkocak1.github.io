@@ -1,0 +1,370 @@
+.container { 
+    display: flex; 
+    height: 100vh; 
+    background-color: rgba(255, 255, 255, 0.059); /* İçerik alanına yarı saydam bir arka plan */ 
+    min-height: 100vh; 
+} 
+ 
+.sidebar { 
+    width: 200px; 
+    padding: 15px; 
+    box-shadow: 2px 0 5px rgb(0,0,0,0.1); 
+     
+    /* Arka Plan Resmi */ 
+    background-image: url('https://github.com/erenkocak1/erenkocak1.github.io/blob/main/iStock-634577262.jpg?raw=true'); 
+    /*background-size: cover; /* Resmin sidebar'a tamamen yayılması */ 
+    background-position: center; /* Resmi ortalar */ 
+ 
+    color: white; /* Yazı rengini beyaz yap */ 
+    border-right: 1px solid #ccc; /* Sağ kenarda ince bir çizgi */ 
+    display: flex; 
+    flex-direction: column; 
+    position: sticky; /* Sidebar'ı sayfa kaydırıldığında sabit tutar */ 
+    top: 0; /* Üstten 0 mesafe bırakır */ 
+    z-index: 1; /* İçeriğin üzerine çıkmasını sağlar */ 
+} 
+ 
+.sidebar h2 { 
+    margin-top: 0; 
+} 
+ 
+.sidebar ul { 
+    list-style-type: none; 
+    padding: 0; 
+} 
+ 
+.sidebar ul li { 
+    margin-bottom: 10px; 
+} 
+ 
+.sidebar ul li a { 
+    text-decoration: none; 
+    color: #B0B0B0; 
+    font-weight: bold; 
+} 
+ 
+.sidebar ul li a:hover { 
+    color: #007BFF; 
+} 
+ 
+.content { 
+    flex: 1; 
+    flex-grow: 1; 
+    padding: 20px; 
+    padding-left: 50px; 
+    overflow: auto; /* İçerik uzun olduğunda kaydırma çubuğu ekler */ 
+    background-color: rgba(0, 0, 0, 0.7); /* İçerik arka planına hafif yarı saydam bir renk */ 
+    color: #d3d3d3; /* Metin rengi */ 
+     
+} 
+ 
+/* Başlık için özel stil */ 
+h1 { 
+    background-color: #303030; /* Başlık arka plan rengi */ 
+    color: #b0b0b0; /* Başlık yazı rengi */ 
+    padding: 15px;
+    margin-top: 0; 
+    border-radius: 10px; 
+    width: fit-content; /* İçeriğin genişliği kadar kısaltır */ 
+    display: inline-block; /* Genişliği içeriğe göre ayarlar */ 
+} 
+ 
+.hidden { 
+    display: none; 
+} 
+ 
+body { 
+    margin: 0; 
+    font-family: Arial, sans-serif; 
+    background-image: url('https://github.com/erenkocak1/erenkocak1.github.io/blob/main/arkaplan.jpg?raw=true'); 
+    background-size: cover; /* Resmi sayfanın tamamına yayar */ 
+    background-position: center; /* Resmi ortalar */ 
+    background-attachment: fixed; /* Arka plan kaydırıldığında sabit kalır */ 
+} 
+.social-media { 
+    margin-top: 20px; /* Menüden sonra biraz boşluk bırakır */ 
+    display: flex; 
+    justify-content: space-around; /* İkonlar arasına eşit boşluk bırakır */ 
+    padding: 10px; 
+    border-top: 1px solid #ccc; /* Üst kısımda bir ayırıcı çizgi */ 
+} 
+ 
+/* Genel sosyal medya ikonları stili */ 
+.social-media { 
+    margin-top: 20px; 
+    display: flex; 
+    justify-content: space-around; 
+    padding: 10px; 
+    border-top: 1px solid #ccc; 
+} 
+ 
+.social-media a { 
+    display: inline-block; 
+} 
+ 
+.social-icon { 
+    transition: filter 0.3s ease; 
+    filter: brightness(1) invert(1); /* Tema ile uyumlu olacak şekilde ikonları beyaz yapar */ 
+} 
+ 
+/* LinkedIn ikonu için özel stil */ 
+.linkedin-icon { 
+    width: 50px; /* LinkedIn ikonu genişliği */ 
+    height: auto; /* Yüksekliği genişlik ile orantılı olarak ayarlanır */ 
+} 
+ 
+/* GitHub ikonu için özel stil */ 
+.github-icon { 
+    width: 80px; /* GitHub ikonu genişliği */ 
+    height: auto; /* Yüksekliği genişlik ile orantılı olarak ayarlanır */ 
+} 
+ 
+.instagram-icon { 
+    width: 80px; /* instagram ikonu genişliği */ 
+    height: auto; /* Yüksekliği genişlik ile orantılı olarak ayarlanır */ 
+} 
+ 
+/* Diğer hesaplar için de benzer şekilde özel sınıflar tanımlayabilirsiniz */ 
+ 
+/* Hover efekti */ 
+.social-icon:hover { 
+    filter: brightness(1) invert(0); /* Üzerine gelindiğinde orijinal rengi gösterir */ 
+} 
+.sidebar h2 { 
+    margin-top: 10px; /* Üstten biraz boşluk bırakır */ 
+    text-align: center; /* Ortalar */ 
+    font-size: 24px; /* Yazı boyutunu ayarlar */ 
+    font-weight: bold; /* Kalın yapar */ 
+    border-bottom: 1px solid #ccc; /* Üst kısımda bir ayırıcı çizgi */ 
+    padding: 10px; 
+    color: #ffff; /* Yazı rengini beyaz yapar */ 
+} 
+/* Desktop styles */ 
+.header { 
+    background-color: #f0f0f0; 
+    padding: 20px; 
+  } 
+  /* Genel metin renk ayarları */
+.content ul li a {
+    color: #969696; /* Burada istediğiniz rengi belirleyin */
+    text-decoration: none; /* Alt çizgiyi kaldırmak isterseniz */
+}
+
+.content ul li a:hover {
+    color: #ffcc00; /* Üzerine gelindiğinde rengin nasıl değişeceğini belirleyin */
+    text-decoration: underline; /* Üzerine gelindiğinde alt çizgi eklemek isterseniz */
+}
+
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column; /* Sidebar ve content'i alt alta getirmek için */
+        height: auto;
+    }
+    .sidebar {
+        width: 100%; /* Sidebar genişliğini ekran genişliğine uyumlu hale getirir */
+        padding: 10px; /* İçerik kenar boşluklarını daraltır */
+        box-shadow: none; /* Mobilde gölgeyi kaldırır, düz bir görünüm sağlar */
+        background-size: contain; /* Resmin sidebar içinde taşmasını önler */
+        position: relative; /* Mobilde sabitlenmeyi kaldırır */
+        top: auto; /* Üstten mesafeyi sıfırlar */
+       /* max-height: 300px; /* Maksimum yükseklik belirler */
+        overflow-y: auto; /* İçerik taşarsa kaydırma çubuğu ekler */
+    }
+    
+    .sidebar h2 {
+        font-size: 20px; /* Başlık boyutunu küçültür */
+        margin-bottom: 10px; /* Alt kenar boşluğunu azaltır */
+    }
+
+    .sidebar ul li {
+        margin-bottom: 5px; /* Liste elemanları arasındaki boşluğu azaltır */
+    }
+
+    .social-media {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .social-icon {
+        width: 30px; /* Sosyal medya ikonlarını küçültür */
+    }
+
+    .content {
+         margin-top: 10px;
+    }
+
+    h1, h2, h3 {
+        font-size: 20px; /* Başlık boyutlarını mobil için küçültmek */
+    }
+
+    .social-media {
+       /* flex-direction: column;*/
+        align-items: center;
+    }
+
+    .social-icon {
+        width: 40px; /* İkonları küçültmek için */
+    }
+    /* Yazılar listesi ve içerik kısmı için mobil düzenlemeler */
+/* Genel görünüm düzenlemeleri */
+@media (max-width: 600px) {
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden; /* Yatay kaydırmayı engeller */
+    }
+    .container {
+        display: flex;
+        flex-direction: column; /* Sidebar'ın üstteki içeriğin altında yer almasını sağlar */
+        height: auto; /* Yüksekliği otomatik ayarlar */
+        min-height: 100vh; /* Sayfanın yüksekliğini en az ekran yüksekliği kadar yapar */
+        margin: 0; /* Tüm marginleri sıfırlar */
+        padding: 0; /* Tüm paddingleri sıfırlar */
+        box-sizing: border-box; /* Padding ve border'ı box modeline dahil eder */
+    }
+
+    .sidebar {
+        width: 100%; /* Sidebar'ın genişliğini ekran genişliğine uydurur */
+        height: auto; /* Yüksekliği içeriğe göre otomatik ayarlar */
+        padding: 15px; /* Padding'i biraz arttırır */
+        box-shadow: none; /* Kutu gölgesini kaldırır */
+        border-right: none; /* Sağ kenar çizgisini kaldırır */
+        background-color: rgba(0, 0, 0, 0.8); /* Arka plan rengini koyu ve saydam yapar */
+        color: white; /* Yazı rengini beyaz yapar */
+        border-bottom: 1px solid #494040; /* Üst kısımda bir ayırıcı çizgi */ 
+        box-sizing: border-box;
+        margin-bottom: 0px; /* Menü ve içerik arasında boşluk bırakır */
+    }
+
+    .content {
+        overflow-wrap: break-word; /* Uzun kelimelerin satıra kırılmasını sağlar */
+        word-break: break-word; /* Metin taşmasını önler */
+        padding: 15px; /* İçeriğin kenar boşluklarını arttırır */
+        background-color: rgba(0, 0, 0, 0.755); /* İçerik arka planının daha koyu ve saydam olmasını sağlar */
+        margin-top: 0; /* Menü ile içerik arasındaki boşluğu kaldırır */
+        box-sizing: border-box; /* Padding ve border'ı box modeline dahil eder */
+        word-wrap: break-word; /* Kelimeleri kırar ve satıra sığdırır */
+        overflow-wrap: break-word; /* Modern tarayıcılarda kelime kaydırmasını destekler */
+        white-space: normal; /* Metin satırlarının kaydırılmasını sağlar */
+        max-width: 100%;
+    }
+
+    .content h1, .content h3 {
+        font-size: 1.3em; /* Başlık boyutlarını küçültür */
+        text-align: center; /* Başlıkları ortalar */
+        margin-top: 0; /* Üstten boşluğu kaldırır */
+    }
+
+    .content p {
+        font-size: 1em; /* Paragraf metin boyutunu küçültür */
+        line-height: 1.5; /* Satır yüksekliğini arttırır */
+    }
+
+    .content img {
+        width: 100%; /* Resimleri ekran genişliğine göre yeniden boyutlandırır */
+        height: auto; /* Yüksekliği oranlı olarak ayarlar */
+        display: block; /* Resimleri blok olarak gösterir */
+        margin: 10px 0; /* Üst ve alt margin ekler */
+    }
+
+    .content ul {
+        padding-left: 15px; /* Listeye sol padding ekler */
+        margin: 0;
+    }
+
+    .content ul li {
+        margin-bottom: 20px; /* Liste elemanları arasındaki boşluğu artırır */
+    }
+    /* İçerik alanını mobil uyumlu hale getirmek için */
+.content {
+    box-sizing: border-box; /* Padding ve border'ları genişliğe dahil eder */
+    padding: 15px; /* İçerik etrafına padding ekler */
+    overflow: hidden; /* Taşmayı gizler */
+    word-wrap: break-word; /* Uzun kelimeleri satıra kırar */
+    max-width: 100%; /* İçeriğin ekran genişliğini aşmamasını sağlar */
+}
+
+/* Resimlerin mobilde uyumlu olması için */
+.content img {
+    max-width: 100%; /* Resimlerin ekran genişliğine göre uyumlu olmasını sağlar */
+    height: auto; /* Yüksekliği oranlı olarak ayarlar */
+    display: block; /* Blok eleman olarak gösterir */
+    margin: 10px 0; /* Üst ve alt margin ekler */
+}
+
+/* Metin taşmasını önlemek için */
+.content p {
+    margin: 0 0 15px; /* Paragraflar arasına boşluk bırakır */
+    word-break: break-word; /* Metin taşmasını önler */
+    overflow-wrap: break-word; /* Modern tarayıcılarda metin kaydırmasını sağlar */
+}
+
+/* Başlıkların mobilde uyumlu olması için */
+.content h1, .content h2, .content h3 {
+    margin: 0 0 15px; /* Başlıklar arasına boşluk bırakır */
+    word-break: break-word; /* Metin taşmasını önler */
+}
+
+/* Genel stil ayarları */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Sayfa geneli için düzenleme */
+.container {
+    display: flex;
+    flex-direction: column; /* Menü ve içerik arasına boşluk bırakır */
+}
+/* İçerik alanı stil ayarları */
+.content {
+    padding: 0; /* İç boşlukları kaldırır */
+    margin: 0;  /* Dış boşlukları kaldırır */
+}
+
+/* İçerik div'lerinin stil ayarları */
+.content > div {
+    padding: 15px; /* İç boşlukları kaldırır */
+    margin: 0;  /* Dış boşlukları kaldırır */
+    box-sizing: border-box; /* Kenar boşluklarını ve padding'i toplam genişliğe dahil eder */
+}
+/* Genel metin renk ayarları */
+.content ul li a {
+    color: #969696; /* Burada istediğiniz rengi belirleyin */
+    text-decoration: none; /* Alt çizgiyi kaldırmak isterseniz */
+}
+
+.content ul li a:hover {
+    color: #ffcc00; /* Üzerine gelindiğinde rengin nasıl değişeceğini belirleyin */
+    text-decoration: underline; /* Üzerine gelindiğinde alt çizgi eklemek isterseniz */
+
+@media (max-width: 600px) {
+    video {
+        width: 100%;
+        height: auto;
+    }
+}
+@media (max-width: 600px) {
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 en boy oranı için */
+    height: 0;
+    overflow: hidden;
+  }
+
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+    
+}
+
+
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metasploit Framework</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+            
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+     <h1>Metasploit Framework</h1>
+   <p><em>Metasploit Framework</em>&nbsp;siber g&uuml;venlik sekt&ouml;r&uuml;nde en &ccedil;ok kullanılan a&ccedil;ık kaynak kodlu keşif , tarama ve sızma testi aracıdır. Metasploit Framework i&ccedil;erisinde 2000+ civarı exploit barındırmaktadır.</p>
+<p>Bu a&ccedil;ık kaynak kodlu framework i&ccedil;erisinde exploitler,payloadlar,auxiliaryler ve encoderler vardır. Bu mod&uuml;ller sayesinde network ,web uygulama g&uuml;venlik a&ccedil;ıklarının keşfi ve istismarının yanı sıra hedef makinaya zararlı yazılım y&uuml;klemek i&ccedil;inde kullanılabilir.</p>
+<p>Kullanıma ge&ccedil;meden &ouml;nce bu m&ouml;d&uuml;llerin kısaca tanımlarını yapalım.</p>
+<h4>Exploit</h4>
+<p>Bir exploit, hedef sistemdeki bir <span style="text-decoration: underline;">zafiyeti k&ouml;t&uuml;ye kullanarak sisteme yetkisiz erişim sağlamak</span> i&ccedil;in tasarlanmış bir <strong>kod veya komut dizisidir.</strong> Başka bir deyişle, exploit, bir sistemin savunmasındaki bir boşluktan yararlanarak i&ccedil;eri sızma y&ouml;ntemidir<strong>.</strong></p>
+<p><strong>Payload</strong></p>
+<p>Payload, bir <span style="text-decoration: underline;">exploit başarıyla &ccedil;alıştırıldıktan sonra hedef sistemde &ccedil;alıştırılan asıl k&ouml;t&uuml; ama&ccedil;lı kod</span> veya komutlardır. Payload, saldırganın hedef sistem &uuml;zerinde ne yapacağını belirler.</p>
+<p>Daha anlaşılır şekilde s&ouml;ylemek gerekisrse amacı <strong>hedef sistem &uuml;zerinde istenen eylemleri ger&ccedil;ekleştirmektir.</strong> Bu eylemler arasında bir komut istemi (shell) a&ccedil;mak, dosya y&uuml;klemek veya indirmek, sisteme arka kapı (backdoor) yerleştirmek, keylogger &ccedil;alıştırmak veya daha karmaşık post-exploitation aktiviteleri yer alabilir.</p>
+<p><strong>Auxiliary Mod&uuml;lleri</strong></p>
+<p>Exploit veya payload olmayan, fakat tarama, hizmet numaralandırma ve benzeri işlevler i&ccedil;in kullanılan yardımcı ara&ccedil;lardır. Kısaca Hedef sistem hakkında bilgi &ccedil;ıkarmak (enumeration) i&ccedil;in kullanılan yardımcı mod&uuml;llerdir.</p>
+<p><strong>Encoder Mod&uuml;lleri</strong></p>
+<p>Payloadların antivir&uuml;s programları tarafından tespit edilmesini zorlaştırmak i&ccedil;in kullanılır. Kodları şifreleyerek antivir&uuml;s tespitini atlatmaya &ccedil;alışır.</p>
+<h2 style="text-align: center;">Kullanımı</h2>
+<p>&nbsp;</p>
+<p><img src="https://img001.prntscr.com/file/img001/8rPgmW5OSFea-T2udXj97g.png" width="400" height="432" /></p>
+<p>İlk olarak konsolumuza <span style="background-color: #000000; color: #ffff00;"><code>msfconsole</code></span> yazarak &ccedil;alıştıralım framework&uuml;. Burada i&ccedil;erisinde bulunan exploitlerin payloadların vs sayısını g&ouml;rebiliriz.</p>
+<p>&nbsp;<img src="https://img001.prntscr.com/file/img001/BPqPOetDRnSjTtXdtin4LA.png" width="717" height="342" /></p>
+<p>Her mod&uuml;lde olduğu gibi bu mod&uuml;lde de <span style="background-color: #000000; color: #ffff00;"><span style="color: #ffff00; font-family: monospace;">help</span> </span>&nbsp;komutu ile neler yapabileceğimizi g&ouml;rebiliriz.</p>
+<h4>Bunlardan bazıları ve &ccedil;ok kullanılanları şunlardır;</h4>
+<p><span style="color: #ff0000;"><em>version</em> </span>: versiyon kontrol&uuml;</p>
+<p><span style="color: #ff0000;"><em>search</em> </span>: exploit, payload, vb arama yapabiliriz. search -h parametresi ile yapılacak arama i&ccedil;in uygun kriterler se&ccedil;ilir.</p>
+<p><span style="color: #ff0000;"><em>show</em> </span>: istediğimiz bileşenleri listeleyebiliriz.</p>
+<p><span style="color: #ff0000;"><em>use</em> </span>: listeden kullanmak istenilen exploit , payloadı vb se&ccedil;ilir.</p>
+<p><span style="color: #ff0000;"><em>db_status</em>&nbsp;</span>: Veri tabanı bağlantı kontrol&uuml;.</p>
+<p><span style="color: #ff0000;"><em>info</em> </span>: Se&ccedil;ilen exploit gerekli ayarları , versiyon vb. gibi bilgileri g&ouml;sterir.</p>
+<p><span style="color: #ff0000;"><em>set</em> </span>: Exploit , payload i&ccedil;in gerekli d&uuml;zenlemeler yapılır.</p>
+<p><span style="color: #ff0000;"><em>unset</em> </span>: Yapılan değişiklikler geri alınır.</p>
+<p><span style="color: #ff0000;"><em>sessions</em> </span>: Aktif olan oturumlar ve id bilgilerini listeler.</p>
+<p><span style="color: #ff0000;"><em>exploit</em> </span>: Se&ccedil;ilen hedefe saldırı başlatır.</p>
+<p>&Ouml;rneğin search işlemi yapalım:</p>
+<p><img src="https://img001.prntscr.com/file/img001/pZfWVyc0R5O2UJVBQKCopg.png" width="1028" height="269" /></p>
+<p>Mesela burada <code><span style="background-color: #000000; color: #ffff00;">search reverse</span></code> komutu ile i&ccedil;erisinde reverse ge&ccedil;en b&uuml;t&uuml;n mod&uuml;lleri g&ouml;r&uuml;nt&uuml;ledik. Bunlarda payload olan expolit olan auxiliary olan bir &ccedil;ok mod&uuml;l mevcuttu.</p>
+<h3 style="text-align: center;">&Ouml;rnek mod&uuml;l kullanımı</h3>
+<p>&Ouml;rneğin bir saldırıda saldırdığınız Windows makinesine nmap aracı ile tarama yaptınız. Ve nmap size bu makinenin TCP 135 portunun a&ccedil;ık olduğunu s&ouml;yledi.</p>
+<p>Ondan sonra aşşağıdaki gibi bir arama yapıp uygun mod&uuml;l&uuml; se&ccedil;tik. Bu mod&uuml;l&uuml;n g&uuml;venilirliği "great" olarak belirtilmiş, yani başarı oranı olduk&ccedil;a y&uuml;ksek.</p>
+<p><img src="https://img001.prntscr.com/file/img001/u3U-qfoDTxCth4Fx_X_fNg.png" width="862" height="222" /></p>
+<p>Buradaki aramanın anlamı ise 135. port ile ilişkilendirilmiş mod&uuml;llerden t&uuml;r&uuml; exploit , hedef platformu ise windows olan mod&uuml;lleri listele demek.</p>
+<p>Şimdi <code><span style="color: #ffff00; background-color: #000000;">use 0</span></code> komutu ile se&ccedil;tiğimiz mod&uuml;l&uuml; kullanalım. Sonrasında info komutu ile detaylarına bakabiliriz.</p>
+<p><img src="https://img001.prntscr.com/file/img001/SgKz1SbLQWmg8asw7IYjEg.png" width="784" height="509" /></p>
+<p>Sonrasında <code><span style="background-color: #000000; color: #ffff00;">options </span>&nbsp;</code>komutu ile &ccedil;eşitli ayarları g&ouml;rebiliriz. Bunlardan en &ouml;nemlileri <strong>bu exploit i&ccedil;in</strong> <em>hedef adresi hedef portu birde bizim adres ve portumuzun</em> olduğu bilgilerdir. Ek olarak required=yes yazan b&ouml;l&uuml;mlerin set edilmesi zorunludur zaten.&nbsp;</p>
+<p><img src="https://img001.prntscr.com/file/img001/RKpU0HTJQYWZrXaWh7qQHQ.png" width="620" height="359" /></p>
+<p>Sonrasında <span style="background-color: #000000; color: #ffff00;"><code>set lhost ip_adress</code></span>&nbsp; set <code><span style="background-color: #000000; color: #ffff00;">lport port_no gibi</span></code> ayarlamalar ile expolitimizi d&uuml;zenliyoruz.</p>
+<p><img src="https://img001.prntscr.com/file/img001/S_KjAxz7QjOV76TIQ7UGig.png" width="607" height="376" /></p>
+<p>Şimdi tek kalan payloadımızı da belirleyip <span style="background-color: #000000; color: #ffff00;"><code>expolit</code> </span>komutu ile &ccedil;alıştırmak. Payload belirleme kısmı mevcut olan a&ccedil;ığa g&ouml;re değişir. <span style="color: #ffff00; background-color: #000000;"><code data-start="1198" data-end="1231">windows/meterpreter/reverse_tcp</code></span> payload&rsquo;ını kullandık. &Ccedil;&uuml;nk&uuml; bu payload, ters bağlantı yoluyla g&uuml;venlik duvarlarını aşmamıza yardımcı olurken, meterpreterden kullanmak ise bize hedef sistem &uuml;zerinde daha fazla kontrol imk&acirc;nı sundu.</p>
+<p><img src="https://img001.prntscr.com/file/img001/cYJcivcrT1OKmAuOnZ-Hbg.png" width="864" height="115" /></p>
+<p>Bundan sonra artık dinleme aşaması. Ama girdiğimiz bilgiler random olduğu i&ccedil;in bir veri alamıyoruz.</p>
+<p>&nbsp;</p>
+<h3>&Ouml;nemli Not:</h3>
+<p><span style="text-align: center; color: #0000ff;"><strong><em>Bu tekniklerin hepsi, yalnızca yasal ve etik ama&ccedil;larla, yani izniniz olan sistemlerde kullanılmalıdır. İzniniz olmayan sistemlerde bu t&uuml;r teknikleri kullanmak yasalara aykırıdır ve ciddi hukuki sonu&ccedil;lara yol a&ccedil;abilir.</em></strong></span></p>
+<p style="text-align: center;"><strong>Okuduğunuz i&ccedil;in teşekk&uuml;rler.</strong></p>
+     
+</body>
+</html>

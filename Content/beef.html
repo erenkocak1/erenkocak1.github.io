@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeEF Nedir,Nasıl Kullanılır?</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+<h1>BeEF Nedir,Nasıl Kullanılır?</h1>
+
+
+
+
+<p><img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpjY2FiN3djaDJjcGNpbW5iazhjcjk4Nnc1d3MwcHhiMzYzaHc2NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fboOpBRD6u4SPMsBG2/giphy.gif" width="600" height="165" /></p>
+<p data-start="0" data-end="279"><strong data-start="0" data-end="41">BeEF (Browser Exploitation Framework)</strong>, web tarayıcılarını hedef alarak saldırılar ger&ccedil;ekleştirmek amacıyla kullanılan bir <strong data-start="126" data-end="150">sızma testi aracıdır</strong>. Tarayıcı g&uuml;venlik a&ccedil;ıklarını istismar ederek <strong data-start="197" data-end="260">hedef sistemler &uuml;zerinde kontrol sağlamak ve bilgi toplamak</strong> i&ccedil;in kullanılır.</p>
+<p data-start="281" data-end="808">Genellikle <strong data-start="292" data-end="341">beyaz şapkalı hackerlar ve g&uuml;venlik uzmanları</strong> tarafından sistemlerin g&uuml;venlik a&ccedil;ıklarını tespit edip kapatmak amacıyla kullanılsa da, <strong data-start="430" data-end="490">k&ouml;t&uuml; niyetli kişiler tarafından da k&ouml;t&uuml;ye kullanılabilir</strong>. BeEF, tarayıcı tabanlı saldırıları hedef alır ve kullanıcının tarayıcısında &ccedil;alışan bir <strong data-start="580" data-end="599">JavaScript kodu</strong> ile başlar. Bu kod genellikle <strong data-start="630" data-end="681">oltalama (phishing) veya zararlı bir web sitesi</strong> &uuml;zerinden kurbana enjekte edilir. Kullanıcının tarayıcısı ele ge&ccedil;irildiğinde, saldırgan <strong data-start="770" data-end="805">&ccedil;eşitli komutlar &ccedil;alıştırabilir</strong>.</p>
+<p data-start="810" data-end="1338"><strong data-start="810" data-end="829">BeEF framework&uuml;</strong>,<span style="color: #ff0000;"> <strong data-start="831" data-end="858">penetrasyon testlerinde</strong></span> tarayıcı g&uuml;venlik a&ccedil;ıklarını değerlendirmek i&ccedil;in kullanıldığından, saldırının <strong data-start="937" data-end="969"><span style="color: #ff0000;">yerel ağda</span> kalması &ouml;nemlidir</strong>. <strong data-start="971" data-end="1009">Modern tarayıcı g&uuml;venlik &ouml;nlemleri</strong> (CSP, SOP, sandboxing vb.) <strong data-start="1037" data-end="1074" data-is-only-node="">dış ağa bağlantıyı zorlaştırırken</strong>, <strong data-start="1076" data-end="1128">yerel ağ i&ccedil;inde ger&ccedil;ekleştirilen XSS saldırıları</strong> daha hızlı ve g&uuml;venilir sonu&ccedil;lar verir. <strong data-start="1169" data-end="1180">&Ouml;rneğin</strong>, sahte giriş ekranları, JavaScript ile a&ccedil;ılan pop-up&rsquo;lar veya zararlı dosya indirme gibi teknikler, <strong data-start="1281" data-end="1335">hedef ortam i&ccedil;inde daha etkili bir şekilde &ccedil;alışır</strong>.</p>
+<p data-start="1340" data-end="1622">Ek olarak, <strong data-start="1351" data-end="1383">BeEF&rsquo;in bazı eski y&ouml;ntemleri</strong> artık eskisi kadar etkili değildir. <strong data-start="1420" data-end="1458">ActiveX ile PowerShell &ccedil;alıştırmak</strong> gibi teknikler &ccedil;oğu tarayıcıda engellenmiş, <strong data-start="1503" data-end="1548">ekran g&ouml;r&uuml;nt&uuml;s&uuml; alma veya &ccedil;erezleri &ccedil;alma</strong> gibi işlemler de <strong data-start="1566" data-end="1606">sıkı g&uuml;venlik politikaları nedeniyle</strong> zorlaşmıştır.</p>
+<p data-start="1624" data-end="2011" data-is-last-node="" data-is-only-node=""><strong data-start="1624" data-end="1684">XSS saldırılarında hızlı ve doğrudan etki eden y&ouml;ntemler</strong> tercih edilmelidir. <strong data-start="1705" data-end="1716">&Ouml;rneğin</strong>, JavaScript ile pop-up a&ccedil;mak, sahte giriş ekranları g&ouml;stermek veya zararlı bir dosya indirtmek gibi teknikler, <strong data-start="1828" data-end="1867">dış ağa &ccedil;ıkmadan da etkili olabilir</strong>. <strong data-start="1869" data-end="1922">Uzun s&uuml;reli oturum bekleme veya dış bağlantı a&ccedil;ma</strong> gibi işlemler yerine, <strong data-start="1945" data-end="2010" data-is-only-node="">hedef ortam i&ccedil;inde saldırıyı ger&ccedil;ekleştirmek daha mantıklıdır</strong>.</p>
+<h3 style="text-align: center;" data-start="1624" data-end="2011">&nbsp;</h3>
+<h3 style="text-align: center;" data-start="1624" data-end="2011"><strong>Kurulum Ve Kullanım</strong></h3>
+<p>1-) İlk olarak ;</p>
+<p><img src="https://img001.prntscr.com/file/img001/oPu8y_Z7QfmExwwyImpPtA.png" alt="" width="515" height="250" /></p>
+<p style="text-align: center;"><span style="color: #ff0000;"><code>sudo apt install beef-xss</code></span></p>
+<p>Komutu ile aracımızı kuralım.(Bende kurulu , sizde y&uuml;kleme ekranı &ccedil;ıkar).</p>
+<p>&nbsp;</p>
+<p>2-) Bu adımda ilk olarak(1 numara ile belirlenmiş kısım) <span style="color: #ff0000;"><code>beef-xss</code></span> komutu ile &ccedil;alıştıralım aracı. Burada sizden şifre girmenizi isteyecektir o şifre ile aray&uuml;ze giriyoruz. Şifre belirledikten sonra 3 numaralı yerde belirtilen geri sayımı bekleyin.</p>
+<p><img src="https://img001.prntscr.com/file/img001/_H2n28uyRiyWyqI1nnW_mQ.png" width="515" height="497" /></p>
+<p>Bekledikten sonra bize verdiği adrese tarayıcımızdan giriş yapalım. Kullanıcı adı beef şifre ise sizin belirlediğiniz şifredir. Eğer şifre belirlemeniz istenmediyse <em>beef-beef</em> olarak giriniz.</p>
+<p>&nbsp;</p>
+<p>3-) BeEF'i kullanarak, hedef sistemi etkileyebilmek i&ccedil;in &ouml;ncelikle <strong data-start="63" data-end="103">&ouml;zelleştirilmiş bir sahte web sitesi</strong> tasarlamanız gerekmektedir. Bu siteye, BeEF'in sağladığı <strong data-start="161" data-end="190">zararlı JavaScript kodunu</strong> enjekte ederek, kurbanın tarayıcısına zarar vermek amacıyla &ccedil;eşitli saldırılar başlatabilirsiniz. Bu şekilde, kurban etkileşime ge&ccedil;meden &ouml;nce, sahte site &uuml;zerinden <strong data-start="355" data-end="394">BeEF'in kontrol&uuml;n&uuml; ele ge&ccedil;irirsiniz</strong>.&nbsp;</p>
+<p>Bu adımda o kısmı halledeceğiz. Ama basit bir şey yaptığımız i&ccedil;in sadece scripti ekleyip site kısmı ile uğraşmayacaz.</p>
+<p>G&ouml;rselde verilen adrese gidip <strong>root olarak</strong> a&ccedil;alım o dosyayı. Ve i&ccedil;indeki <strong>index.html</strong> dosyasını d&uuml;zenleyelip i&ccedil;ine yukarıdaki g&ouml;rselin <strong>2 numaralı kısmında verilen hook scriptini</strong> yazalım. Burada &ouml;nemli olan bir detay var <strong>IP adresi kısmına kullandığımız kali linux'un IP adresini</strong> yazmamız lazım.</p>
+<p><img src="https://img001.prntscr.com/file/img001/0gTlUVfpTAaxjy0erNTcFQ.png" width="515" height="400" /></p>
+<p>&nbsp;</p>
+<p><img src="https://img001.prntscr.com/file/img001/f-m_dxNUTuS3rFzIha55yg.png" width="515" height="166" /></p>
+<p>&nbsp;</p>
+<p>4-)&nbsp; &nbsp; Bu işlemlerden sonra yeni bir tane terminal a&ccedil;ıp;</p>
+<p style="text-align: center;"><span style="color: #ff0000;"><code>service apache2 start</code></span></p>
+<p data-start="0" data-end="327">komutunu girelim. Bu işlem tamamlandıktan sonra, <strong data-start="71" data-end="121">yerel ağdaki farklı bir sanal makineye ge&ccedil;erek</strong> test aşamasına ge&ccedil;elim. Ben <strong data-start="150" data-end="205">Windows 10 işletim sistemine sahip bir sanal makine</strong> kullanıyorum. Tarayıcıya, <strong data-start="232" data-end="261">Kali Linux&rsquo;un IP adresini</strong> (aynı zamanda script yazarken belirttiğimiz IP adresi) yazalım.</p>
+<p data-start="329" data-end="500"><strong data-start="329" data-end="343">index.html</strong> dosyamızda yalnızca BeEF&rsquo;in zararlı scripti bulunduğundan, sayfada herhangi bir HTML veya CSS i&ccedil;eriği olmadığından <strong data-start="459" data-end="497">boş bir ekran bizi karşılayacaktır</strong>.</p>
+<p data-start="502" data-end="816">Bu adımdan sonra, tekrar <strong data-start="527" data-end="560">Kali Linux makinemize d&ouml;nerek</strong> BeEF paneli &uuml;zerinden istediğimiz işlemleri ger&ccedil;ekleştirebiliriz. Daha &ouml;nce belirttiğim gibi, <strong data-start="655" data-end="701">penetrasyon testlerinde kullanılan bu aracın bazı işlevleri</strong>, g&uuml;n&uuml;m&uuml;zde bir&ccedil;ok tarayıcı tarafından kısıtlanmıştır ve bazı eski y&ouml;ntemleri artık eskisi kadar etkili değildir.</p>
+<p data-start="818" data-end="994" data-is-last-node="" data-is-only-node="">Yapılabilecek temel işlemler ve <strong data-start="850" data-end="871">kurulum aşamaları</strong> aşağıda eklediğim videoda detaylı olarak anlatılmaktadır. Videoyu takip ederek kurulumu adım adım ger&ccedil;ekleştirebilirsiniz.</p>
+<p data-start="818" data-end="994" data-is-last-node="" data-is-only-node=""><iframe title="beef framework yerel ağda basit kurulum" src="//www.youtube.com/embed/oSHL6MBChHM" width="380" height="280" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<p>&nbsp;</p>
+<p data-start="818" data-end="994" data-is-last-node="" data-is-only-node="">&nbsp;</p>
+<h3>&Ouml;nemli Not:</h3>
+<p><span style="text-align: center; color: #0000ff;"><strong><em>Bu tekniklerin hepsi, yalnızca yasal ve etik ama&ccedil;larla, yani izniniz olan sistemlerde kullanılmalıdır. İzniniz olmayan sistemlerde bu t&uuml;r teknikleri kullanmak yasalara aykırıdır ve ciddi hukuki sonu&ccedil;lara yol a&ccedil;abilir.</em></strong></span></p>
+<p style="text-align: center;"><strong>Okuduğunuz i&ccedil;in teşekk&uuml;rler.</strong></p>

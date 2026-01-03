@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://i.imgur.com/iQZmNok.png">
+    <title>KOÇAK</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="loadContent()">
+    <div class="container">
+        <div class="sidebar">
+            <h2>Menü</h2>
+            <ul>
+                <li><a href="#anasayfa" onclick="showContent('anasayfa')">Ana Sayfa</a></li>
+                <li><a href="#hakkimda" onclick="showContent('hakkimda')">Hakkımda</a></li>
+                <li><a href="#yazilar-list" onclick="showContent('yazilar-list')">Yazılar</a></li>
+                <li><a href="#ctf" onclick="showContent('ctf')">CTF Çözümleri</a></li>
+            </ul>
+            <div class="social-media">
+                <a href="https://www.linkedin.com/in/yusuf-eren-ko%C3%A7ak-2522b828a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BUqISFXQARqWHBTnyYUlKbg%3D%3D" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="social-icon linkedin-icon">
+                </a>
+                <a href="https://github.com/erenkocak1" target="_blank">
+                    <img src="https://logos-world.net/wp-content/uploads/2020/11/GitHub-Logo.png" alt="GitHub" class="social-icon github-icon">
+                </a>
+                <a href="https://www.instagram.com/erennkocak1/" target="_blank">
+                    <img src="https://w7.pngwing.com/pngs/877/705/png-transparent-instagram-photo-picture-social-brands-and-logos-icon.png" alt="Instagram" class="social-icon linkedin-icon">
+                </a>
+            </div>            
+        </div>
+        <div class="content">
+            <div id="anasayfa">
+                <h1>Hoşgeldiniz</h1>
+                <p>Bu blogda siber g&uuml;venlik, ağ savunması ve etik hackerlık konularında edindiğim bilgileri paylaşıyorum.</p>
+<p>Amacım, siber d&uuml;nyada g&uuml;venliği sağlamak isteyenlere rehberlik etmek ve bu alanda kendini geliştirmek isteyenler i&ccedil;in faydalı i&ccedil;erikler sunmak.</p>
+<p>🔍 CTF &amp; Zafiyet Analizleri &ndash; Yakın zamanda &ccedil;&ouml;zd&uuml;ğ&uuml;m CTF (Capture The Flag) senaryoları ve ger&ccedil;ek d&uuml;nyadaki zafiyet analizleri.</p>
+<p>🛠 Ara&ccedil;lar &amp; Kaynaklar &ndash; Siber g&uuml;venlik d&uuml;nyasında kullanılan ara&ccedil;lar ve faydalı kaynaklar.</p>
+<p>📜 Kendi Projelerim &ndash; Geliştirdiğim g&uuml;venlik odaklı projeler ve teknik deneyimlerim</p>
+<p>Eğer siber g&uuml;venlik ile ilgileniyorsanız veya yeni şeyler &ouml;ğrenmek istiyorsanız, i&ccedil;eriklerimi inceleyebilir, benimle iletişime ge&ccedil;ebilirsiniz.&nbsp;</p>
+<p>Ayrıca buradaki yazılarımı paylaştığım Medium profilime de buradan ulaşabilirsiniz;</p>
+<p style="text-align: center;">👇🏼</p>
+<h3 style="text-align: center;"><span style="background-color: #000000; color: #ffffff;"> <a style="background-color: #000000; color: #ffffff; text-decoration: underline;" href="https://medium.com/@erenkocak177" target="_blank">Medium</a></span></h3>
+        
+            </div>
+            <div id="hakkimda" class="hidden">
+                <h1>~$ whoami</h1>
+               <p>Ben<strong> Yusuf Eren Ko&ccedil;ak</strong>.</p>
+<p>2023 yılında Fırat &Uuml;niversitesi Adli Bilişim M&uuml;hendisliği b&ouml;l&uuml;m&uuml;ne<br />yerleştim. Ortaokul yıllarımdan itibaren başlayan merakım ve<br />s&uuml;rekli bir şeyler başarma isteğim, beni siber g&uuml;venlik alanına<br />y&ouml;nlendirdi.</p>
+<p>Son yıllarda &ouml;zellikle <strong>Red Team</strong> alanına yoğunlaştım<br />ve sistemlerde g&uuml;venlik a&ccedil;ıklarını tespit etme, zafiyet analizleri<br />yapma ve penetrasyon testleri ger&ccedil;ekleştirme konularında kendimi<br />geliştiriyorum. <strong>Ağ g&uuml;venliği ve etik hackerlık</strong> gibi konulara da ilgi<br />duyuyor, bu alanlarda teknik becerilerimi s&uuml;rekli artırmak i&ccedil;in<br />&ccedil;alışıyorum.</p>
+<p>Edindiğim bilgi ve deneyimleri <strong>blog yazıları ve &ccedil;eşitli</strong><br /><strong>projeler</strong> aracılığıyla paylaşarak &ccedil;evreme katkıda bulunmayı &ouml;ncelik<br />haline getirdim. Kendimi geliştirirken, alanında yetkin kişilerden<br />destek alarak hem teorik hem pratik olarak ilerlemeye devam<br />ediyorum.</p>
+            </div>
+            <div id="yazilar-list" class="hidden">
+                <h3>Yazılar</h3>
+                <ul>
+                    <li><a href="#sosyalmuhendislik" onclick="showContent('sosyalmuhendislik')">Sosyal Mühendislik Nedir?</a></li>
+                    <li><a href="#nmap" onclick="showContent('nmap')">Nmap nedir, Nasıl Kullanılır? ve Kullanımı Sırasında Önemli Parametreler</a></li>
+                    <li><a href="#beef" onclick="showContent('beef')">BeEF Nedir,Nasıl Kullanılır?</a></li>
+                    <li><a href="#metasploit" onclick="showContent('metasploit')">Metasploit Framework</a></li>
+                    <li><a href="#backdoor" onclick="showContent('backdoor')">MSFvenom ile Backdoor Geliştirme</a></li>
+                    <li><a href="#izin" onclick="showContent('izin')">Linux’ta Dosya İzinleri ve Yetkiler</a></li>
+                    <li><a href="#powershell" onclick="showContent('powershell')">PowerShell'de Kullanıcı/Grup Yönetimi, Ağ Araçları, RSAT ve Script Tabanlı Otomasyon</a></li>
+                    <li><a href="#lfi" onclick="showContent('lfi')">File Inclusion-Local File Inclusion (LFI)</a></li>
+                     <li><a href="#ffuf" onclick="showContent('ffuf')">Temel Düzeyde Ffuf Tool'u Kullanımı</a></li>
+                    <li><a href="#buffero" onclick="showContent('buffero')">Buffer Overflow Zafiyeti Nedir ve Nasıl Tespit Edilir?</a></li>
+                </ul>
+
+</div>
+            <div id="ctf" class="hidden">
+                <h3>CTF Çözümleri</h3>
+                <ul>
+                    <li><a href="#cyborg" onclick="showContent('cyborg')">TryHackMe Cyborg Odası Çözümü(Easy)</a></li>
+                </ul>
+
+
+                
+            </div>
+            <div id="yazi-content" class="hidden">
+                <!-- Dinamik içerik buraya yüklenecek -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showContent(contentId, pushState = true) {
+            // Tüm içerik div'lerini gizle
+            var sections = document.querySelectorAll('.content > div');
+            sections.forEach(function(section) {
+                section.classList.add('hidden');
+            });
+
+            // İçerik bölümü yüklü mü kontrol et
+            var contentElement = document.getElementById(contentId);
+            if (contentElement) {
+                contentElement.classList.remove('hidden');
+            } else {
+                // İçeriği yükle
+                fetch('Content/' + contentId + '.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        var contentDiv = document.createElement('div');
+                        contentDiv.innerHTML = data;
+                        contentDiv.id = contentId;
+                        document.querySelector('.content').appendChild(contentDiv);
+                        contentDiv.classList.remove('hidden');
+                    })
+                    .catch(error => console.error('İçerik yüklenemedi:', error));
+            }
+
+            if (contentId === 'yazilar-list') {
+                document.getElementById('yazilar-list').classList.remove('hidden');
+            }
+
+            // URL'yi güncelle
+            if (pushState) {
+                history.pushState({ contentId: contentId }, null, '#' + contentId);
+            }
+        }
+
+        function loadContent() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showContent(hash, false);
+            } else {
+                showContent('anasayfa', false);
+            }
+        }
+
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.contentId) {
+                showContent(event.state.contentId, false);
+            }
+        });
+
+        window.onload = loadContent;
+    </script>
+</body>
+</html>
+
+
+
+

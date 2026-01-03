@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux’ta Dosya İzinleri ve Yetkiler</title>
+    <style>
+      
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+          
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+     <h1>Linux’ta Dosya İzinleri ve Yetkiler</h1>
+
+
+
+<p data-start="118" data-end="358">Linux işletim sisteminde <strong data-start="143" data-end="170">dosya ve dizin izinleri</strong>, kullanıcıların bir dosyayı okuyup yazabilmesini veya &ccedil;alıştırabilmesini belirler. Bu izinler, sistem g&uuml;venliğinin temel taşlarından biridir ve yetkilendirme a&ccedil;ısından b&uuml;y&uuml;k &ouml;nem taşır.</p>
+<p data-start="118" data-end="358"><img src="https://img001.prntscr.com/file/img001/D-Ba5OjLQPqf4aQA_pDOZw.png" width="515" height="515" /></p>
+<p data-start="118" data-end="358">&Ouml;zellikle <strong data-start="308" data-end="355">sızma testleri ve makine &ccedil;&ouml;z&uuml;mleri yaparken</strong>, sistemdeki gerekli izinleri almak hedef makineyi başarıyla &ccedil;&ouml;zmek i&ccedil;in kritik bir rol oynar.</p>
+<h2 data-start="360" data-end="401"><strong data-start="363" data-end="399">1. Dosya İzinleri Nasıl &Ccedil;alışır?</strong></h2>
+<ul data-start="466" data-end="710">
+<li data-start="466" data-end="533"><strong data-start="468" data-end="489">Okuma (r - read):</strong> Dosyanın i&ccedil;eriğini g&ouml;r&uuml;nt&uuml;leyebilme izni.</li>
+<li data-start="534" data-end="597"><strong data-start="536" data-end="558">Yazma (w - write):</strong> Dosya i&ccedil;eriğini değiştirebilme izni.</li>
+<li data-start="598" data-end="710"><strong data-start="600" data-end="629">&Ccedil;alıştırma (x - execute):</strong> Dosyanın &ccedil;alıştırılmasına izin verme (genellikle programlar ve betikler i&ccedil;in).</li>
+</ul>
+<p data-start="712" data-end="761">Bu izinler, &uuml;&ccedil; farklı kullanıcı grubuna atanır:</p>
+<ul data-start="763" data-end="955">
+<li data-start="763" data-end="820"><strong data-start="765" data-end="786">Sahip (user - u):</strong> Dosyanın sahibi olan kullanıcı.</li>
+<li data-start="821" data-end="879"><strong data-start="823" data-end="844">Grup (group - g):</strong> Dosya sahibinin ait olduğu grup.</li>
+<li data-start="880" data-end="955"><strong data-start="882" data-end="909">Diğerleri (others - o):</strong> Sahip ve grup haricindeki t&uuml;m kullanıcılar.</li>
+</ul>
+<p data-start="957" data-end="1015">Bir dosyanın izinlerini g&ouml;rmek i&ccedil;in şu komut kullanılır:</p>
+<p data-start="957" data-end="1015"><span style="color: #ffcc00; background-color: #000000;"><code>ls -l kocak<br /></code></span>&Ouml;rnek &ccedil;ıktı:</p>
+<p data-start="957" data-end="1015"><span style="background-color: #000000; color: #ffcc00;"><code>-rwxr-xr-- 1 user group 4096 Feb 23 10:30 kocak<br /></code></span></p>
+<p data-start="1115" data-end="1136">Bu &ccedil;ıktının anlamı:</p>
+<ul data-start="1137" data-end="1358">
+<li data-start="1137" data-end="1216"><strong data-start="1139" data-end="1160">Sahip (user - u):</strong> Okuma, yazma ve &ccedil;alıştırma yetkisine sahip (<strong data-start="1205" data-end="1212">rwx</strong>).</li>
+<li data-start="1217" data-end="1289"><strong data-start="1219" data-end="1240">Grup (group - g):</strong> Okuma ve &ccedil;alıştırma yetkisine sahip (<strong data-start="1278" data-end="1285">r-x</strong>).</li>
+<li data-start="1290" data-end="1358"><strong data-start="1292" data-end="1319">Diğerleri (others - o):</strong> Sadece okuma iznine sahip (<strong data-start="1347" data-end="1354">r--</strong>).</li>
+</ul>
+<p>&nbsp;</p>
+<h2 data-start="1365" data-end="1421"><strong data-start="1368" data-end="1419">2. "chmod" Komutu ile Dosya İzinlerini Değiştirme</strong></h2>
+<p data-start="1423" data-end="1579"><span style="color: #ffcc00;"><span style="background-color: #000000;">chmod </span>&nbsp;</span> komutu, Linux&rsquo;ta dosya ve dizin izinlerini değiştirmek i&ccedil;in kullanılır. İzinleri belirlerken <strong data-start="1524" data-end="1536">sembolik</strong> ve <strong data-start="1540" data-end="1551">sayısal</strong> y&ouml;ntemler kullanılabilir.</p>
+<h3 data-start="1581" data-end="1626"><strong data-start="1585" data-end="1624">2.a-) Sembolik Y&ouml;ntem ile chmod Kullanımı</strong></h3>
+<p data-start="1628" data-end="1699">Dosya izinlerini sembolik olarak değiştirmek i&ccedil;in şu yapı kullanılır:</p>
+<h3 data-start="1858" data-end="1885"><strong data-start="1862" data-end="1883">&Ouml;rnek Kullanımlar</strong></h3>
+<ul data-start="1886" data-end="2223">
+<li data-start="1886" data-end="1968"><strong data-start="1888" data-end="1930">Dosya sahibine &ccedil;alıştırma izni ekleme:</strong>
+<div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950">
+<div class="sticky top-9 md:top-[5.75rem]">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffcc00;"><code class="!whitespace-pre language-bash"><span class="hljs-built_in"><span style="background-color: #000000;">chmod</span></span><span style="background-color: #000000;"> u+x kocak
+</span></code></span></div>
+<div class="overflow-y-auto p-4" dir="ltr"><code class="!whitespace-pre language-bash"></code></div>
+</div>
+</li>
+<li data-start="1969" data-end="2042"><strong data-start="1971" data-end="2004">Grubun yazma iznini kaldırma:</strong>
+<div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950">
+<div class="sticky top-9 md:top-[5.75rem]">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffcc00; background-color: #000000;"><code class="!whitespace-pre language-bash"><span class="hljs-built_in">chmod</span> g-w kocak</code></span></div>
+<div class="overflow-y-auto p-4" dir="ltr">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ff0000; background-color: #000000;"><code class="!whitespace-pre language-bash"></code></span></div>
+</div>
+</li>
+<li data-start="2043" data-end="2138"><strong data-start="2045" data-end="2100">Diğer kullanıcıları sadece okuma ile sınırlandırma:</strong>
+<div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950">
+<div class="sticky top-9 md:top-[5.75rem]">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffcc00; background-color: #000000;"><code class="!whitespace-pre language-bash"><span class="hljs-built_in">chmod</span> o=r kocak
+</code></span></div>
+</div>
+</li>
+<li data-start="2139" data-end="2223"><strong data-start="2141" data-end="2185">T&uuml;m kullanıcılara &ccedil;alıştırma izni verme: </strong></li>
+</ul>
+<p style="padding-left: 40px;"><span style="color: #ffcc00; background-color: #000000;"><code class="!whitespace-pre language-bash"><span class="hljs-built_in">chmod</span> a+x kocak</code></span></p>
+<p>&nbsp;</p>
+<h3 data-start="2230" data-end="2276"><strong data-start="2233" data-end="2274">2.b-) Sayısal Y&ouml;ntem ile chmod Kullanımı</strong></h3>
+<p data-start="2278" data-end="2338">Linux&rsquo;ta her izin t&uuml;r&uuml; belirli bir sayı ile temsil edilir:</p>
+<ul data-start="2339" data-end="2446">
+<li data-start="2339" data-end="2371"><strong data-start="2341" data-end="2358">4 (r - read):</strong> Okuma izni</li>
+<li data-start="2372" data-end="2405"><strong data-start="2374" data-end="2392">2 (w - write):</strong> Yazma izni</li>
+<li data-start="2406" data-end="2446"><strong data-start="2408" data-end="2428">1 (x - execute):</strong> &Ccedil;alıştırma izni</li>
+</ul>
+<p data-start="2448" data-end="2498">Bu değerler toplanarak izin setleri oluşturulur:</p>
+<ul data-start="2499" data-end="2661">
+<li data-start="2499" data-end="2547"><strong data-start="2501" data-end="2513">7 (rwx):</strong> Okuma, yazma ve &ccedil;alıştırma izni</li>
+<li data-start="2548" data-end="2584"><strong data-start="2550" data-end="2562">6 (rw-):</strong> Okuma ve yazma izni</li>
+<li data-start="2585" data-end="2626"><strong data-start="2587" data-end="2599">5 (r-x):</strong> Okuma ve &ccedil;alıştırma izni</li>
+<li data-start="2627" data-end="2661"><strong data-start="2629" data-end="2641">4 (r--):</strong> Sadece okuma izni</li>
+</ul>
+<h3 data-start="2663" data-end="2690"><strong data-start="2667" data-end="2688">&Ouml;rnek Kullanımlar</strong></h3>
+<ul data-start="2691" data-end="3108">
+<li data-start="2691" data-end="2809"><strong data-start="2693" data-end="2771">Dosya sahibine tam yetki, grup ve diğerlerine okuma-&ccedil;alıştırma izni verme:</strong>
+<div class="overflow-y-auto p-4" dir="ltr">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffcc00; background-color: #000000;"><code class="!whitespace-pre language-bash"><span class="hljs-built_in">chmod</span> 755 kocak</code></span></div>
+<div class="overflow-y-auto p-4" dir="ltr">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ff0000; background-color: #000000;"><code class="!whitespace-pre language-bash"></code></span></div>
+</li>
+<li data-start="2810" data-end="2910"><strong data-start="2812" data-end="2872">T&uuml;m kullanıcılara tam yetki verme (tehlikeli olabilir!):</strong>
+<div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950">
+<div class="sticky top-9 md:top-[5.75rem]">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ffcc00; background-color: #000000;"><code class="!whitespace-pre language-bash"><span class="hljs-built_in">chmod</span> 777 kocak</code></span></div>
+<div class="overflow-y-auto p-4" dir="ltr">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="color: #ff0000; background-color: #000000;"><code class="!whitespace-pre language-bash"></code></span></div>
+</div>
+</li>
+<li data-start="2911" data-end="2997"><strong data-start="2913" data-end="2959">Sadece sahibine okuma ve yazma izni verme:</strong>
+<div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950">
+<div class="sticky top-9 md:top-[5.75rem]">
+<div class="absolute bottom-0 right-2 flex h-9 items-center">
+<div class="flex items-center rounded bg-token-sidebar-surface-primary px-2 font-sans text-xs text-token-text-secondary dark:bg-token-main-surface-secondary"><span style="background-color: #000000; color: #ffcc00;"><code class="!whitespace-pre language-bash"><span class="hljs-built_in">chmod</span> 600 kocak</code></span></div>
+</div>
+</div>
+<div class="overflow-y-auto p-4" dir="ltr">&nbsp;</div>
+<div class="overflow-y-auto p-4" dir="ltr"><span style="background-color: #000000; color: #ff0000;"><code class="!whitespace-pre language-bash"></code></span></div>
+</div>
+</li>
+<li data-start="2998" data-end="3108"><strong data-start="3000" data-end="3070">Sahibe okuma-yazma, gruba okuma, diğerlerine hi&ccedil;bir yetki vermeme:</strong>
+<div class="contain-inline-size rounded-md border-[0.5px] border-token-border-medium relative bg-token-sidebar-surface-primary dark:bg-gray-950">
+<div class="sticky top-9 md:top-[5.75rem]">
+<div class="absolute bottom-0 right-2 flex h-9 items-center">
+<div class="flex items-center rounded bg-token-sidebar-surface-primary px-2 font-sans text-xs text-token-text-secondary dark:bg-token-main-surface-secondary"><span style="background-color: #000000; color: #ffcc00;"><code class="!whitespace-pre language-bash"><span class="hljs-built_in">chmod</span> 640 kocak</code></span></div>
+</div>
+</div>
+</div>
+</li>
+</ul>
+<p>*&Ouml;rneklerde verilen "kocak" ibaresi dosya adıdır.</p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><strong>Okuduğunuz i&ccedil;in teşekk&uuml;rler.</strong></p>

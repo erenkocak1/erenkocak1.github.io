@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buffer Overflow Zafiyeti Nedir ve Nasıl Tespit Edilir?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+     <h1>Buffer Overflow Zafiyeti Nedir ve Nasıl Tespit Edilir?
+</h1>
+<p>Herkese merhaba,</p>
+<p>Bu yazımızda, exploit geliştirmenin temel taşlarından biri olan Buffer Overflow zafiyetinin ne olduğunu, nasıl meydana geldiğini ve bir uygulamada bu zafiyetin nasıl tespit edilebileceğini ele alacağız.</p>
+<h2>Buffer Overflow Nedir?</h2>
+<p>Buffer Overflow, en temel tanımıyla, bir programcının ayırdığı bellek alanına, <strong>zafiyetli fonksiyonlar aracılığıyla kapasitesinden fazla veri yazılmasıdır</strong>. Bu taşma sonucunda, programın akışı manip&uuml;le edilebilir ve hatta sistemde istenmeyen kod (shellcode) &ccedil;alıştırılabilir.</p>
+<p>En sık karşılaşılan t&uuml;rlerinden biri Stack Tabanlı Buffer Overflow'dur ve yığın <strong>(stack) &uuml;zerinde bir taşma meydana gelmesiyle</strong> oluşur.</p>
+<p>&nbsp;</p>
+<p><img src="https://cdn.prod.website-files.com/68a4552adf4a460ade53ca38/68d67f69408ab39765000319_buffer-overflow-attacks.png" alt="" width="393" height="206" /></p>
+<p>&nbsp;</p>
+<p><em>&Ouml;rneğin</em>;</p>
+<p>Aşağıdaki C kodunda name adında 6 byte'lık bir karakter dizisi ve hemen altında değeri 0 olan i adında bir tam sayı değişkeni tanımlanmıştır. Bu iki değişken, bellekte ardışık olarak tutulur.</p>
+<p><code>#include &lt;stdio.h&gt;</code></p>
+<p><code>int main(){</code></p>
+<p><code>&nbsp; &nbsp; printf("Kullanıcı adını girin:");</code></p>
+<p><code>&nbsp; &nbsp; char name[6] = "BUFFER";</code></p>
+<p><code>&nbsp; &nbsp; int i=0;</code></p>
+<p><code>&nbsp; &nbsp; gets(name);</code></p>
+<p><code>&nbsp; &nbsp; if(i == 0){</code></p>
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf("Kullanıcı adı değişti.");</code></p>
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; return 0;</code></p>
+<p><code>&nbsp; &nbsp; }</code></p>
+<p><code>&nbsp; &nbsp; else{</code></p>
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; printf("i degiskeninin degeri değişti!");</code></p>
+<p><code>&nbsp; &nbsp; }</code></p>
+<p><code>}</code></p>
+<p>Bu kodda kullanılan gets() fonksiyonu, herhangi bir boyut kontrol&uuml; yapmadan kullanıcıdan aldığı t&uuml;m veriyi name değişkenine atar. Eğer kullanıcı 6 byte'tan daha uzun bir veri girerse (&ouml;rneğin "BUFFER123"), name i&ccedil;in ayrılan 6 byte'lık alan dolar ve taşan veriler i değişkeni i&ccedil;in ayrılan bellek alanına yazılmaya başlar.</p>
+<p>Normalde i değişkeninin değeri 0 olduğu i&ccedil;in programın "Kullanıcı adı değişti." &ccedil;ıktısını vermesi gerekir. Ancak zafiyet s&ouml;m&uuml;r&uuml;ld&uuml;ğ&uuml;nde i'nin değeri 0'dan farklı bir değere d&ouml;n&uuml;ş&uuml;r ve program else bloğunu &ccedil;alıştırır.</p>
+<p>&nbsp;<em>Normal &Ccedil;alışma:</em></p>
+<p>Kullanıcı adını girin: BUFFER</p>
+<p>Kullanıcı adı değişti.</p>
+<p>&nbsp;<em>Zafiyetli &Ccedil;alışma:</em></p>
+<p>Kullanıcı adını girin: BUFFER12345</p>
+<p>i degiskeninin degeri değişti!</p>
+<p>&nbsp;</p>
+<h3>Zafiyete Neden Olan Tehlikeli Fonksiyonlar</h3>
+<p>Buffer Overflow zafiyetine sık&ccedil;a neden olan bazı C fonksiyonları şunlardır:</p>
+<ul>
+<li><span style="color: #ff0000;"><strong>strcpy</strong></span>: Kaynak veriyi hedefe kopyalarken hedefin boyutunu kontrol etmez.</li>
+<li><span style="color: #ff0000;"><strong>strncpy</strong></span>: Kopyalanacak veri boyutuna bir sınır getirse de, belirtilen sınır hedef alandan b&uuml;y&uuml;kse yine taşmaya neden olabilir.</li>
+<li><span style="color: #ff0000;"><strong>strcat</strong></span>: İki metin dizisini birleştirirken boyut kontrol&uuml; yapmaz.</li>
+<li><span style="color: #ff0000;"><strong>gets</strong></span>: Kullanıcıdan aldığı girdinin boyutunu kontrol etmez (yukarıdaki &ouml;rnekte olduğu gibi).</li>
+<li><span style="color: #ff0000;"><strong>fgets</strong></span>: Girdi boyutunu sınırlasa da, belirtilenden daha az bir boyut girilirse zafiyete yol a&ccedil;abilir.</li>
+<li><span style="color: #ff0000;"><strong>memcpy</strong></span>: Belirtilen boyuttaki veriyi hedefe kopyalar, ancak hedefin yeterli boyutta olup olmadığını kontrol etmez.</li>
+</ul>
+<p>&nbsp;</p>
+<h3>Buffer Overflow Zafiyeti Nasıl Tespit Edilir?</h3>
+<p>Bir uygulamada bu zafiyetin olup olmadığını anlamanın ilk adımı, uygulamanın kullanıcıdan veri aldığı giriş noktalarını doğru bir şekilde belirlemektir. Tespit işlemi genel olarak Fuzzing adı verilen bir y&ouml;ntemle yapılır.</p>
+<p>Fuzzing Nedir?</p>
+<p>Fuzzing, bir uygulamanın giriş noktalarına <strong>&ccedil;ok sayıda anlamsız veya rastgele veri g&ouml;nderilerek uygulamanın &ccedil;&ouml;kertilmeye (crash) &ccedil;alışılmasıdır</strong>. Eğer uygulama g&ouml;nderilen bu uzun veriler karşısında &ccedil;&ouml;kerse, bu durum bir Buffer Overflow zafiyetinin olabileceğine dair g&uuml;&ccedil;l&uuml; bir işarettir. Ancak her &ccedil;&ouml;kmenin exploit edilebileceği anlamına gelmediğini de unutmamak gerekir.</p>
+<p>Ek olarak kali linux'ta ki fuzzing ile ilgili olan ffuf adlı toolu da tanıttığım yazıma <a href="https://www.turkhackteam.org/konular/temel-duzeyde-ffuf-toolu-kullanimi.2076479/">buradan</a> ulaşabilirsiniz.</p>
+<h3>Tespit Adımları:</h3>
+<p><span style="text-decoration: underline;"><strong><em>Payload Oluşturma</em></strong></span>: İlk olarak, uygulamaya g&ouml;ndermek i&ccedil;in &ccedil;ok sayıda tekrarlayan karakterden oluşan bir veri hazırlanır.&Ouml;rneğin, Python kullanarak 3000 adet 'A' karakteri oluşturulabilir.</p>
+<p>&nbsp; &nbsp;<code>python3 -c "print('A' * 3000)"</code></p>
+<p><span style="text-decoration: underline;"><em><strong>Uygulamayı &Ccedil;&ouml;kertme</strong></em></span>: Oluşturulan bu payload, zafiyet ş&uuml;phesi olan uygulamaya bir girdi olarak g&ouml;nderilir.</p>
+<p><span style="text-decoration: underline;"><em><strong>Debugger ile Analiz</strong></em></span>: Uygulama bir debugger (hata ayıklayıcı) &uuml;zerinden tekrar başlatılır ve payload yeniden g&ouml;nderilir.</p>
+<p><span style="text-decoration: underline;"><em><strong>Register'ları Kontrol Etme</strong></em></span>: Eğer payload başarılı bir şekilde bellek taşmasına neden olduysa, bu durum işlemci register'larına yansıyacaktır. &Ouml;zellikle <strong>EIP</strong> (Extended Instruction Pointer) register'ı kontrol edilir. EIP, &ccedil;alıştırılacak bir sonraki komutun bellek adresini tutar. Başarılı bir saldırıda, EIP register'ının i&ccedil;inde g&ouml;nderdiğimiz 'A' karakterlerinin hexadecimal karşılığı olan 41414141 değerini g&ouml;r&uuml;r&uuml;z. Bu, programın akışını kontrol edebildiğimizin kesin bir kanıtıdır.</p>
+<p>Okuduğunuz i&ccedil;in teşekk&uuml;r ederim.</p>
+     
+</body>
+</html>

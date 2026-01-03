@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buffer Overflow Zafiyeti Nedir ve Nasıl Tespit Edilir?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+     <h1>Buffer Overflow Zafiyeti Nedir ve Nasıl Tespit Edilir?
+</h1>
+<p>Herkese merhaba,</p>
+<p>Bu yazımızda, exploit geliştirmenin temel taşlarından biri olan Buffer Overflow zafiyetinin ne olduğunu, nasıl meydana geldiğini ve bir uygulamada bu zafiyetin nasıl tespit edilebileceğini ele alacağız.</p>
+<h2>Buffer Overflow Nedir?</h2>
+<p>Buffer Overflow, en temel tanımıyla, bir programcının ayırdığı bellek alanına, <strong>zafiyetli fonksiyonlar aracılığıyla kapasitesinden fazla veri yazılmasıdır</strong>. Bu taşma sonucunda, programın akışı manip&uuml;le edilebilir ve hatta sistemde istenmeyen kod (shellcode) &ccedil;alıştırılabilir.</p>
+<p>En sık karşılaşılan t&uuml;rlerinden biri Stack Tabanlı Buffer Overflow'dur ve yığın <strong>(stack) &uuml;zerinde bir taşma meydana gelmesiyle</strong> oluşur.</p>
+<p>&nbsp;</p>
+<p><img src="https://cdn.prod.website-files.com/68a4552adf4a460ade53ca38/68d67f69408ab39765000319_buffer-overflow-attacks.png" alt="" width="393" height="206" /></p>
+<p>&nbsp;</p>
+<p><em>&Ouml;rneğin</em>;</p>
+<p>Aşağıdaki C kodunda name adında 6 byte'lık bir karakter dizisi ve hemen altında değeri 0 olan i adında bir tam sayı değişkeni tanımlanmıştır. Bu iki değişken, bellekte ardışık olarak tutulur.</p>
+<p><code>#include &lt;stdio.h&gt;</code></p>
+<p><code>int main(){</code></p>
+<p><code>&nbsp; &nbsp; printf("Kullanıcı adını girin:");</code></p>
+<p><code>&nbsp; &nbsp; char name[6] = "BUFFER";</code></p>
+<p><code>&nbsp; &nbsp; int i=0;</code></p>
+<p><code>&nbsp; &nbsp; gets(name);</code></p>
+<p><code>&nbsp; &nbsp; if(i == 0){</code></p>
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf("Kullanıcı adı değişti.");</code></p>
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; return 0;</code></p>
+<p><code>&nbsp; &nbsp; }</code></p>
+<p><code>&nbsp; &nbsp; else{</code></p>
+<p><code>&nbsp; &nbsp; &nbsp; &nbsp; printf("i degiskeninin degeri değişti!");</code></p>
+<p><code>&nbsp; &nbsp; }</code></p>
+<p><code>}</code></p>
+<p>Bu kodda kullanılan gets() fonksiyonu, herhangi bir boyut kontrol&uuml; yapmadan kullanıcıdan aldığı t&uuml;m veriyi name değişkenine atar. Eğer kullanıcı 6 byte'tan daha uzun bir veri girerse (&ouml;rneğin "BUFFER123"), name i&ccedil;in ayrılan 6 byte'lık alan dolar ve taşan veriler i değişkeni i&ccedil;in ayrılan bellek alanına yazılmaya başlar.</p>
+<p>Normalde i değişkeninin değeri 0 olduğu i&ccedil;in programın "Kullanıcı adı değişti." &ccedil;ıktısını vermesi gerekir. Ancak zafiyet s&ouml;m&uuml;r&uuml;ld&uuml;ğ&uuml;nde i'nin değeri 0'dan farklı bir değere d&ouml;n&uuml;ş&uuml;r ve program else bloğunu &ccedil;alıştırır.</p>
+<p>&nbsp;<em>Normal &Ccedil;alışma:</em></p>
+<p>Kullanıcı adını girin: BUFFER</p>
+<p>Kullanıcı adı değişti.</p>
+<p>&nbsp;<em>Zafiyetli &Ccedil;alışma:</em></p>
+<p>Kullanıcı adını girin: BUFFER12345</p>
+<p>i degiskeninin degeri değişti!</p>
+<p>&nbsp;</p>
+<h3>Zafiyete Neden Olan Tehlikeli Fonksiyonlar</h3>
+<p>Buffer Overflow zafiyetine sık&ccedil;a neden olan bazı C fonksiyonları şunlardır:</p>
+<ul>
+<li><span style="color: #ff0000;"><strong>strcpy</strong></span>: Kaynak veriyi hedefe kopyalarken hedefin boyutunu kontrol etmez.</li>
+<li><span style="color: #ff0000;"><strong>strncpy</strong></span>: Kopyalanacak veri boyutuna bir sınır getirse de, belirtilen sınır hedef alandan b&uuml;y&uuml;kse yine taşmaya neden olabilir.</li>
+<li><span style="color: #ff0000;"><strong>strcat</strong></span>: İki metin dizisini birleştirirken boyut kontrol&uuml; yapmaz.</li>
+<li><span style="color: #ff0000;"><strong>gets</strong></span>: Kullanıcıdan aldığı girdinin boyutunu kontrol etmez (yukarıdaki &ouml;rnekte olduğu gibi).</li>
+<li><span style="color: #ff0000;"><strong>fgets</strong></span>: Girdi boyutunu sınırlasa da, belirtilenden daha az bir boyut girilirse zafiyete yol a&ccedil;abilir.</li>
+<li><span style="color: #ff0000;"><strong>memcpy</strong></span>: Belirtilen boyuttaki veriyi hedefe kopyalar, ancak hedefin yeterli boyutta olup olmadığını kontrol etmez.</li>
+</ul>
+<p>&nbsp;</p>
+<h3>Buffer Overflow Zafiyeti Nasıl Tespit Edilir?</h3>
+<p>Bir uygulamada bu zafiyetin olup olmadığını anlamanın ilk adımı, uygulamanın kullanıcıdan veri aldığı giriş noktalarını doğru bir şekilde belirlemektir. Tespit işlemi genel olarak Fuzzing adı verilen bir y&ouml;ntemle yapılır.</p>
+<p>Fuzzing Nedir?</p>
+<p>Fuzzing, bir uygulamanın giriş noktalarına <strong>&ccedil;ok sayıda anlamsız veya rastgele veri g&ouml;nderilerek uygulamanın &ccedil;&ouml;kertilmeye (crash) &ccedil;alışılmasıdır</strong>. Eğer uygulama g&ouml;nderilen bu uzun veriler karşısında &ccedil;&ouml;kerse, bu durum bir Buffer Overflow zafiyetinin olabileceğine dair g&uuml;&ccedil;l&uuml; bir işarettir. Ancak her &ccedil;&ouml;kmenin exploit edilebileceği anlamına gelmediğini de unutmamak gerekir.</p>
+<p>Ek olarak kali linux'ta ki fuzzing ile ilgili olan ffuf adlı toolu da tanıttığım yazıma <a href="https://erenkocak1.github.io/#ffuf">buradan</a> ulaşabilirsiniz.</p>
+<h3 class="bbHeading">Tespit Adımları:​</h3>
+<p><strong><em>Payload Oluşturma</em></strong>: İlk olarak, uygulamaya g&ouml;ndermek i&ccedil;in &ccedil;ok sayıda tekrarlayan karakterden oluşan bir veri hazırlanır.&Ouml;rneğin, Python kullanarak 3000 adet 'A' karakteri oluşturulabilir.<br /><br /></p>
+<div class="bbCodeBlock bbCodeBlock--screenLimited bbCodeBlock--code">
+<div class="bbCodeBlock-title">Python:</div>
+<div class="bbCodeBlock-content" dir="ltr">
+<pre class="bbCodeCode language-python" dir="ltr" data-xf-init="code-block" data-lang="python"><code class=" language-python">python3 <span class="prism-token prism-operator">-</span>c <span class="prism-token prism-string">"print('A' * 3000)"</span></code></pre>
+</div>
+</div>
+<p><br />Peki neden &ouml;zellikle 'A' gibi tek bir karakter kullanıyoruz?<br /><br />Sebebi tamamen analiz kolaylığıdır. Program &ccedil;&ouml;kt&uuml;ğ&uuml;nde belleği ve işlemci kayıtlarını (register) inceleyeceğiz. Eğer her yere AAAAAAAA... gibi tek bir karakter dizisi g&ouml;nderirsek, &ccedil;&ouml;kme anında bellek yığınında veya register'larda bu karakterin hexadecimal karşılığı olan&nbsp;<strong>0x41</strong>'i (ASCII'de 'A' harfi) kolayca fark ederiz. Bu, "Evet, benim g&ouml;nderdiğim veri belleğin bu noktasına kadar ulaştı ve kontrol&uuml; etkiledi" demenin en net yoludur. Eğer rastgele karakterler (abc123def...) g&ouml;nderseydik, &ccedil;&ouml;kme anında hangi verinin nereyi etkilediğini anlamak &ccedil;ok zor olurdu.<br /><br /><em><strong>Uygulamayı &Ccedil;&ouml;kertme</strong></em>: Oluşturulan bu payload, zafiyet ş&uuml;phesi olan uygulamaya bir girdi olarak g&ouml;nderilir.Payload'umuzu oluşturduktan sonraki hedefimiz, bu veriyi uygulamaya bir şekilde "yedirerek" &ccedil;&ouml;kmesini sağlamaktır.</p>
+<ul>
+<li data-xf-list-type="ul"><strong>Girdi Noktaları:</strong>&nbsp;Zafiyetli olabilecek uygulama bir komut satırı aracı mı? Bir ağ servisi mi? Bir web formu mu? Payload'ı bu giriş noktalarından birini kullanarak g&ouml;ndermeliyiz. &Ouml;rneğin, komut satırından girdi alan bir program i&ccedil;in payload şu şekilde g&ouml;nderilir:<br /><br />
+<div class="bbCodeBlock bbCodeBlock--screenLimited bbCodeBlock--code">
+<div class="bbCodeBlock-title">Bash:</div>
+<div class="bbCodeBlock-content" dir="ltr">
+<pre class="bbCodeCode language-bash" dir="ltr" data-xf-init="code-block" data-lang="bash"><code class=" language-bash">./zafiyetli_program <span class="prism-token prism-variable">$(python3 -c <span class="prism-token prism-string">"print('A' * 3000)"</span>)</span></code></pre>
+</div>
+</div>
+<br /><br /></li>
+<li data-xf-list-type="ul"><strong>&Ccedil;&ouml;kme Anı:</strong>&nbsp;Payload'ı g&ouml;nderdiğimizde, eğer program zafiyetliyse genellikle "Segmentation Fault" (&Ccedil;&ouml;kme anı demek) gibi bir hata vererek sonlanır. Bu hata, programın erişim izni olmayan bir bellek alanına dokunmaya &ccedil;alıştığı anlamına gelir. Bizim g&ouml;nderdiğimiz 'A' karakterleri, programın akışını y&ouml;nlendiren kritik bir bellek adresinin (&ouml;rneğin geri d&ouml;n&uuml;ş adresi) &uuml;zerine yazıldı. Program bu adrese atlamaya &ccedil;alıştığında, 0x41414141 gibi anlamsız bir adrese denk geldiği i&ccedil;in işletim sistemi tarafından durdurulur ve &ccedil;&ouml;ker. Bu &ccedil;&ouml;kme,&nbsp;<strong>zafiyetin varlığına dair en b&uuml;y&uuml;k kanıttır.</strong></li>
+</ul>
+<p><br /><em><strong>Debugger ile Analiz</strong></em>: &Ccedil;&ouml;kertmeyi başardık. Ama bu yeterli değil. Programın akışını ger&ccedil;ekten kontrol edip edemeyeceğimizi anlamamız gerekiyor. İşte bu noktada&nbsp;<strong>debugger</strong>&nbsp;(hata ayıklayıcı) devreye girer. GDB (GNU Debugger) gibi bir ara&ccedil;la uygulamayı adım adım &ccedil;alıştırırız.</p>
+<ul>
+<li data-xf-list-type="ul"><strong>Debugger'ı Başlatma:</strong>&nbsp;&Ouml;nce debugger'ı a&ccedil;ar ve zafiyetli programı onun i&ccedil;inden &ccedil;alıştırırız.<br /><br />
+<div class="bbCodeBlock bbCodeBlock--screenLimited bbCodeBlock--code">
+<div class="bbCodeBlock-title">Bash:</div>
+<div class="bbCodeBlock-content" dir="ltr">
+<pre class="bbCodeCode language-bash" dir="ltr" data-xf-init="code-block" data-lang="bash"><code class=" language-bash">gdb ./zafiyetli_program
+<span class="prism-token prism-punctuation">(</span>gdb<span class="prism-token prism-punctuation">)</span> run <span class="prism-token prism-variable">$(python3 -c <span class="prism-token prism-string">"print('A' * 3000)"</span>)</span></code></pre>
+</div>
+</div>
+<br /><br /></li>
+<li data-xf-list-type="ul"><strong>EIP Register'ının &Ouml;nemi:</strong>&nbsp;Program debugger i&ccedil;inde &ccedil;&ouml;kt&uuml;ğ&uuml;nde, işlemcinin o anki durumunu g&ouml;steren register'ları inceleriz. Bizim i&ccedil;in en kritik olanı&nbsp;<strong>EIP (Extended Instruction Pointer)</strong>&nbsp;register'ıdır. 64-bit sistemlerde bu register&nbsp;<strong>RIP (Instruction Pointer)</strong>&nbsp;olarak adlandırılır.<br /><br /><strong>G&ouml;revi:</strong>&nbsp;EIP, CPU'nun bir sonraki adımda &ccedil;alıştıracağı komutun bellek adresini tutar. Yani programın akışını o y&ouml;netir.<br />Eğer &ccedil;&ouml;kme anında EIP register'ının değerine baktığımızda&nbsp;<strong>0x41414141</strong>&nbsp;değerini g&ouml;r&uuml;yorsak, &ccedil;&ouml;kt&uuml;ğ&uuml;n&uuml; anlarız. Bu, bizim g&ouml;nderdiğimiz 'A' karakterlerinin, programın bir sonraki komut olarak nereye gideceğini belirleyen adresi tamamen ele ge&ccedil;irdiği anlamına gelir.</li>
+</ul>
+<p>EIP'nin &uuml;zerine 0x41414141 yazabildiğimiz i&ccedil;in, bu demektir ki oraya 0x41414141 yerine kendi hazırladığımız zararlı kodun (shellcode) bellek adresini de yazabiliriz. B&ouml;ylece program, &ccedil;&ouml;kmesi gereken o noktada bizim kodumuzu &ccedil;alıştırmaya başlar ve sistemin kontrol&uuml;n&uuml; ele ge&ccedil;irmiş oluruz.<br /><br /><em><strong>Register'ları Kontrol Etme</strong></em>: Eğer payload başarılı bir şekilde bellek taşmasına neden olduysa, bu durum işlemci register'larına yansıyacaktır. &Ouml;zellikle&nbsp;<strong>EIP</strong>&nbsp;(Extended Instruction Pointer) register'ı kontrol edilir. EIP, &ccedil;alıştırılacak bir sonraki komutun bellek adresini tutar. Başarılı bir saldırıda, EIP register'ının i&ccedil;inde g&ouml;nderdiğimiz 'A' karakterlerinin hexadecimal karşılığı olan 41414141 değerini g&ouml;r&uuml;r&uuml;z. Bu, programın akışını kontrol edebildiğimizin kesin bir kanıtıdır.</p>
+<p>Okuduğunuz i&ccedil;in teşekk&uuml;r ederim.</p>
+     
+</body>
+</html>

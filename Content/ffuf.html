@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temel Düzeyde Ffuf Tool'u Kullanımı</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+<h1>Temel Düzeyde Ffuf Tool'u Kullanımı</h1>
+  <p>Bu yazıda <code data-start="528" data-end="534">ffuf</code> kullanarak hedef sitelerde dizin keşfi (directory fuzzing) ve subdomain fuzzing nasıl yapılır, elde edilen HTTP stat&uuml;lerinin (200, 301, 403 vb.) ne anlama geldiği ve hangi sonu&ccedil;ların &ouml;ncelikli incelemeye değer olduğu adım adım anlatıcam.&nbsp;</p>
+<p>Başlangı&ccedil; seviyesinde bir yazı olacaktır.&nbsp;</p>
+<p>İlk olarak Ffuf toolumuzu <a href="https://github.com/ffuf/ffuf" target="_blank">buradaki</a> github linkinden kuralım.</p>
+<p>Sonra her toolda olduğu gibi help men&uuml;s&uuml; var fakat burada &ccedil;ok kafa karıştırmaya gerek yok.</p>
+<p>En &ccedil;ok kullanacağımız <em><strong>-u</strong></em> ile <strong><em>-w</em></strong> parametresi.</p>
+<p><img src="https://i.imgur.com/TfPfmlI.png" width="700" height="392" /></p>
+<p>&Ouml;rnek kullanımda verilmiştir zaten.</p>
+<p><img src="https://i.imgur.com/G7xilov.png" alt="" width="651" height="422" /></p>
+<p>Şimdi bize olası directory ve sub-domain isimlerini i&ccedil;eren wordlist&rsquo;lerin lazım olacak. Bunun i&ccedil;in SecLists kullanabiliriz. Onu da <a href="https://github.com/danielmiessler/SecLists" target="_blank">buradan</a> indirebilirsiniz. Directory taraması i&ccedil;in <em><strong>common.txt</strong></em> işimizi g&ouml;recektir.</p>
+<p><img src="https://i.imgur.com/Yef7CGN.png" width="871" height="305" /></p>
+<p>Şimdi test aşamasına ge&ccedil;elim. Burada ben <strong data-start="383" data-end="395">Acunetix</strong> tarafından eğitim ama&ccedil;lı a&ccedil;ık bırakılan <a href="https://testphp.vulnweb.com/" target="_blank">testphp.vulnweb.com&nbsp;</a> sitesinden deneme yapıcam.</p>
+<p><img src="https://i.imgur.com/MwHdZ9k.png" width="634" height="533" /></p>
+<p>Şimdi kullanımında ilk olarak -u parametresini yazıp hedef siteyi ekliyoruz. Burada şu an directory testi yaptığımız i&ccedil;in url'nin sonuna <em><strong>FUZZ</strong> </em>ibaresini ekledik.&nbsp;</p>
+<p>&Ccedil;&uuml;nk&uuml; toolumuz listeden aldığı isimleri FUZZ kısmına ekleyip deneyecek. Sonrasında -w parametresi ile seclistimizde bulunan common.txt dosyamızı se&ccedil;iyoruz.</p>
+<p>Tam kodumuz</p>
+<p><span style="background-color: #000000; color: #ffff00;"><code>ffuf -u http://testphp.vulnweb.com/FUZZ -w ../../common.txt</code></span></p>
+<p>şeklinde.</p>
+<p>&Ccedil;ıktıda g&ouml;r&uuml;ld&uuml;ğ&uuml; &uuml;zere hedef sunucuda farklı HTTP stat&uuml;lerine sahip birden fazla dizin/dosya bulundu.</p>
+<ul style="list-style-type: square;">
+<li><strong data-start="251" data-end="258">200</strong> erişilebilir ve i&ccedil;erik d&ouml;nd&uuml;ren kaynakları (aktif sayfalar veya a&ccedil;ık dosyalar),</li>
+<li><strong data-start="339" data-end="350">301/302</strong> y&ouml;nlendirmeleri (başka bir adrese taşınmış veya sonuna <code data-start="406" data-end="409">/</code> eklenmesi gereken dizinler),</li>
+<li><strong data-start="439" data-end="446">403</strong> erişimi engellenmiş ancak mevcut olan kaynakları (yetki gerektiren paneller veya kapalı dizinler),</li>
+<li><strong data-start="546" data-end="553">404</strong> bulunmayan yolları ve <strong data-start="576" data-end="583">500</strong> gibi kodlar ise sunucu tarafı hatalarını g&ouml;sterir.</li>
+</ul>
+<p>Bu bilgiler keşif aşamasında hangi yolların daha derinlemesine incelenmesi gerektiğini (&ouml;rn. phpinfo, uploads, admin gibi) ve hangi sonu&ccedil;ların potansiyel bilgi sızıntısı ya da erişim kontrol zafiyeti olabileceğini belirlememize yardımcı olur.</p>
+<p><img src="https://i.imgur.com/v3jW5Yz.png" width="665" height="381" /></p>
+<p>&Ccedil;ıktılarda <strong data-start="322" data-end="334">200 (OK)</strong> stat&uuml;s&uuml; d&ouml;nen yollar bizim i&ccedil;in &ouml;nceliklidir &ccedil;&uuml;nk&uuml; bu kod, hedefte ilgili dosya veya dizinin ger&ccedil;ekten erişilebilir olduğunu ve i&ccedil;erik d&ouml;nd&uuml;rd&uuml;ğ&uuml;n&uuml; g&ouml;sterir &mdash; yani buralar daha derin inceleme (&ouml;r. phpinfo, uploads, a&ccedil;ık dosyalar) i&ccedil;in hedeflenmelidir.</p>
+<p>ffuf ile sadece 200 d&ouml;nen sonu&ccedil;ları g&ouml;rmek i&ccedil;in <code data-start="635" data-end="644">-mc 200</code> kullanabiliriz.</p>
+<p><span style="background-color: #000000; color: #ffff00;"><code>ffuf -u http://testphp.vulnweb.com/FUZZ -w ../../common.txt -mc 200</code></span></p>
+<p><img src="https://i.imgur.com/owf6hNB.png" width="665" height="323" /></p>
+<p>Bunlara ek olarak subdomain taramasıda yapabiliriz. Fakat subdomain bulma / tarama kısmı şu an daha farklı toollarla yapıldığı i&ccedil;in burada pek işimize yaramaz sadece b&ouml;yle bir &ouml;zelliğide var diye g&ouml;steriyorum. Seclists dosyamızda bulunan subdomain listelerinden <em><strong>subdomains-top1million-5000.txt</strong></em> listesini denemek i&ccedil;in kullanalım mesela.</p>
+<p><img src="https://i.imgur.com/rxaL8hD.png" width="656" height="378" /></p>
+<p>Burada da aynı mantıkla FUZZ kısmını url'nin başına ekleyerek tarama yapıyoruz. Ben &ccedil;ıktıg&ouml;r&uuml;nmesi i&ccedil;in google.com &uuml;zerinden ilerliyeceğim.&nbsp;</p>
+<p>Kod bu şekilde oluyor:<span style="background-color: #000000; color: #ffff00;"><code>ffuf -u http://FUZZ.google.com -w ../../<em><strong>subdomains-top1million-5000.txt&nbsp;</strong></em></code></span></p>
+<p><img src="https://i.imgur.com/Xz6j12D.png" width="644" height="442" /></p>
+<p>Okuduğunuz i&ccedil;in teşekk&uuml;r ederim.</p>
+  
+
+

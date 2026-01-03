@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Inclusion-Local File Inclusion (LFI)</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #d3d3d3;
+            background-color: rgba(0, 0, 0, 0.7);
+
+        }
+        h1 {
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+<h1>File Inclusion-Local File Inclusion (LFI)</h1>
+
+<h2>File Inclusion</h2>
+<p>File Inclusion zafiyetleri, web uygulamalarında olduk&ccedil;a yaygın olarak bulunabilen ve tehlikeli g&uuml;venlik a&ccedil;ıklarından biridir. Bu zafiyetler, bir web uygulamasının kullanıcı girdilerini uygun şekilde doğrulamadığında ortaya &ccedil;ıkar ve saldırganların sunucu &uuml;zerindeki dosyalara erişmesine veya uzaktan zararlı dosyalar dahil etmesine olanak tanır.</p>
+<p>File Inclusion zafiyetleri iki ana kategoriye ayrılır.</p>
+<ol>
+<li><strong> Local File Inclusion (LFI)</strong></li>
+</ol>
+<p>Local File Inclusion (LFI), saldırganların web uygulamalarında yerel dosyaları dahil ederek sunucu &uuml;zerinde hassas bilgileri elde etmelerini sağlayan bir g&uuml;venlik a&ccedil;ığıdır. Bu zafiyet, genellikle kullanıcıdan alınan dosya adı veya yol bilgisi girdilerinin doğrulanmaması veya yetersiz şekilde kontrol edilmesi sonucunda ortaya &ccedil;ıkar.</p>
+<ol start="2">
+<li><strong> Remote File Inclusion (RFI)</strong></li>
+</ol>
+<p>Saldırganların uzaktaki bir sunucudan dosya dahil ederek zararlı kod &ccedil;alıştırmasına olanak tanır. Bu y&ouml;ntem, saldırganların kendi sunucularından zararlı dosyalar y&uuml;klemesine ve sunucunun kontrol&uuml;n&uuml; ele ge&ccedil;irmesine olanak tanır.</p>
+<h3>File Inclusion Zafiyetlerinin Nedenleri</h3>
+<p>File Inclusion zafiyetleri, genellikle geliştiricilerin kullanıcı girdilerini yetersiz şekilde doğrulaması veya filtrelemesi sonucu ortaya &ccedil;ıkar. Web uygulamaları, dinamik olarak belirli dosyaları dahil etmek i&ccedil;in kullanıcıdan dosya adı veya yol bilgisi alabilir. Eğer bu girdiler uygun şekilde kontrol edilmezse, saldırganlar bu girdileri manip&uuml;le ederek istenmeyen dosyalara erişebilir veya zararlı dosyaları sunucuya dahil edebilir.</p>
+<p><strong>&Ouml;rnek</strong></p>
+<p>PHP ile yazılmış bir web uygulamasının aşağıdaki gibi bir dosya dahil etme işlemi ger&ccedil;ekleştirdiğini varsayalım:</p>
+<blockquote>
+<p><span style="background-color: #000000; color: #ffff00;"><code>&lt;?php&nbsp;&nbsp;&nbsp; $file = $_GET['page'];&nbsp;&nbsp;&nbsp; include($file);?&gt;</code></span></p>
+</blockquote>
+<p>Bu &ouml;rnekte, kullanıcıdan alınan</p>
+<p>Page parametresi doğrudan&nbsp; include fonksiyonuna aktarılıyor. Eğer kullanıcı&nbsp; <strong>page=../../../etc/passwd</strong> gibi bir değer g&ouml;nderirse, uygulama sunucu &uuml;zerindeki passwd dosyasını dahil edebilir. Bu, saldırganın sunucunun yapılandırma dosyalarına ve diğer hassas bilgilerine erişim sağlamasına olanak tanır.</p>
+<p>&nbsp;</p>
+<h3>File Inclusion Zafiyetlerinden Korunma</h3>
+<p>File Inclusion zafiyetlerinden korunmanın en etkili yolu, kullanıcı girdilerini doğru şekilde doğrulamak ve filtrelemektir. Bunun yanı sıra, aşağıdaki g&uuml;venlik &ouml;nlemleri de alınmalıdır:</p>
+<ul>
+<li><strong>Girdi Doğrulama ve Filtreleme:</strong> Kullanıcı girdilerini sıkı bir şekilde doğrulamak ve potansiyel zararlı girdileri filtrelemek &ouml;nemlidir.</li>
+<li><strong>Dosya Yolunu Sabitleme:</strong> Dahil edilecek dosyaların yollarını sabitlemek ve sadece belirli dizinler i&ccedil;erisindeki dosyaların dahil edilmesine izin vermek.</li>
+<li><strong>G&uuml;venlik Duvarları ve WAF Kullanımı:</strong> Web Uygulama G&uuml;venlik Duvarı (WAF) gibi ara&ccedil;lar kullanarak zararlı istekleri tespit etmek ve engellemek.</li>
+<li><strong>G&uuml;venlik G&uuml;ncellemeleri:</strong> Web uygulamalarını ve sunucu yazılımlarını d&uuml;zenli olarak g&uuml;ncelleyerek bilinen g&uuml;venlik a&ccedil;ıklarını kapatmak.</li>
+</ul>
+<h2>Local File Inclusion (LFI)</h2>
+<p>LFI zafiyetleri, genellikle aşağıdaki gibi dinamik dosya dahil etme işlemlerinde ortaya &ccedil;ıkar:</p>
+<blockquote>
+<p><code><span style="background-color: #000000; color: #ffff00;">&lt;?php</span></code><code><span style="background-color: #000000; color: #ffff00;">&nbsp;$file = $_GET['page'];</span></code><code><span style="background-color: #000000; color: #ffff00;"> include($file);</span></code><code><span style="background-color: #000000; color: #ffff00;">?&gt;</span></code></p>
+</blockquote>
+<p>Bu &ouml;rnekte,</p>
+<p><strong>page</strong> parametresi kullanıcıdan alınır ve doğrudan <strong>include </strong>fonksiyonuna aktarılır. Kullanıcı,</p>
+<p><strong>page=../../../../etc/passwd </strong>gibi bir değer g&ouml;nderirse, sunucu &uuml;zerindeki <strong>/etc/passwd </strong>dosyasını dahil edebilir. Bu dosya, sistem kullanıcıları hakkında kritik bilgileri i&ccedil;erebilir ve saldırganın sunucuya yetkisiz erişim sağlamasına yardımcı olabilir.</p>
+<p>LFI payloadlarında kullanılan <strong>../ </strong>ifadesi Linux sistemlerde bir &ouml;nceki dizini işaret eder. Bizim amacımız <strong>/etc/passwd </strong>dosyasını okumak olabilir ancak web uygulamasında bu dosyayı <strong>/var/www/html/project </strong>gibi bir dizinde arayabilir. Dolayısıyla biz payloadımıza bir &ccedil;ok kez ../ifadesini ekleyerek &ouml;ncelikle Linux sistemin <strong>k&ouml;k dizinine (/)</strong> erişip ardından <strong>/etc/passwd</strong> dosyasını okumaya &ccedil;alışırız.</p>
+<h3>LFI Saldırıları ve Senaryoları</h3>
+<h4>Log Dosyalarına Erişim</h4>
+<p>Web sunucuları genellikle erişim ve hata g&uuml;nl&uuml;kleri tutar. Saldırganlar, bu log dosyalarına erişerek &ouml;nemli bilgiler elde edebilirler.</p>
+<blockquote>
+<p><span style="background-color: #000000;"><code><span style="color: #ffff00;">http://4oca4.com/index.php?page=../../../../var/log/apache2/access.log</span></code></span></p>
+</blockquote>
+<h4>PHP Kod Enjeksiyonu (Log Poisoning)</h4>
+<p>LFI zafiyeti, saldırganların zararlı PHP kodlarını &ccedil;alıştırmasına da olanak tanıyabilir. &Ouml;rneğin, web sunucusunun erişim loglarına bir PHP kodu eklenmişse, bu kod LFI zafiyeti kullanılarak &ccedil;alıştırılabilir.</p>
+<p>Aşağıda User-Agent alanına enjekte edilmiş PHP kodu bulunan bir HTTP isteği bulunuyor.</p>
+<blockquote>
+<p><span style="background-color: #000000; color: #ffff00;"><code>GET /index.php HTTP/1.1 </code></span></p>
+<p><span style="background-color: #000000; color: #ffff00;"><code>User-Agent: &lt;?php system('ls'); ?&gt;</code></span></p>
+</blockquote>
+<p>Bu isteği g&ouml;nderdikten sonra tarayıcıdan <strong>access.log</strong> dosyasını g&ouml;r&uuml;nt&uuml;leyelim.</p>
+<blockquote>
+<p><span style="background-color: #000000; color: #ffff00;"><code>http://4oca4.com/index.php?page=../../../../var/log/apache2/access.log</code></span></p>
+</blockquote>
+<p>Bu durumda, zararlı PHP kodu sunucu &uuml;zerinde &ccedil;alıştırılır ve saldırgan sunucu dosya sistemindeki dosyaları listeleyebilir.</p>
+<h4>PHP://filter ile Dosya Okuma</h4>
+<p>PHP'nin <strong>php://filter</strong> &ouml;zelliği, dosya i&ccedil;eriğinin okunması sırasında belirli filtrelerin uygulanmasına olanak tanır. Bu &ouml;zellikle bir dosyanın Base64 ile kodlanarak okunması, dosya i&ccedil;eriğini direkt olarak okumanın m&uuml;mk&uuml;n olmadığı durumlarda kullanışlı olabilir. Bu, &ouml;zellikle web uygulamalarında hata mesajlarında veya bazı log dosyalarında yararlı olabilir.</p>
+<ol>
+<li><span style="text-decoration: underline;"><em><strong> Payload:</strong></em></span></li>
+</ol>
+<blockquote>
+<p><code><span style="color: #ffff00; background-color: #000000;">php://filter/convert.base64-encode/resource=home.php</span></code></p>
+<p><code><span style="color: #ffff00; background-color: #000000;">http://4oca4.com/index.php?page=php://filter/convert.base64-encode/resource=home.php</span></code></p>
+</blockquote>
+<ol start="2">
+<li><span style="text-decoration: underline;"><em><strong> &Ccedil;ıktı:</strong></em></span></li>
+</ol>
+<blockquote>
+<pre>PD9waHAKCmVjaG8gImhlbGxvIHdvcmxkIjsKCj8+</pre>
+</blockquote>
+<ol start="3">
+<li><em><span style="text-decoration: underline;"><strong> Base64 Kodunu &Ccedil;&ouml;zme:</strong></span></em></li>
+</ol>
+<blockquote>
+<p>echo 'PD9waHAKCmVjaG8gImhlbGxvIHdvcmxkIjsKCj8+' | base64 --decode</p>
+</blockquote>
+<ol start="4">
+<li><span style="text-decoration: underline;"><em><strong> Base64 Kodununun &Ccedil;ıktısı:</strong></em></span></li>
+</ol>
+<blockquote>
+<p><span style="background-color: #000000; color: #ffff00;"><code>&lt;?php echo "hello world"; ?&gt;</code></span></p>
+</blockquote>
+<h2>Bypass Y&ouml;ntemleri</h2>
+<p>Local File Inclusion (LFI) zafiyetlerine karşı bir&ccedil;ok web uygulaması &ccedil;eşitli koruma mekanizmaları uygular. Ancak, bu korumalar genellikle yeterli değildir ve &ccedil;eşitli bypass teknikleri kullanılarak aşılabilir.</p>
+<h3>1. Dizin Ge&ccedil;işi Filtreleri (Path Traversal Filters)</h3>
+<p>Bazı web uygulamaları, dizin ge&ccedil;işlerini (../) engellemek i&ccedil;in basit bir arama ve değiştirme filtresi kullanır. Bu filtreler, ../ alt dizelerini kaldırarak dizin ge&ccedil;iş saldırılarını &ouml;nlemeyi ama&ccedil;lar.</p>
+<p><strong>&Ouml;rnek Kod</strong></p>
+<blockquote>
+<p><span style="background-color: #000000; color: #ffff00;"><code>$language = str_replace('../', '', $_GET['language']);</code></span></p>
+</blockquote>
+<p>Bu kod, ../ alt dizelerini kaldırarak dizin ge&ccedil;işini engellemeyi hedefler. Ancak, bu filtreler genellikle yetersizdir &ccedil;&uuml;nk&uuml; girdiyi sadece bir kez işler ve &ccedil;ıktıya yeniden filtre uygulamaz. Bu nedenle, <strong>....// </strong>gibi girdiler kullanarak filtreyi aşmak m&uuml;mk&uuml;nd&uuml;r.</p>
+<p><strong>Bypass Y&ouml;ntemi</strong></p>
+<blockquote>
+<p><code><span style="background-color: #000000; color: #ffff00;">https://4oca4.com/index.php?language=....//....//....//....//etc/passwd</span></code></p>
+</blockquote>
+<ul>
+<li><strong>G&ouml;nderdiğimiz Payload:</strong></li>
+</ul>
+<blockquote>
+<p>....//....//....//....//etc/passwd</p>
+</blockquote>
+<ul>
+<li><strong>Filtrelendikten Sonraki Hali:</strong></li>
+</ul>
+<blockquote>
+<p>../../../../etc/passwd</p>
+</blockquote>
+<p>Bu şekilde,<strong> ../</strong> alt dizeleri kaldırıldıktan sonra hala dizin ge&ccedil;işi ger&ccedil;ekleştirebiliriz. Benzer şekilde, <strong>..././</strong> veya<strong> ..../</strong> gibi diğer dizin ge&ccedil;iş alt dizeleri de kullanılabilir.</p>
+<h3>2. Kodlama (Encoding)</h3>
+<p>Bazı web uygulamaları, LFI ile ilgili karakterleri i&ccedil;eren girdileri engelleyen filtreler kullanır. Ancak, bu filtreler URL kodlama kullanılarak aşılabilir. URL kodlama, k&ouml;t&uuml; karakterleri i&ccedil;ermeyen ancak yine de &ccedil;&ouml;z&uuml;lerek dizin ge&ccedil;işi sağlayacak bir giriş sağlar.&Ouml;rneğin, <strong>. ve /</strong> karakterlerini i&ccedil;eren girdiler engelleniyorsa, <strong>../</strong> dizesini</p>
+<ul>
+<li><strong>%2e%2e%2f </strong></li>
+</ul>
+<p>olarak URL kodlayabiliriz.</p>
+<ul>
+<li><strong>https://4oca4.com/index.php language=%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64 </strong></li>
+</ul>
+<p>Bu şekilde, URL encoding ile kodlanmış LFI payloadımız, sunucu tarafındaki filtreyi aşarak dizin ge&ccedil;işi ger&ccedil;ekleştirir ve /etc/passwd dosyasını okuyabiliriz.</p>
+<p><strong>Not:</strong> URL encoding ve decoding işlemleri i&ccedil;in kullanılabilecek bir&ccedil;ok &ccedil;evrimi&ccedil;i site vardır, buralardan yararlanılabilir.</p>
+<h3>3. İzin Verilen Yollar (Approved Paths)</h3>
+<p>Bazı web uygulamaları, dosyanın belirli bir dizin altında olmasını sağlamak i&ccedil;in d&uuml;zenli ifadeler (regex) kullanır.</p>
+<p><strong>&Ouml;rnek</strong></p>
+<blockquote>
+<p><span style="background-color: #000000; color: #ffff00;"><code>if(preg_match('/^\.\/languages\/.+$/', $_GET['language'])) {&nbsp;&nbsp;&nbsp; include($_GET['language']);} else {&nbsp;&nbsp;&nbsp; echo 'Invalid path specified!';}</code></span></p>
+</blockquote>
+<p>Yukarıdaki kod par&ccedil;acığında, kullanıcıdan gelen get parametresinin</p>
+<p><strong>language</strong></p>
+<p>kelimesi ile başlayıp başlamadığı kontrol ediliyor. Bu filtreyi aşmak i&ccedil;in, sunucu tarafından izin verilen yol ile başlamalı ve ardından <strong>../ </strong>kullanarak k&ouml;k dizine d&ouml;nmeliyiz:</p>
+<p><strong>https://4oca4.com/index.php?language=./languages/../../../../etc/passwd</strong></p>
+<p>Bu y&ouml;ntem, izin verilen yolu kullanarak filtreyi aşar ve dizin ge&ccedil;işi ger&ccedil;ekleştirir.</p>
+<h3>4. Null Byte Enjeksiyonu</h3>
+<p>Bazı web uygulamaları, girdi dizisine belirli bir uzantı ekleyerek (&ouml;rneğin .php) dosya dahil etme işlemini sınırlar. Ancak, eski PHP s&uuml;r&uuml;mlerinde bu t&uuml;r filtreler <strong>null byte (%00) </strong>enjeksiyonu kullanılarak aşılabilir.</p>
+<p>Null byte, dizeyi sonlandırır ve sonraki karakterleri yok sayar.</p>
+<p><span style="text-decoration: underline;"><em><strong>Null Byte Karakteri: %00</strong></em></span></p>
+<p><strong>https://4oca4.com/index.php?language=/etc/passwd%00</strong></p>
+<p>Bu şekilde, <strong>.php</strong> uzantısı yok sayılır ve <strong>/etc/passwd</strong> dosyası dahil edilir.</p>
+<p><strong>&Ouml;nleme Y&ouml;ntemleri</strong></p>
+<p>File Inclusion zafiyetleri, &ouml;zellikle web uygulamalarında ciddi g&uuml;venlik a&ccedil;ıklarına neden olabilir. Bu zafiyetlerin &ouml;nlenmesi i&ccedil;in &ccedil;eşitli y&ouml;ntemler ve uygulamalar mevcuttur. Bu b&ouml;l&uuml;mde, File Inclusion zafiyetlerinden korunmak i&ccedil;in alınabilecek &ouml;nlemleri detaylı bir şekilde ele alacağız.</p>
+<ol>
+<li><strong> Input Validation (Girdi Doğrulama)</strong></li>
+</ol>
+<p>Girdi doğrulama, kullanıcı tarafından sağlanan verilerin g&uuml;venilir olup olmadığını kontrol etmeyi i&ccedil;erir. File Inclusion zafiyetlerini &ouml;nlemek i&ccedil;in aşağıdaki girdi doğrulama teknikleri uygulanabilir.</p>
+<ul>
+<li><strong>Beyaz Liste (Whitelist) Kullanımı:</strong> Yalnızca belirli ve g&uuml;venli dosyaların y&uuml;klenmesine izin verin. Beyaz liste, izin verilen dosya adlarını veya yollarını i&ccedil;erir.</li>
+<li><strong>Regex Kullanımı:</strong> Dosya yollarını ve adlarını belirli bir desenle eşleştirerek doğrulayın.</li>
+<li><strong>Uzantı Kontrol&uuml;:</strong> Yalnızca belirli dosya uzantılarına izin verin (&ouml;rneğin, .pdf, .jpg).</li>
+</ul>
+<ol start="2">
+<li><strong> Path Traversal &Ouml;nleme</strong></li>
+</ol>
+<p>Path traversal saldırıları, dizin ge&ccedil;işi yaparak yetkisiz dosyalara erişim sağlar. Bu t&uuml;r saldırıları &ouml;nlemek i&ccedil;in aşağıdaki &ouml;nleme teknikleri uygulanabilir.</p>
+<ul>
+<li><strong>Ger&ccedil;ek Yol (Realpath) Kullanımı:</strong> Dosya yolunu <strong>realpath()</strong> gibi fonksiyonlarla &ccedil;&ouml;z&uuml;mleyin ve beklenen dizin i&ccedil;inde olup olmadığını kontrol edin.</li>
+</ul>
+<ul>
+<li><strong>Dizin Sabitleme (Chroot Jail):</strong> Uygulamayı belirli bir dizinle sınırlayarak dışarıya erişimi engelleyin.</li>
+</ul>
+<ol start="3">
+<li><strong> Dosya Dahil Etme Kısıtlamaları</strong></li>
+</ol>
+<p>Dosya dahil etme işlemlerini g&uuml;venli hale getirmek i&ccedil;in aşağıdaki teknikler uygulanabilir.</p>
+<ul>
+<li><strong>Tam Yol (Full Path) Kullanımı:</strong> Dosya adlarını tam yollarıyla belirtin ve dinamik girdi yerine sabit yollar kullanın.</li>
+<li><strong>Dış Kaynak Kısıtlamaları:</strong> Dış kaynaklardan dosya dahil edilmesini engelleyin. &Ouml;zellikle, URL tabanlı dosya dahil etme işlemlerine izin vermeyin.</li>
+</ul>
+<ol start="4">
+<li><strong> Dosya İzinleri ve G&uuml;venlik</strong></li>
+</ol>
+<p>Dosya izinleri ve g&uuml;venlik ayarları, dosya erişimlerini kontrol etmek i&ccedil;in &ouml;nemlidir.</p>
+<ul>
+<li><strong>Dosya İzinleri:</strong> Yalnızca gerekli izinlere sahip dosyaların dahil edilmesini sağlayın. Dosya izinlerini <strong>chmod </strong>ile ayarlayın ve minimum izinleri kullanın.(Dosya izinleri ile ilgili yazıma da <a href="https://erenkocak1.github.io/#izin" target="_blank">buradan</a> ulaşabilirsiniz.)</li>
+</ul>
+<ul>
+<li><strong>Dosya Sahipliği:</strong> Dosya sahibi ve grup sahipliğini kontrol edin ve sadece yetkili kullanıcıların dosya erişimini sağlayın.</li>
+</ul>
+<ol start="5">
+<li><strong> Kod İnceleme ve G&uuml;venlik Testleri</strong></li>
+</ol>
+<p>D&uuml;zenli kod incelemeleri ve g&uuml;venlik testleri, potansiyel zafiyetleri erken aşamada tespit etmeye yardımcı olur.</p>
+<ul>
+<li><strong>Kod İnceleme:</strong> Manuel ve otomatik kod inceleme ara&ccedil;ları kullanarak kod g&uuml;venliğini kontrol edin.</li>
+<li><strong>Sızma Testleri:</strong> D&uuml;zenli sızma testleri yaparak file inclusion zafiyetlerini tespit edin ve d&uuml;zeltin.</li>
+</ul>
+<ol start="6">
+<li><strong> G&uuml;venlik Duvarları ve WAF (Web Application Firewall)</strong></li>
+</ol>
+<p>Web uygulama g&uuml;venlik duvarları (WAF), file inclusion saldırılarını tespit edip engelleyebilir.</p>
+<ul>
+<li><strong>WAF Kullanımı:</strong> ModSecurity gibi WAF ara&ccedil;ları kullanarak file inclusion saldırılarını otomatik olarak engelleyin.</li>
+<li><strong>G&uuml;venlik Kuralları:</strong> &Ouml;zelleştirilmiş g&uuml;venlik kuralları oluşturarak belirli saldırı t&uuml;rlerini hedefleyin ve engelleyin.</li>
+</ul>
+<p>&nbsp;</p>
