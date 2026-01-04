@@ -1,21 +1,150 @@
-<h2 data-path-to-node="2">PortSwigger Expert Lab: Exfiltrating Sensitive Data via Server-Side Prototype Pollution</h2>
-<p data-path-to-node="3">Bu expert seviye laboratuvarı &ccedil;&ouml;zerken, konuya yeni başlayan arkadaşlardan bu alanda derinleşmek isteyenlere kadar herkesin faydalanabileceği, <strong data-path-to-node="3" data-index-in-node="145">metodoloji odaklı</strong> bir rehber hazırladım.</p>
-<p data-path-to-node="4">Sadece kodu kopyalayıp yapıştırmak yerine;</p>
-<ul data-path-to-node="5">
-<li>
-<p data-path-to-node="5,0,0"><strong data-path-to-node="5,0,0" data-index-in-node="0">Oracle</strong> ve <strong data-path-to-node="5,0,0" data-index-in-node="10">Side-channel confirmation</strong> gibi temel keşif mantıklarını,</p>
-</li>
-<li>
-<p data-path-to-node="5,1,0"><strong data-path-to-node="5,1,0" data-index-in-node="0">Node.js</strong> ve <strong data-path-to-node="5,1,0" data-index-in-node="11">Express.js</strong> mimarisindeki zayıflıkları,</p>
-</li>
-<li>
-<p data-path-to-node="5,2,0">Ve en &ouml;nemlisi, sistemde y&uuml;kl&uuml; olan <strong data-path-to-node="5,2,0" data-index-in-node="36">Vim</strong> gibi ara&ccedil;ları birer <strong data-path-to-node="5,2,0" data-index-in-node="60">Gadget</strong>&nbsp;olarak kullanarak nasıl <strong data-path-to-node="5,2,0" data-index-in-node="93">RCE</strong>&nbsp;elde edebileceğimizi adım adım notlarımla beraber paylaşıyorum.</p>
-</li>
-</ul>
-<p><strong data-path-to-node="7" data-index-in-node="0">Bol şans ve keyifli &ccedil;alışmalar.</strong></p>
-<p><iframe title="portswigger / exfiltrating sensitive data via server-side prototype pollution / writeup" src="//www.youtube.com/embed/BLa4tJg2Loo" width="640" height="400" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
-<p>&nbsp;</p>
-<p data-path-to-node="7">&nbsp;</p>
-<p data-path-to-node="7"><strong data-path-to-node="7" data-index-in-node="0"><img src="https://i.imgur.com/Fv9pDAG.jpeg" width="320" height="410" /><img src="https://i.imgur.com/dYk0okO.jpeg" width="320" height="380" /></strong></p>
-<p data-path-to-node="7"><strong data-path-to-node="7" data-index-in-node="0"><img src="https://i.imgur.com/JKhbwHh.jpeg" width="320" height="369" /><img src="https://i.imgur.com/2AgI4uv.jpeg" width="320" height="383" /></strong></p>
-<p data-path-to-node="7"><strong data-path-to-node="7" data-index-in-node="0"><img src="https://i.imgur.com/aWb8XDD.jpeg" width="639" height="494" /></strong></p>
+<style>
+  
+    body { background-color: #0f0f0f; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.6; }
+    
+    .pentest-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    
+    .expert-title { color: #00ff00; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+
+    .lab-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+
+    .lab-card {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lab-card:hover {
+        transform: translateY(-10px);
+        border-color: #00ff00;
+        box-shadow: 0 15px 30px rgba(0,255,0,0.15);
+    }
+
+
+    .lab-card img {
+        width: 100%;
+        height: 350px;
+        object-fit: contain; 
+        background: #222;
+        padding: 10px;
+        transition: transform 0.5s ease;
+    }
+
+    .lab-card:hover img { transform: scale(1.02); }
+
+
+    .lab-card-content {
+        padding: 20px;
+        background: #1a1a1a;
+        border-top: 1px solid #333;
+    }
+
+    .lab-card-title {
+        color: #00ff00;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 10px;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .lab-card-desc { color: #bbb; font-size: 13px; margin: 0; }
+
+
+    .video-wrapper {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        margin: 30px 0;
+        border-radius: 12px;
+        border: 1px solid #333;
+    }
+    .video-wrapper iframe {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+    }
+</style>
+
+<div class="pentest-container">
+    <h2 class="expert-title">PortSwigger Expert Lab: Exfiltrating Sensitive Data via Server-Side Prototype Pollution</h2>
+    
+    <p>Bu expert seviye laboratuvarı çözerken, konuya yeni başlayan arkadaşlardan bu alanda derinleşmek isteyenlere kadar herkesin faydalanabileceği, <strong>metodoloji odaklı</strong> bir rehber hazırladım.</p>
+    
+    <p>Sadece kodu kopyalayıp yapıştırmak yerine;</p>
+    <ul>
+        <li><strong>Oracle</strong> ve <strong>Side-channel confirmation</strong> gibi temel keşif mantıklarını,</li>
+        <li><strong>Node.js</strong> ve <strong>Express.js</strong> mimarisindeki zayıflıkları,</li>
+        <li>Ve en önemlisi, sistemde yüklü olan <strong>Vim</strong> gibi araçları birer <strong>Gadget</strong> olarak kullanarak nasıl <strong>RCE</strong> elde edebileceğimizi adım adım notlarımla beraber paylaşıyorum.</li>
+    </ul>
+
+    <p><strong>Bol şans ve keyifli çalışmalar.</strong></p>
+
+    <div class="video-wrapper">
+        <iframe title="Writeup" src="//www.youtube.com/embed/BLa4tJg2Loo" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="lab-gallery-grid">
+        
+        <div class="lab-card">
+            <a href="https://i.imgur.com/Fv9pDAG.jpeg" target="_blank">
+                <img src="https://i.imgur.com/Fv9pDAG.jpeg" alt="Oracle & Side Channel">
+            </a>
+            <div class="lab-card-content">
+                <div class="lab-card-title">> Keşif Metodolojisi</div>
+                <p class="lab-card-desc">Oracle ve Side-channel doğrulama ile zafiyet tespiti.</p>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <a href="https://i.imgur.com/dYk0okO.jpeg" target="_blank">
+                <img src="https://i.imgur.com/dYk0okO.jpeg" alt="Node JS & Express">
+            </a>
+            <div class="lab-card-content">
+                <div class="lab-card-title">> Teknoloji Analizi</div>
+                <p class="lab-card-desc">Node.js ve Express.js mimarisindeki zayıf noktalar.</p>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <a href="https://i.imgur.com/JKhbwHh.jpeg" target="_blank">
+                <img src="https://i.imgur.com/JKhbwHh.jpeg" alt="Prototype Pollution">
+            </a>
+            <div class="lab-card-content">
+                <div class="lab-card-title">> Prototype Pollution</div>
+                <p class="lab-card-desc">Zafiyetin temel mantığı ve global zehirleme süreci.</p>
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <a href="https://i.imgur.com/2AgI4uv.jpeg" target="_blank">
+                <img src="https://i.imgur.com/2AgI4uv.jpeg" alt="Vim Gadget">
+            </a>
+            <div class="lab-card-content">
+                <div class="lab-card-title">> Vim Gadget RCE</div>
+                <p class="lab-card-desc">ExecSync manipülasyonu ve Vim üzerinden komut yürütme.</p>
+            </div>
+        </div>
+
+        <div class="lab-card" style="grid-column: span 1;">
+            <a href="https://i.imgur.com/aWb8XDD.jpeg" target="_blank">
+                <img src="https://i.imgur.com/aWb8XDD.jpeg" alt="Final Payloads">
+            </a>
+            <div class="lab-card-content">
+                <div class="lab-card-title">> Exploitation & Exfiltration</div>
+                <p class="lab-card-desc">Kirlenmiş prototipin tetiklenmesi ve verilerin sızdırılması.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
