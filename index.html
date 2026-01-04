@@ -77,25 +77,22 @@
                 
             </div>
             <div id="yazi-content" class="hidden">
-                <!-- Dinamik içerik buraya yüklenecek -->
+
             </div>
         </div>
     </div>
     
     <script>
         function showContent(contentId, pushState = true) {
-            // Tüm içerik div'lerini gizle
             var sections = document.querySelectorAll('.content > div');
             sections.forEach(function(section) {
                 section.classList.add('hidden');
             });
 
-            // İçerik bölümü yüklü mü kontrol et
             var contentElement = document.getElementById(contentId);
             if (contentElement) {
                 contentElement.classList.remove('hidden');
             } else {
-                // İçeriği yükle
                 fetch('Content/' + contentId + '.html')
                     .then(response => response.text())
                     .then(data => {
@@ -112,7 +109,6 @@
                 document.getElementById('yazilar-list').classList.remove('hidden');
             }
 
-            // URL'yi güncelle
             if (pushState) {
                 history.pushState({ contentId: contentId }, null, '#' + contentId);
             }
@@ -137,6 +133,7 @@
     </script>
 </body>
 </html>
+
 
 
 
