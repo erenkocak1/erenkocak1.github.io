@@ -1,83 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
 <style>
-  
-    body { background-color: #0f0f0f; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.6; }
+    /* Profesyonel Galeri ve Sayfa Tasarımı */
+    body { background-color: #0d1117; color: #c9d1d9; font-family: 'Segoe UI', sans-serif; line-height: 1.6; }
     
-    .pentest-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    .main-content { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
     
-    .expert-title { color: #00ff00; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-
-    .lab-gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 25px;
-        margin-top: 30px;
+    .expert-banner { 
+        color: #3fb950; 
+        border-left: 5px solid #3fb950; 
+        padding-left: 15px; 
+        margin-bottom: 30px; 
+        text-transform: uppercase;
+        font-family: 'Courier New', monospace;
     }
 
-
-    .lab-card {
-        background: #1a1a1a;
-        border: 1px solid #333;
-        border-radius: 12px;
+    /* Video Alanı */
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        margin-bottom: 40px;
+        border: 1px solid #30363d;
+        border-radius: 8px;
         overflow: hidden;
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+    .video-container iframe {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+    }
+
+    /* Galeri Izgarası */
+    .grid-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+    }
+
+    /* Not Kartları */
+    .note-card {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease, border-color 0.3s ease;
         display: flex;
         flex-direction: column;
     }
 
-    .lab-card:hover {
-        transform: translateY(-10px);
-        border-color: #00ff00;
-        box-shadow: 0 15px 30px rgba(0,255,0,0.15);
+    .note-card:hover {
+        transform: translateY(-8px);
+        border-color: #3fb950;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
 
-
-    .lab-card img {
+    .note-card img {
         width: 100%;
-        height: 350px;
+        height: 400px;
         object-fit: contain; 
-        background: #222;
+        background: #0d1117;
         padding: 10px;
-        transition: transform 0.5s ease;
     }
 
-    .lab-card:hover img { transform: scale(1.02); }
-
-
-    .lab-card-content {
-        padding: 20px;
-        background: #1a1a1a;
-        border-top: 1px solid #333;
+    .note-info {
+        padding: 15px;
+        background: #21262d;
+        border-top: 1px solid #30363d;
     }
 
-    .lab-card-title {
-        color: #00ff00;
+    .note-title {
+        color: #3fb950;
         font-weight: bold;
-        font-size: 16px;
-        margin-bottom: 10px;
-        font-family: 'Courier New', Courier, monospace;
+        font-size: 15px;
+        margin-bottom: 5px;
+        font-family: 'Courier New', monospace;
     }
 
-    .lab-card-desc { color: #bbb; font-size: 13px; margin: 0; }
+    .note-text { color: #8b949e; font-size: 13px; }
 
-
-    .video-wrapper {
-        position: relative;
-        padding-bottom: 56.25%;
-        height: 0;
-        overflow: hidden;
-        margin: 30px 0;
-        border-radius: 12px;
-        border: 1px solid #333;
-    }
-    .video-wrapper iframe {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-    }
+    strong { color: #3fb950; }
 </style>
+</head>
+<body>
 
-<div class="pentest-container">
-    <h2 class="expert-title">PortSwigger Expert Lab: Exfiltrating Sensitive Data via Server-Side Prototype Pollution</h2>
+<div class="main-content">
+    <h2 class="expert-banner">PortSwigger Expert Lab: Exfiltrating Sensitive Data via Server-Side Prototype Pollution</h2>
     
     <p>Bu expert seviye laboratuvarı çözerken, konuya yeni başlayan arkadaşlardan bu alanda derinleşmek isteyenlere kadar herkesin faydalanabileceği, <strong>metodoloji odaklı</strong> bir rehber hazırladım.</p>
     
@@ -90,61 +99,64 @@
 
     <p><strong>Bol şans ve keyifli çalışmalar.</strong></p>
 
-    <div class="video-wrapper">
-        <iframe title="Writeup" src="//www.youtube.com/embed/BLa4tJg2Loo" frameborder="0" allowfullscreen></iframe>
+    <div class="video-container">
+        <iframe src="//www.youtube.com/embed/BLa4tJg2Loo" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <div class="lab-gallery-grid">
+    <div class="grid-gallery">
         
-        <div class="lab-card">
+        <div class="note-card">
             <a href="https://i.imgur.com/Fv9pDAG.jpeg" target="_blank">
-                <img src="https://i.imgur.com/Fv9pDAG.jpeg" alt="Oracle & Side Channel">
+                <img src="https://i.imgur.com/Fv9pDAG.jpeg">
             </a>
-            <div class="lab-card-content">
-                <div class="lab-card-title">> Keşif Metodolojisi</div>
-                <p class="lab-card-desc">Oracle ve Side-channel doğrulama ile zafiyet tespiti.</p>
+            <div class="note-info">
+                <div class="note-title">> Discovery: Oracle & Side-Channel</div>
+                <p class="note-text">Sisteme sızmadan önce zafiyetin varlığını kanıtlama süreci.</p>
             </div>
         </div>
 
-        <div class="lab-card">
+        <div class="note-card">
             <a href="https://i.imgur.com/dYk0okO.jpeg" target="_blank">
-                <img src="https://i.imgur.com/dYk0okO.jpeg" alt="Node JS & Express">
+                <img src="https://i.imgur.com/dYk0okO.jpeg">
             </a>
-            <div class="lab-card-content">
-                <div class="lab-card-title">> Teknoloji Analizi</div>
-                <p class="lab-card-desc">Node.js ve Express.js mimarisindeki zayıf noktalar.</p>
+            <div class="note-info">
+                <div class="note-title">> Architecture: Node.js & Express</div>
+                <p class="note-text">JS çalışma ortamı ve web framework etkileşimi.</p>
             </div>
         </div>
 
-        <div class="lab-card">
+        <div class="note-card">
             <a href="https://i.imgur.com/JKhbwHh.jpeg" target="_blank">
-                <img src="https://i.imgur.com/JKhbwHh.jpeg" alt="Prototype Pollution">
+                <img src="https://i.imgur.com/JKhbwHh.jpeg">
             </a>
-            <div class="lab-card-content">
-                <div class="lab-card-title">> Prototype Pollution</div>
-                <p class="lab-card-desc">Zafiyetin temel mantığı ve global zehirleme süreci.</p>
+            <div class="note-info">
+                <div class="note-title">> Prototype Pollution Concept</div>
+                <p class="note-text">Objelerin mirasını kirleterek global ayarları manipüle etme.</p>
             </div>
         </div>
 
-        <div class="lab-card">
+        <div class="note-card">
             <a href="https://i.imgur.com/2AgI4uv.jpeg" target="_blank">
-                <img src="https://i.imgur.com/2AgI4uv.jpeg" alt="Vim Gadget">
+                <img src="https://i.imgur.com/2AgI4uv.jpeg">
             </a>
-            <div class="lab-card-content">
-                <div class="lab-card-title">> Vim Gadget RCE</div>
-                <p class="lab-card-desc">ExecSync manipülasyonu ve Vim üzerinden komut yürütme.</p>
+            <div class="note-info">
+                <div class="note-title">> Exploitation: Vim Gadget RCE</div>
+                <p class="note-text">ExecSync ve Vim editörü üzerinden sistem komutu yürütme.</p>
             </div>
         </div>
 
-        <div class="lab-card" style="grid-column: span 1;">
+        <div class="note-card">
             <a href="https://i.imgur.com/aWb8XDD.jpeg" target="_blank">
-                <img src="https://i.imgur.com/aWb8XDD.jpeg" alt="Final Payloads">
+                <img src="https://i.imgur.com/aWb8XDD.jpeg">
             </a>
-            <div class="lab-card-content">
-                <div class="lab-card-title">> Exploitation & Exfiltration</div>
-                <p class="lab-card-desc">Kirlenmiş prototipin tetiklenmesi ve verilerin sızdırılması.</p>
+            <div class="note-info">
+                <div class="note-title">> Final: Data Exfiltration</div>
+                <p class="note-text">Collaborator üzerinden verileri sızdıran nihai saldırı kalıbı.</p>
             </div>
         </div>
 
     </div>
 </div>
+
+</body>
+</html>
