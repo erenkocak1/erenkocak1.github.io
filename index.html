@@ -6,9 +6,143 @@
   <meta name="description" content="Yusuf Eren Koçak — adli bilişim, siber güvenlik, projeler ve teknik yazılar.">
   <meta name="theme-color" content="#f5f3ee">
   <title>Yusuf Eren Koçak — Siber Güvenlik & Adli Bilişim</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23171717'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Arial,sans-serif' font-size='24' font-weight='700' fill='%23f5f3ee'%3EYK%3C/text%3E%3C/svg%3E">
+  <style>
+:root {
+  --bg: #f5f3ee;
+  --paper: #fbfaf7;
+  --text: #171717;
+  --muted: #66645f;
+  --line: #d8d4cb;
+  --accent: #b94b2b;
+  --max: 1080px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { color: inherit; }
+.wrap { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+.nav { height: 70px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-size: .85rem; font-weight: 800; letter-spacing: .16em; }
+nav { display: flex; gap: 28px; font-size: .92rem; }
+nav a, .hero-links a, .contact-links a { transition: opacity .2s ease; }
+nav a:hover, .hero-links a:hover, .contact-links a:hover { opacity: .55; }
+.menu-button { display: none; border: 0; background: none; padding: 8px 0; }
+
+.hero { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; padding: 110px 0 90px; }
+.overline, .eyebrow { margin: 0 0 14px; font-size: .74rem; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.hero h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(3.6rem, 9vw, 7.4rem); font-weight: 500; line-height: .95; letter-spacing: -.055em; }
+.intro { max-width: 690px; margin: 34px 0 0; font-size: clamp(1.15rem, 2vw, 1.45rem); color: var(--muted); }
+.hero-links { display: flex; flex-wrap: wrap; gap: 25px; margin-top: 34px; font-size: .93rem; font-weight: 650; }
+.primary-link { color: var(--accent); }
+
+.section { padding: 100px 0; border-top: 1px solid var(--line); }
+.section-head { display: grid; grid-template-columns: 1.2fr .8fr; gap: 70px; align-items: end; margin-bottom: 48px; }
+h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.2rem, 4.8vw, 4.2rem); line-height: 1.04; font-weight: 500; letter-spacing: -.035em; }
+.section-head > p, .contact-inner p { margin: 0; color: var(--muted); max-width: 520px; }
+
+.toolbar { display: flex; gap: 18px; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.toolbar input { width: min(340px, 100%); padding: 12px 0; border: 0; border-bottom: 1px solid var(--line); outline: none; background: transparent; color: var(--text); }
+.toolbar input:focus { border-bottom-color: var(--text); }
+.filters { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.filter { border: 1px solid var(--line); border-radius: 999px; background: transparent; padding: 7px 12px; font-size: .78rem; cursor: pointer; }
+.filter.active, .filter:hover { border-color: var(--text); background: var(--text); color: var(--bg); }
+
+.article-list { border-top: 1px solid var(--line); }
+.article-row { width: 100%; display: grid; grid-template-columns: 72px 1fr 190px 24px; gap: 22px; align-items: center; padding: 24px 0; border: 0; border-bottom: 1px solid var(--line); background: none; text-align: left; cursor: pointer; }
+.article-row:hover h3 { color: var(--accent); }
+.article-number, .article-meta { color: var(--muted); font-size: .8rem; }
+.article-row h3 { margin: 0; font-size: clamp(1.05rem, 2vw, 1.35rem); font-weight: 650; transition: color .2s ease; }
+.article-arrow { text-align: right; font-size: 1.1rem; }
+.empty { color: var(--muted); }
+
+.about { background: var(--paper); }
+.about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 90px; }
+.about-copy { font-size: 1.1rem; }
+.about-copy p { margin: 0 0 24px; }
+.about-copy p:last-of-type { color: var(--muted); }
+.topics { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 35px; }
+.topics span { border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; font-size: .78rem; }
+
+.project-list { border-top: 1px solid var(--line); }
+.project { display: grid; grid-template-columns: 1fr auto; gap: 40px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+.project span { display: inline-block; color: var(--muted); font-size: .76rem; margin-bottom: 8px; }
+.project h3 { margin: 0 0 6px; font-size: 1.45rem; }
+.project p { margin: 0; color: var(--muted); max-width: 680px; }
+.project strong { align-self: center; font-size: .78rem; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.project:hover h3 { color: var(--accent); }
+
+.contact { background: var(--text); color: var(--bg); }
+.contact .eyebrow { color: #e47b5d; }
+.contact-inner { display: grid; grid-template-columns: 1fr .8fr; gap: 90px; align-items: end; }
+.contact-inner p { color: #aaa79f; margin-top: 20px; }
+.contact-links { display: grid; border-top: 1px solid #444; }
+.contact-links a { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #444; }
+
+footer { border-top: 1px solid var(--line); }
+.footer-inner { min-height: 82px; display: flex; align-items: center; justify-content: space-between; font-size: .82rem; color: var(--muted); }
+
+.article-dialog { width: min(900px, calc(100% - 28px)); max-height: 88vh; padding: 0; border: 1px solid var(--line); background: var(--paper); color: var(--text); box-shadow: 0 30px 100px rgba(0,0,0,.24); }
+.article-dialog::backdrop { background: rgba(20,20,20,.5); backdrop-filter: blur(3px); }
+.dialog-top { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; gap: 30px; align-items: start; padding: 28px 34px; border-bottom: 1px solid var(--line); background: var(--paper); }
+.dialog-top h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+.dialog-top button { border: 0; border-bottom: 1px solid var(--text); background: none; padding: 4px 0; cursor: pointer; }
+.article-content { padding: 34px; max-width: 780px; margin: 0 auto; }
+.article-content h1, .article-content h2, .article-content h3 { font-family: inherit; letter-spacing: -.02em; line-height: 1.25; }
+.article-content h1 { font-size: 2rem; }
+.article-content h2 { margin-top: 2.2em; font-size: 1.5rem; }
+.article-content h3 { margin-top: 1.8em; font-size: 1.2rem; }
+.article-content p, .article-content li { color: #393835; }
+.article-content code { font-family: "SFMono-Regular", Consolas, monospace; font-size: .9em; }
+.article-content pre { overflow-x: auto; padding: 18px; background: #ece9e1; border: 1px solid var(--line); }
+.article-content img { display: block; max-width: 100%; height: auto; margin: 26px auto; }
+.article-content a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.loading { padding: 30px 0; color: var(--muted); }
+
+@media (max-width: 760px) {
+  .wrap { width: min(calc(100% - 28px), var(--max)); }
+  .menu-button { display: block; }
+  nav { display: none; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; gap: 0; padding: 10px 14px 18px; background: var(--bg); border-bottom: 1px solid var(--line); }
+  nav.open { display: flex; }
+  nav a { padding: 12px 0; }
+  .hero { min-height: auto; padding: 92px 0 72px; }
+  .section { padding: 72px 0; }
+  .section-head, .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 32px; }
+  .toolbar { align-items: stretch; flex-direction: column; }
+  .toolbar input { width: 100%; }
+  .filters { justify-content: flex-start; }
+  .article-row { grid-template-columns: 40px 1fr 20px; gap: 14px; }
+  .article-meta { display: none; }
+  .about-grid { gap: 35px; }
+  .project { grid-template-columns: 1fr; gap: 14px; }
+  .project strong { white-space: normal; }
+  .dialog-top, .article-content { padding-left: 20px; padding-right: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -149,5 +283,124 @@
     </div>
     <article id="article-content" class="article-content"></article>
   </dialog>
+  <script>
+"use strict";
+
+const articles = [
+  { slug: "sosyalmuhendislik", title: "Sosyal Mühendislik Nedir?", category: "web", label: "Farkındalık" },
+  { slug: "nmap", title: "Nmap Nedir, Nasıl Kullanılır?", category: "network", label: "Ağ Güvenliği" },
+  { slug: "beef", title: "BeEF Nedir, Nasıl Kullanılır?", category: "web", label: "Web Güvenliği" },
+  { slug: "metasploit", title: "Metasploit Framework", category: "system", label: "Pentest Araçları" },
+  { slug: "backdoor", title: "MSFvenom ile Backdoor Geliştirme", category: "system", label: "Pentest Laboratuvarı" },
+  { slug: "izin", title: "Linux'ta Dosya İzinleri ve Yetkiler", category: "system", label: "Linux" },
+  { slug: "powershell", title: "PowerShell Yönetim ve Otomasyon Rehberi", category: "system", label: "Windows" },
+  { slug: "lfi", title: "File Inclusion ve Local File Inclusion", category: "web", label: "Web Güvenliği" },
+  { slug: "ffuf", title: "Temel Düzeyde ffuf Kullanımı", category: "web", label: "Keşif" },
+  { slug: "buffero", title: "Buffer Overflow Zafiyeti", category: "system", label: "Binary Security" },
+  { slug: "ad", title: "Active Directory Sızma Testi ve BloodHound", category: "network", label: "Active Directory" },
+  { slug: "cyborg", title: "TryHackMe Cyborg Odası Çözümü", category: "ctf", label: "CTF Çözümü" }
+];
+
+const state = { filter: "all", search: "" };
+const list = document.querySelector("#article-list");
+const empty = document.querySelector("#empty-state");
+const dialog = document.querySelector("#article-dialog");
+const articleTitle = document.querySelector("#article-title");
+const articleCategory = document.querySelector("#article-category");
+const articleContent = document.querySelector("#article-content");
+const nav = document.querySelector("#site-nav");
+const menuButton = document.querySelector(".menu-button");
+
+function escapeHtml(text) {
+  return text.replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]));
+}
+
+function renderArticles() {
+  const term = state.search.trim().toLocaleLowerCase("tr-TR");
+  const filtered = articles.filter(article => {
+    const categoryMatch = state.filter === "all" || article.category === state.filter;
+    const searchMatch = `${article.title} ${article.label}`.toLocaleLowerCase("tr-TR").includes(term);
+    return categoryMatch && searchMatch;
+  });
+
+  list.innerHTML = filtered.map(article => {
+    const index = String(articles.indexOf(article) + 1).padStart(2, "0");
+    return `<button class="article-row" type="button" data-slug="${escapeHtml(article.slug)}">
+      <span class="article-number">${index}</span>
+      <h3>${escapeHtml(article.title)}</h3>
+      <span class="article-meta">${escapeHtml(article.label)}</span>
+      <span class="article-arrow">↗</span>
+    </button>`;
+  }).join("");
+
+  empty.hidden = filtered.length > 0;
+}
+
+async function openArticle(slug) {
+  const article = articles.find(item => item.slug === slug);
+  if (!article) return;
+
+  articleTitle.textContent = article.title;
+  articleCategory.textContent = article.label;
+  articleContent.innerHTML = '<p class="loading">Yazı yükleniyor…</p>';
+  dialog.showModal();
+
+  try {
+    const response = await fetch(`Content/${encodeURIComponent(slug)}.html`);
+    if (!response.ok) throw new Error(String(response.status));
+    const html = await response.text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    doc.querySelectorAll("script").forEach(el => el.remove());
+    doc.querySelectorAll("a[target='_blank']").forEach(el => el.setAttribute("rel", "noopener noreferrer"));
+    articleContent.innerHTML = doc.body.innerHTML || html;
+    articleContent.querySelectorAll("img").forEach(img => {
+      img.loading = "lazy";
+      img.removeAttribute("width");
+      img.removeAttribute("height");
+    });
+  } catch (error) {
+    articleContent.innerHTML = `<p>Yazı yüklenemedi. <code>Content/${escapeHtml(slug)}.html</code> dosyasının repoda olduğundan emin ol.</p>`;
+  }
+}
+
+list.addEventListener("click", event => {
+  const row = event.target.closest("[data-slug]");
+  if (row) openArticle(row.dataset.slug);
+});
+
+document.querySelector("#dialog-close").addEventListener("click", () => dialog.close());
+dialog.addEventListener("click", event => {
+  if (event.target === dialog) dialog.close();
+});
+
+document.querySelector("#article-search").addEventListener("input", event => {
+  state.search = event.target.value;
+  renderArticles();
+});
+
+document.querySelectorAll(".filter").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+    button.classList.add("active");
+    state.filter = button.dataset.filter;
+    renderArticles();
+  });
+});
+
+menuButton.addEventListener("click", () => {
+  const open = menuButton.getAttribute("aria-expanded") === "true";
+  menuButton.setAttribute("aria-expanded", String(!open));
+  nav.classList.toggle("open", !open);
+});
+
+nav.addEventListener("click", () => {
+  nav.classList.remove("open");
+  menuButton.setAttribute("aria-expanded", "false");
+});
+
+document.querySelector("#year").textContent = new Date().getFullYear();
+renderArticles();
+
+  </script>
 </body>
 </html>
